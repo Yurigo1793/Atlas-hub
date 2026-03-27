@@ -8,8 +8,8 @@ namespace atlas::input {
 
 class HotkeyManager {
  public:
-  bool registrarAtalhosGlobais();
-  void removerAtalhosGlobais();
+  bool registrarAtalhosGlobais(void* windowHandle);
+  void removerAtalhosGlobais(void* windowHandle);
 
 #ifdef _WIN32
   static constexpr int kAbrirInterface = 1;

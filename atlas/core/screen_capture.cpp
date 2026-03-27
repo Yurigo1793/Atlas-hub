@@ -19,10 +19,8 @@ void CapturedImage::release() {
 
 namespace {
 #ifdef _WIN32
-CapturedImage capturarTelaInterna(const RECT& regiao) {
+CapturedImage capturarTelaInterna(int left, int top, int largura, int altura) {
   CapturedImage image;
-  const int largura = regiao.right - regiao.left;
-  const int altura = regiao.bottom - regiao.top;
 
   HDC hdcTela = GetDC(nullptr);
   if (hdcTela == nullptr) {
@@ -41,8 +39,8 @@ CapturedImage capturarTelaInterna(const RECT& regiao) {
         largura,
         altura,
         hdcTela,
-        regiao.left,
-        regiao.top,
+        left,
+        top,
         SRCCOPY | CAPTUREBLT);
 
     image.bitmap = hBitmap;
@@ -64,21 +62,24 @@ CapturedImage capturarTelaInterna(const RECT& regiao) {
 
 CapturedImage capturarTela() {
 #ifdef _WIN32
-  RECT tela{};
-  tela.left = 0;
-  tela.top = 0;
-  tela.right = GetSystemMetrics(SM_CXSCREEN);
-  tela.bottom = GetSystemMetrics(SM_CYSCREEN);
-  return capturarTelaInterna(tela);
+  const int largura = GetSystemMetrics(SM_CXSCREEN);
+  const int altura = GetSystemMetrics(SM_CYSCREEN);
+  return capturarTelaInterna(0, 0, largura, altura);
 #else
   return {};
 #endif
 }
 
+CapturedImage capturarTela(const CaptureRegion& regiao) {
 #ifdef _WIN32
-CapturedImage capturarTela(const RECT& regiao) {
-  return capturarTelaInterna(regiao);
-}
+  if (regiao.width <= 0 || regiao.height <= 0) {
+    return {};
+  }
+  return capturarTelaInterna(regiao.left, regiao.top, regiao.width, regiao.height);
+#else
+  (void)regiao;
+  return {};
 #endif
+}
 
 }  // namespace atlas::core

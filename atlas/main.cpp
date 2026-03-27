@@ -1,5 +1,6 @@
 #include <atomic>
 #include <iostream>
+#include <optional>
 #include <thread>
 
 #ifdef _WIN32
@@ -8,7 +9,6 @@
 
 #include "core/ocr_engine.hpp"
 #include "core/screen_capture.hpp"
-#include "input/hotkey_manager.hpp"
 #include "ui/app_window.hpp"
 #include "utils/command_loop.hpp"
 
@@ -16,15 +16,12 @@ int main() {
   std::cout << "Atlas-Hub iniciado\n";
 
   atlas::core::OcrEngine ocrEngine;
-  auto executarOcrTela = [&ocrEngine]() {
-    auto captura = atlas::core::capturarTela();
+  auto executarOcrTela = [&ocrEngine](const std::optional<atlas::core::CaptureRegion>& regiao) {
+    auto captura = regiao.has_value() ? atlas::core::capturarTela(*regiao) : atlas::core::capturarTela();
     std::string texto = ocrEngine.reconhecerTexto(captura);
     captura.release();
     return texto;
   };
-
-  atlas::input::HotkeyManager hotkeys;
-  hotkeys.registrarAtalhosGlobais();
 
   std::atomic<bool> uiPronta{false};
   std::thread uiThread([&]() {
@@ -45,8 +42,6 @@ int main() {
 #ifdef _WIN32
   PostQuitMessage(0);
 #endif
-
-  hotkeys.removerAtalhosGlobais();
 
   if (uiThread.joinable()) {
     uiThread.join();

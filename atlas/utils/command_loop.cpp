@@ -23,7 +23,8 @@ void CommandLoop::executar() {
 
     if (comando == "ocr_tela") {
       if (ocrCommand_) {
-        std::cout << "--- Resultado OCR ---\n" << ocrCommand_() << "\n---------------------\n";
+        std::cout << "--- Resultado OCR ---\n" << ocrCommand_(std::nullopt)
+                  << "\n---------------------\n";
       }
       continue;
     }

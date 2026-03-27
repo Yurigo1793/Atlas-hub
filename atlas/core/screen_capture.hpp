@@ -6,6 +6,13 @@
 
 namespace atlas::core {
 
+struct CaptureRegion {
+  int left = 0;
+  int top = 0;
+  int width = 0;
+  int height = 0;
+};
+
 struct CapturedImage {
 #ifdef _WIN32
   HBITMAP bitmap = nullptr;
@@ -17,8 +24,6 @@ struct CapturedImage {
 };
 
 CapturedImage capturarTela();
-#ifdef _WIN32
-CapturedImage capturarTela(const RECT& regiao);
-#endif
+CapturedImage capturarTela(const CaptureRegion& regiao);
 
 }  // namespace atlas::core
