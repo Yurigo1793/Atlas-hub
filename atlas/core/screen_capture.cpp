@@ -82,4 +82,64 @@ CapturedImage capturarTela(const CaptureRegion& regiao) {
 #endif
 }
 
+CapturedImage recortarImagem(const CapturedImage& origem, const CaptureRegion& regiaoRelativa) {
+#ifdef _WIN32
+  if (origem.bitmap == nullptr || origem.width <= 0 || origem.height <= 0) {
+    return {};
+  }
+
+  if (regiaoRelativa.width <= 0 || regiaoRelativa.height <= 0) {
+    return {};
+  }
+
+  if (regiaoRelativa.left < 0 || regiaoRelativa.top < 0 ||
+      regiaoRelativa.left + regiaoRelativa.width > origem.width ||
+      regiaoRelativa.top + regiaoRelativa.height > origem.height) {
+    return {};
+  }
+
+  HDC hdcTela = GetDC(nullptr);
+  if (hdcTela == nullptr) {
+    return {};
+  }
+
+  HDC hdcOrigem = CreateCompatibleDC(hdcTela);
+  HDC hdcDestino = CreateCompatibleDC(hdcTela);
+  HBITMAP bitmapDestino = CreateCompatibleBitmap(hdcTela, regiaoRelativa.width, regiaoRelativa.height);
+
+  CapturedImage recorte{};
+  if (hdcOrigem != nullptr && hdcDestino != nullptr && bitmapDestino != nullptr) {
+    HGDIOBJ oldOrigem = SelectObject(hdcOrigem, origem.bitmap);
+    HGDIOBJ oldDestino = SelectObject(hdcDestino, bitmapDestino);
+    BitBlt(
+        hdcDestino,
+        0,
+        0,
+        regiaoRelativa.width,
+        regiaoRelativa.height,
+        hdcOrigem,
+        regiaoRelativa.left,
+        regiaoRelativa.top,
+        SRCCOPY);
+    SelectObject(hdcDestino, oldDestino);
+    SelectObject(hdcOrigem, oldOrigem);
+
+    recorte.bitmap = bitmapDestino;
+    recorte.width = regiaoRelativa.width;
+    recorte.height = regiaoRelativa.height;
+  } else if (bitmapDestino != nullptr) {
+    DeleteObject(bitmapDestino);
+  }
+
+  if (hdcOrigem != nullptr) DeleteDC(hdcOrigem);
+  if (hdcDestino != nullptr) DeleteDC(hdcDestino);
+  ReleaseDC(nullptr, hdcTela);
+  return recorte;
+#else
+  (void)origem;
+  (void)regiaoRelativa;
+  return {};
+#endif
+}
+
 }  // namespace atlas::core

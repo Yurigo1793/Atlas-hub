@@ -18,4 +18,5 @@ target_include_directories(atlas_hub PRIVATE atlas)
 
 if(WIN32)
   target_compile_definitions(atlas_hub PRIVATE UNICODE _UNICODE)
+  target_link_libraries(atlas_hub PRIVATE msimg32)
 endif()
