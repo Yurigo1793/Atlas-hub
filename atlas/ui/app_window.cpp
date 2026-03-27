@@ -6,6 +6,7 @@
 
 #ifdef _WIN32
 #include <windowsx.h>
+#include <wingdi.h>
 #endif
 
 namespace atlas::ui {
@@ -21,10 +22,14 @@ constexpr COLORREF kAzulEscuro = RGB(0x2F, 0x4F, 0x6F);
 struct SelectionState {
   int originX = 0;
   int originY = 0;
+  int captureWidth = 0;
+  int captureHeight = 0;
+  HBITMAP capturedBitmap = nullptr;
   bool dragging = false;
   bool confirmed = false;
   POINT start{};
   POINT current{};
+  RECT selectedRect{};
   atlas::core::CaptureRegion region{};
 };
 
@@ -66,9 +71,11 @@ LRESULT CALLBACK SelectionWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
     case WM_LBUTTONDOWN: {
       if (state == nullptr) return 0;
       state->dragging = true;
+      state->confirmed = false;
       state->start.x = GET_X_LPARAM(lParam);
       state->start.y = GET_Y_LPARAM(lParam);
       state->current = state->start;
+      state->selectedRect = {};
       SetCapture(hwnd);
       InvalidateRect(hwnd, nullptr, TRUE);
       return 0;
@@ -91,6 +98,7 @@ LRESULT CALLBACK SelectionWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
         normalized.top = min(state->start.y, GET_Y_LPARAM(lParam));
         normalized.right = max(state->start.x, GET_X_LPARAM(lParam));
         normalized.bottom = max(state->start.y, GET_Y_LPARAM(lParam));
+        state->selectedRect = normalized;
 
         const int width = normalized.right - normalized.left;
         const int height = normalized.bottom - normalized.top;
@@ -120,13 +128,74 @@ LRESULT CALLBACK SelectionWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
       GetClientRect(hwnd, &client);
       FillRect(hdc, &client, static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH)));
 
+      HDC memDC = nullptr;
+      HGDIOBJ oldBitmap = nullptr;
+      if (state != nullptr && state->capturedBitmap != nullptr) {
+        memDC = CreateCompatibleDC(hdc);
+        if (memDC != nullptr) {
+          oldBitmap = SelectObject(memDC, state->capturedBitmap);
+          BitBlt(
+              hdc,
+              0,
+              0,
+              state->captureWidth,
+              state->captureHeight,
+              memDC,
+              0,
+              0,
+              SRCCOPY);
+        }
+      }
+
+      BLENDFUNCTION blend{};
+      blend.BlendOp = AC_SRC_OVER;
+      blend.SourceConstantAlpha = 160;
+      HDC darkDC = CreateCompatibleDC(hdc);
+      HBITMAP darkBmp = CreateCompatibleBitmap(hdc, client.right - client.left, client.bottom - client.top);
+      HGDIOBJ oldDarkBmp = nullptr;
+      if (darkDC != nullptr && darkBmp != nullptr) {
+        oldDarkBmp = SelectObject(darkDC, darkBmp);
+        HBRUSH darkBrush = CreateSolidBrush(RGB(0, 0, 0));
+        FillRect(darkDC, &client, darkBrush);
+        DeleteObject(darkBrush);
+        AlphaBlend(
+            hdc,
+            0,
+            0,
+            client.right - client.left,
+            client.bottom - client.top,
+            darkDC,
+            0,
+            0,
+            client.right - client.left,
+            client.bottom - client.top,
+            blend);
+      }
+
+      RECT selection{};
+      bool hasSelection = false;
       if (state != nullptr && state->dragging) {
-        RECT selection{};
         selection.left = min(state->start.x, state->current.x);
         selection.top = min(state->start.y, state->current.y);
         selection.right = max(state->start.x, state->current.x);
         selection.bottom = max(state->start.y, state->current.y);
+        hasSelection = true;
+      } else if (state != nullptr && state->confirmed) {
+        selection = state->selectedRect;
+        hasSelection = true;
+      }
 
+      if (hasSelection && memDC != nullptr) {
+        BitBlt(
+            hdc,
+            selection.left,
+            selection.top,
+            selection.right - selection.left,
+            selection.bottom - selection.top,
+            memDC,
+            selection.left,
+            selection.top,
+            SRCCOPY);
         HPEN pen = CreatePen(PS_SOLID, 2, RGB(143, 175, 207));
         HGDIOBJ oldPen = SelectObject(hdc, pen);
         HGDIOBJ oldBrush = SelectObject(hdc, GetStockObject(HOLLOW_BRUSH));
@@ -134,6 +203,22 @@ LRESULT CALLBACK SelectionWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
         SelectObject(hdc, oldBrush);
         SelectObject(hdc, oldPen);
         DeleteObject(pen);
+      }
+
+      if (oldBitmap != nullptr) {
+        SelectObject(memDC, oldBitmap);
+      }
+      if (memDC != nullptr) {
+        DeleteDC(memDC);
+      }
+      if (oldDarkBmp != nullptr) {
+        SelectObject(darkDC, oldDarkBmp);
+      }
+      if (darkBmp != nullptr) {
+        DeleteObject(darkBmp);
+      }
+      if (darkDC != nullptr) {
+        DeleteDC(darkDC);
       }
 
       EndPaint(hwnd, &ps);
@@ -300,7 +385,15 @@ LRESULT AppWindow::handleMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
       const int controlId = LOWORD(wParam);
       switch (controlId) {
         case kBtnOcrTela:
-          if (onOcrRequest_) atualizarResultado(onOcrRequest_(std::nullopt));
+          if (onOcrRequest_) {
+            auto captura = atlas::core::capturarTela();
+            if (captura.bitmap == nullptr) {
+              atualizarResultado("Falha: nao foi possivel capturar a tela.");
+            } else {
+              atualizarResultado(onOcrRequest_(captura));
+            }
+            captura.release();
+          }
           return 0;
         case kBtnConfig:
           aplicarProximaConfiguracaoVisual();
@@ -319,6 +412,7 @@ LRESULT AppWindow::handleMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
         ShowWindow(hwnd_, SW_SHOW);
         SetForegroundWindow(hwnd_);
       } else if (wParam == atlas::input::HotkeyManager::kExecutarOcr) {
+        MessageBoxW(hwnd_, L"HOTKEY FUNCIONOU", L"Atlas-Hub", MB_OK | MB_ICONINFORMATION);
         executarOcrPorSelecao();
       }
       return 0;
@@ -465,7 +559,8 @@ void AppWindow::aplicarTemaVisual(HWND hwnd) {
   }
 }
 
-std::optional<atlas::core::CaptureRegion> AppWindow::selecionarRegiaoTela() {
+std::optional<atlas::core::CaptureRegion> AppWindow::selecionarRegiaoTela(
+    const atlas::core::CapturedImage& capturaTelaCompleta, int origemX, int origemY) {
   WNDCLASSW wc{};
   wc.lpfnWndProc = SelectionWindowProc;
   wc.hInstance = GetModuleHandleW(nullptr);
@@ -475,8 +570,11 @@ std::optional<atlas::core::CaptureRegion> AppWindow::selecionarRegiaoTela() {
   RegisterClassW(&wc);
 
   SelectionState state{};
-  state.originX = GetSystemMetrics(SM_XVIRTUALSCREEN);
-  state.originY = GetSystemMetrics(SM_YVIRTUALSCREEN);
+  state.originX = origemX;
+  state.originY = origemY;
+  state.captureWidth = capturaTelaCompleta.width;
+  state.captureHeight = capturaTelaCompleta.height;
+  state.capturedBitmap = capturaTelaCompleta.bitmap;
 
   HWND overlay = CreateWindowExW(
       WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_LAYERED,
@@ -485,8 +583,8 @@ std::optional<atlas::core::CaptureRegion> AppWindow::selecionarRegiaoTela() {
       WS_POPUP,
       state.originX,
       state.originY,
-      GetSystemMetrics(SM_CXVIRTUALSCREEN),
-      GetSystemMetrics(SM_CYVIRTUALSCREEN),
+      state.captureWidth,
+      state.captureHeight,
       nullptr,
       nullptr,
       GetModuleHandleW(nullptr),
@@ -511,19 +609,47 @@ std::optional<atlas::core::CaptureRegion> AppWindow::selecionarRegiaoTela() {
 
 void AppWindow::executarOcrPorSelecao() {
   ShowWindow(hwnd_, SW_HIDE);
-  Sleep(120);
+  Sleep(90);
 
-  auto regiao = selecionarRegiaoTela();
+  const int origemX = GetSystemMetrics(SM_XVIRTUALSCREEN);
+  const int origemY = GetSystemMetrics(SM_YVIRTUALSCREEN);
+  const int largura = GetSystemMetrics(SM_CXVIRTUALSCREEN);
+  const int altura = GetSystemMetrics(SM_CYVIRTUALSCREEN);
+
+  atlas::core::CaptureRegion telaVirtual{origemX, origemY, largura, altura};
+  auto capturaTelaCompleta = atlas::core::capturarTela(telaVirtual);
+  if (capturaTelaCompleta.bitmap == nullptr) {
+    ShowWindow(hwnd_, SW_SHOW);
+    SetForegroundWindow(hwnd_);
+    atualizarResultado("Falha: nao foi possivel capturar a tela para selecao.");
+    return;
+  }
+
+  auto regiao = selecionarRegiaoTela(capturaTelaCompleta, origemX, origemY);
 
   ShowWindow(hwnd_, SW_SHOW);
   SetForegroundWindow(hwnd_);
 
   if (!regiao.has_value()) {
+    capturaTelaCompleta.release();
     atualizarResultado("Selecao cancelada.");
     return;
   }
 
-  if (onOcrRequest_) atualizarResultado(onOcrRequest_(regiao));
+  atlas::core::CaptureRegion regiaoRelativa{
+      regiao->left - origemX, regiao->top - origemY, regiao->width, regiao->height};
+  auto recorte = atlas::core::recortarImagem(capturaTelaCompleta, regiaoRelativa);
+  capturaTelaCompleta.release();
+
+  if (recorte.bitmap == nullptr) {
+    atualizarResultado("Falha: nao foi possivel recortar a area selecionada.");
+    return;
+  }
+
+  if (onOcrRequest_) {
+    atualizarResultado(onOcrRequest_(recorte));
+  }
+  recorte.release();
 }
 
 void AppWindow::desenharBotao(LPDRAWITEMSTRUCT drawInfo) {
