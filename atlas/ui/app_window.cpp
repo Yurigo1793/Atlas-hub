@@ -412,6 +412,7 @@ LRESULT AppWindow::handleMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
         ShowWindow(hwnd_, SW_SHOW);
         SetForegroundWindow(hwnd_);
       } else if (wParam == atlas::input::HotkeyManager::kExecutarOcr) {
+        MessageBoxW(hwnd_, L"HOTKEY FUNCIONOU", L"Atlas-Hub", MB_OK | MB_ICONINFORMATION);
         executarOcrPorSelecao();
       }
       return 0;
