@@ -32,7 +32,7 @@ class AppWindow {
 #endif
   };
 
-  using OcrCallback = std::function<std::string(const std::optional<atlas::core::CaptureRegion>&)>;
+  using OcrCallback = std::function<std::string(const atlas::core::CapturedImage&)>;
 
   explicit AppWindow(OcrCallback onOcrRequest);
   bool criar(void* instanceHandle = nullptr);
@@ -48,7 +48,8 @@ class AppWindow {
   void aplicarTemaVisual(HWND hwnd);
   void aplicarProximaConfiguracaoVisual();
   std::string descreverConfiguracaoAtual() const;
-  std::optional<atlas::core::CaptureRegion> selecionarRegiaoTela();
+  std::optional<atlas::core::CaptureRegion> selecionarRegiaoTela(
+      const atlas::core::CapturedImage& capturaTelaCompleta, int origemX, int origemY);
   void executarOcrPorSelecao();
 #endif
 

@@ -25,5 +25,6 @@ struct CapturedImage {
 
 CapturedImage capturarTela();
 CapturedImage capturarTela(const CaptureRegion& regiao);
+CapturedImage recortarImagem(const CapturedImage& origem, const CaptureRegion& regiaoRelativa);
 
 }  // namespace atlas::core

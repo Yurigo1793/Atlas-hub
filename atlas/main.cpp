@@ -16,17 +16,20 @@ int main() {
   std::cout << "Atlas-Hub iniciado\n";
 
   atlas::core::OcrEngine ocrEngine;
-  auto executarOcrTela = [&ocrEngine](const std::optional<atlas::core::CaptureRegion>& regiao) {
+  auto executarOcrPorRegiao = [&ocrEngine](const std::optional<atlas::core::CaptureRegion>& regiao) {
     auto captura = regiao.has_value() ? atlas::core::capturarTela(*regiao) : atlas::core::capturarTela();
     std::string texto = ocrEngine.reconhecerTexto(captura);
     captura.release();
     return texto;
   };
+  auto executarOcrImagem = [&ocrEngine](const atlas::core::CapturedImage& captura) {
+    return ocrEngine.reconhecerTexto(captura);
+  };
 
   std::atomic<bool> uiPronta{false};
   std::thread uiThread([&]() {
 #ifdef _WIN32
-    atlas::ui::AppWindow window(executarOcrTela);
+    atlas::ui::AppWindow window(executarOcrImagem);
     uiPronta = window.criar(GetModuleHandleW(nullptr));
     if (uiPronta) {
       window.executarLoop();
@@ -36,7 +39,7 @@ int main() {
 #endif
   });
 
-  atlas::utils::CommandLoop loopComandos(executarOcrTela);
+  atlas::utils::CommandLoop loopComandos(executarOcrPorRegiao);
   loopComandos.executar();
 
 #ifdef _WIN32
