@@ -50,10 +50,15 @@ set(ATLASHUB_UIS
     ui/MainWindow.ui
 )
 
+set(ATLASHUB_RESOURCES
+    resources/branding.qrc
+)
+
 add_executable(AtlasHub WIN32
     ${ATLASHUB_SOURCES}
     ${ATLASHUB_HEADERS}
     ${ATLASHUB_UIS}
+    ${ATLASHUB_RESOURCES}
 )
 
 target_include_directories(AtlasHub PRIVATE

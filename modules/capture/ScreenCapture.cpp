@@ -20,9 +20,18 @@ QImage ScreenCapture::captureArea(const QRect &globalArea) const
         return {};
     }
 
-    const QPixmap pixmap = targetScreen->grabWindow(
-        0, globalArea.x(), globalArea.y(), globalArea.width(), globalArea.height());
+    const QRect screenGeometry = targetScreen->geometry();
+    const int localX = globalArea.x() - screenGeometry.x();
+    const int localY = globalArea.y() - screenGeometry.y();
+
+    const QPixmap pixmap =
+        targetScreen->grabWindow(0, localX, localY, globalArea.width(), globalArea.height());
     const QImage image = pixmap.toImage();
+
+    if (image.isNull()) {
+        return {};
+    }
+
     image.save(QStringLiteral("debug_capture.png"));
     return image;
 }

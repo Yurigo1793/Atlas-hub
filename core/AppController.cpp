@@ -66,13 +66,19 @@ void AppController::handleSettingsRequested()
 
 void AppController::handleAreaSelected(const QRect &area)
 {
+    const QString coords = QStringLiteral("x=%1 y=%2 w=%3 h=%4")
+                               .arg(area.x())
+                               .arg(area.y())
+                               .arg(area.width())
+                               .arg(area.height());
+
     Logger::instance().info(QStringLiteral("Selected area: x=%1 y=%2 w=%3 h=%4")
                                 .arg(area.x())
                                 .arg(area.y())
                                 .arg(area.width())
                                 .arg(area.height()));
 
-    m_mainWindow->setStatusText(QStringLiteral("Processing..."));
+    m_mainWindow->setStatusText(QStringLiteral("Processing... | %1").arg(coords));
     closeCaptureOverlay();
 
     QTimer::singleShot(80, [this, area]() { processCapturedArea(area); });
@@ -91,8 +97,9 @@ void AppController::openCaptureOverlay()
     const ConfigManager::AppSettings settings = m_configManager->appSettings();
     if (!settings.showOverlay) {
         m_mainWindow->setStatusText(QStringLiteral("Capturing..."));
+        m_mainWindow->hide();
         if (QScreen *screen = QGuiApplication::primaryScreen()) {
-            processCapturedArea(screen->geometry());
+            QTimer::singleShot(80, [this, screen]() { processCapturedArea(screen->geometry()); });
         }
         return;
     }

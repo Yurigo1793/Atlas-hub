@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QIcon>
 
 #include "core/AppController.h"
 #include "utils/Logger.h"
@@ -8,6 +9,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QApplication::setApplicationName("AtlasHub");
     QApplication::setOrganizationName("AtlasHub");
+    app.setWindowIcon(QIcon(QStringLiteral(":/branding/logo.svg")));
 
     Logger::instance().info("Application starting");
 
