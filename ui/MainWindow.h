@@ -16,13 +16,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    void setResultText(const QString &text);
-    void appendResultText(const QString &text);
-    void setStatusText(const QString &text);
-
 signals:
     void ocrRequested();
-    void settingsRequested();
 
 private:
     void setupUiConnections();

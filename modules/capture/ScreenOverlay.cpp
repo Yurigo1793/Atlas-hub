@@ -9,19 +9,15 @@
 ScreenOverlay::ScreenOverlay(QWidget *parent)
     : QWidget(parent)
 {
-    setWindowFlag(Qt::FramelessWindowHint, true);
-    setWindowFlag(Qt::Tool, true);
-    setWindowFlag(Qt::WindowStaysOnTopHint, true);
-    setWindowState(Qt::WindowFullScreen);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
-    setAttribute(Qt::WA_NoSystemBackground, true);
 
     setCursor(Qt::CrossCursor);
     setFocusPolicy(Qt::StrongFocus);
 
     if (QScreen *screen = QGuiApplication::primaryScreen()) {
-        setGeometry(screen->geometry());
+        setGeometry(screen->virtualGeometry());
     }
 }
 
@@ -32,7 +28,12 @@ void ScreenOverlay::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    painter.fillRect(rect(), QColor(0, 0, 0, 120));
+    painter.fillRect(rect(), QColor(0, 0, 0, 95));
+
+    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+    painter.setPen(QPen(QColor(255, 255, 255, 220), 1));
+    painter.drawText(QPoint(20, 32), QStringLiteral("Arraste para selecionar"));
+    painter.drawText(QPoint(20, 52), QStringLiteral("ESC para cancelar"));
 
     const QRect selectionRect = normalizedSelection();
     if (!selectionRect.isNull()) {
@@ -40,7 +41,7 @@ void ScreenOverlay::paintEvent(QPaintEvent *event)
         painter.fillRect(selectionRect, Qt::transparent);
 
         painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-        painter.setPen(QPen(QColor(0, 170, 255), 2));
+        painter.setPen(QPen(QColor(0, 120, 215), 2));
         painter.drawRect(selectionRect);
     }
 }
@@ -55,6 +56,7 @@ void ScreenOverlay::mousePressEvent(QMouseEvent *event)
     m_selecting = true;
     m_startPoint = mapFromGlobal(event->globalPosition().toPoint());
     m_endPoint = m_startPoint;
+    event->accept();
     update();
 }
 
@@ -66,6 +68,7 @@ void ScreenOverlay::mouseMoveEvent(QMouseEvent *event)
     }
 
     m_endPoint = mapFromGlobal(event->globalPosition().toPoint());
+    event->accept();
     update();
 }
 
@@ -81,8 +84,10 @@ void ScreenOverlay::mouseReleaseEvent(QMouseEvent *event)
 
     const QRect selectionRect = normalizedSelection();
     if (selectionRect.isValid() && selectionRect.width() > 2 && selectionRect.height() > 2) {
+        event->accept();
         emit areaSelected(QRect(mapToGlobal(selectionRect.topLeft()), selectionRect.size()));
     } else {
+        event->accept();
         emit selectionCanceled();
     }
 }

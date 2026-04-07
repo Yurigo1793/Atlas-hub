@@ -28,6 +28,7 @@ set(ATLASHUB_SOURCES
     core/AppController.cpp
     core/HotkeyManager.cpp
     ui/MainWindow.cpp
+    ui/OCRWindow.cpp
     modules/ocr/OCRManager.cpp
     modules/capture/ScreenCapture.cpp
     modules/capture/ScreenOverlay.cpp
@@ -39,6 +40,7 @@ set(ATLASHUB_HEADERS
     core/AppController.h
     core/HotkeyManager.h
     ui/MainWindow.h
+    ui/OCRWindow.h
     modules/ocr/OCRManager.h
     modules/capture/ScreenCapture.h
     modules/capture/ScreenOverlay.h
@@ -48,6 +50,11 @@ set(ATLASHUB_HEADERS
 
 set(ATLASHUB_UIS
     ui/MainWindow.ui
+    ui/OCRWindow.ui
+)
+
+set(ATLASHUB_RESOURCES
+    resources/branding.qrc
 )
 
 set(ATLASHUB_RESOURCES

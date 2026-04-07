@@ -5,6 +5,7 @@
 #include <memory>
 
 class MainWindow;
+class OCRWindow;
 class OCRManager;
 class ScreenCapture;
 class ScreenOverlay;
@@ -31,8 +32,9 @@ public:
 
 private:
     void connectSignals();
-    void handleOcrRequested();
-    void handleSettingsRequested();
+    void handleOpenOcrRequested();
+    void handleBackToHubRequested();
+    void handleCaptureRequested();
     void handleAreaSelected(const QRect &area);
     void handleSelectionCanceled();
     void openCaptureOverlay();
@@ -41,6 +43,7 @@ private:
     void processCapturedArea(const QRect &area);
 
     std::unique_ptr<MainWindow> m_mainWindow;
+    std::unique_ptr<OCRWindow> m_ocrWindow;
     std::unique_ptr<OCRManager> m_ocrManager;
     std::unique_ptr<ScreenCapture> m_screenCapture;
     std::unique_ptr<ScreenOverlay> m_screenOverlay;
