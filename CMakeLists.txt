@@ -76,6 +76,10 @@ target_link_libraries(AtlasHub PRIVATE
     Qt6::Widgets
 )
 
+if(WIN32)
+    target_link_libraries(AtlasHub PRIVATE windowsapp)
+endif()
+
 if(MINGW)
     target_link_options(AtlasHub PRIVATE -mwindows)
 endif()
