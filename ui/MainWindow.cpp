@@ -16,17 +16,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::setResultText(const QString &text)
 {
-    ui->ocrResultTextEdit->setPlainText(text);
+    ui->textResult->setPlainText(text);
 }
 
 void MainWindow::appendResultText(const QString &text)
 {
-    ui->ocrResultTextEdit->append(text);
+    ui->textResult->append(text);
 }
 
 void MainWindow::setStatusText(const QString &text)
 {
-    ui->statusLabel->setText(text);
+    ui->textStatus->setPlainText(text);
 }
 
 void MainWindow::setupUiConnections()

@@ -1,6 +1,9 @@
 #include "AppController.h"
 
+#include <QGuiApplication>
+#include <QScreen>
 #include <QString>
+#include <QTimer>
 
 #include "modules/capture/ScreenCapture.h"
 #include "modules/capture/ScreenOverlay.h"
@@ -63,29 +66,29 @@ void AppController::handleSettingsRequested()
 
 void AppController::handleAreaSelected(const QRect &area)
 {
+    const QString coords = QStringLiteral("x=%1 y=%2 w=%3 h=%4")
+                               .arg(area.x())
+                               .arg(area.y())
+                               .arg(area.width())
+                               .arg(area.height());
+
     Logger::instance().info(QStringLiteral("Selected area: x=%1 y=%2 w=%3 h=%4")
                                 .arg(area.x())
                                 .arg(area.y())
                                 .arg(area.width())
                                 .arg(area.height()));
 
+    m_mainWindow->setStatusText(QStringLiteral("Processing... | %1").arg(coords));
     closeCaptureOverlay();
 
-    const QImage capture = m_screenCapture->captureFullScreen();
-    const QString extractedText = m_ocrManager->extractText(capture);
-    m_mainWindow->setResultText(QStringLiteral("%1\nÁrea selecionada: [%2, %3, %4, %5]")
-                                    .arg(extractedText)
-                                    .arg(area.x())
-                                    .arg(area.y())
-                                    .arg(area.width())
-                                    .arg(area.height()));
-    m_mainWindow->setStatusText(QStringLiteral("Ready"));
+    QTimer::singleShot(80, [this, area]() { processCapturedArea(area); });
 }
 
 void AppController::handleSelectionCanceled()
 {
     Logger::instance().info("Screen selection canceled");
     closeCaptureOverlay();
+    restoreMainWindow();
     m_mainWindow->setStatusText(QStringLiteral("Ready"));
 }
 
@@ -94,7 +97,10 @@ void AppController::openCaptureOverlay()
     const ConfigManager::AppSettings settings = m_configManager->appSettings();
     if (!settings.showOverlay) {
         m_mainWindow->setStatusText(QStringLiteral("Capturing..."));
-        handleAreaSelected(QRect());
+        m_mainWindow->hide();
+        if (QScreen *screen = QGuiApplication::primaryScreen()) {
+            QTimer::singleShot(80, [this, screen]() { processCapturedArea(screen->geometry()); });
+        }
         return;
     }
 
@@ -109,7 +115,37 @@ void AppController::openCaptureOverlay()
 void AppController::closeCaptureOverlay()
 {
     m_screenOverlay->hide();
+}
+
+void AppController::restoreMainWindow()
+{
     m_mainWindow->show();
     m_mainWindow->raise();
     m_mainWindow->activateWindow();
+}
+
+void AppController::processCapturedArea(const QRect &area)
+{
+    const QImage capture = m_screenCapture->captureArea(area);
+    const bool captureOk = !capture.isNull();
+    const QString coords = QStringLiteral("x=%1 y=%2 w=%3 h=%4")
+                               .arg(area.x())
+                               .arg(area.y())
+                               .arg(area.width())
+                               .arg(area.height());
+
+    Logger::instance().info(
+        QStringLiteral("Capture finished. success=%1 area=[%2]").arg(captureOk ? "true" : "false", coords));
+
+    restoreMainWindow();
+
+    if (!captureOk) {
+        m_mainWindow->setStatusText(QStringLiteral("Capture failed | %1").arg(coords));
+        m_mainWindow->setResultText(QStringLiteral("Falha ao capturar a área selecionada."));
+        return;
+    }
+
+    const QString extractedText = m_ocrManager->processImage(capture);
+    m_mainWindow->setResultText(extractedText);
+    m_mainWindow->setStatusText(QStringLiteral("Capture complete | %1").arg(coords));
 }

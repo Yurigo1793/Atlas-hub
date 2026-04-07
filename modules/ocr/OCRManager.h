@@ -15,5 +15,5 @@ class OCRManager
 public:
     OCRManager() = default;
 
-    QString extractText(const QImage &image) const;
+    QString processImage(const QImage &image) const;
 };
