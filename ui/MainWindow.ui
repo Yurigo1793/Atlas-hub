@@ -85,19 +85,22 @@
      </widget>
     </item>
     <item>
-     <widget class="QTextEdit" name="ocrResultTextEdit">
+     <widget class="QTextEdit" name="textStatus">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="maximumHeight">
+       <number>70</number>
+      </property>
       <property name="placeholderText">
-       <string>Resultados de OCR aparecerão aqui...</string>
+       <string>Status e mensagens do sistema...</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="statusLabel">
-      <property name="text">
-       <string>Ready</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+     <widget class="QTextEdit" name="textResult">
+      <property name="placeholderText">
+       <string>Resultados de OCR aparecerão aqui...</string>
       </property>
      </widget>
     </item>

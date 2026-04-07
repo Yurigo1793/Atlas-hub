@@ -37,6 +37,8 @@ private:
     void handleSelectionCanceled();
     void openCaptureOverlay();
     void closeCaptureOverlay();
+    void restoreMainWindow();
+    void processCapturedArea(const QRect &area);
 
     std::unique_ptr<MainWindow> m_mainWindow;
     std::unique_ptr<OCRManager> m_ocrManager;

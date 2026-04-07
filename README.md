@@ -70,6 +70,28 @@ Observações:
 - Se o CMake não localizar o Qt 6, ajuste `CMAKE_PREFIX_PATH` para o diretório de instalação do Qt.
 - O nome final do executável pode variar conforme configuração do gerador/ambiente.
 
+## Solução de problemas de build
+
+### Erro: `Could not find a package configuration file provided by "Qt6"`
+Esse é o erro mais comum quando o ambiente não tem Qt 6 (ou o CMake não sabe onde ele está).
+
+No **Windows**, informe o caminho do Qt no comando de configuração:
+
+```bash
+cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH="C:/Qt/6.8.2/mingw_64"
+```
+
+No **Linux (Ubuntu/Debian)**, instale as dependências de desenvolvimento:
+
+```bash
+sudo apt update
+sudo apt install -y qt6-base-dev cmake g++
+cmake -S . -B build
+cmake --build build
+```
+
+Alternativamente, você pode definir `Qt6_DIR` diretamente para a pasta que contém `Qt6Config.cmake`.
+
 ## Roadmap
 
 ### Fase 1 — Base arquitetural

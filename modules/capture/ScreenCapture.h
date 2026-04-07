@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QImage>
+#include <QRect>
 
 /**
  * @brief Screen capture module.
@@ -13,5 +14,5 @@ class ScreenCapture
 public:
     ScreenCapture() = default;
 
-    QImage captureFullScreen() const;
+    QImage captureArea(const QRect &globalArea) const;
 };

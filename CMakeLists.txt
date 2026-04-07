@@ -10,7 +10,18 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 COMPONENTS Widgets QUIET)
+
+if(NOT Qt6_FOUND)
+    message(FATAL_ERROR
+        "Qt6 (Widgets) nao foi encontrado.\n"
+        "Defina CMAKE_PREFIX_PATH apontando para o diretorio de instalacao do Qt.\n"
+        "Exemplos:\n"
+        "  - Windows (Qt online installer): -DCMAKE_PREFIX_PATH=C:/Qt/6.8.2/mingw_64\n"
+        "  - Linux (apt): geralmente instalado automaticamente via pacote qt6-base-dev\n"
+        "Tambem e possivel definir Qt6_DIR para a pasta que contem Qt6Config.cmake."
+    )
+endif()
 
 set(ATLASHUB_SOURCES
     main.cpp
