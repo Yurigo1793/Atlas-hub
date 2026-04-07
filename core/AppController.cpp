@@ -164,5 +164,11 @@ void AppController::processCapturedArea(const QRect &area)
 
     const QString extractedText = m_ocrManager->processImage(capture);
     m_ocrWindow->setResultText(extractedText);
+
+    if (extractedText == QStringLiteral("OCR failed")) {
+        m_ocrWindow->setStatusText(QStringLiteral("OCR failed | %1").arg(coords));
+        return;
+    }
+
     m_ocrWindow->setStatusText(QStringLiteral("Capture complete | %1").arg(coords));
 }
