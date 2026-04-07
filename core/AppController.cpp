@@ -166,29 +166,3 @@ void AppController::processCapturedArea(const QRect &area)
     m_ocrWindow->setResultText(extractedText);
     m_ocrWindow->setStatusText(QStringLiteral("Capture complete | %1").arg(coords));
 }
-
-void AppController::processCapturedArea(const QRect &area)
-{
-    const QImage capture = m_screenCapture->captureArea(area);
-    const bool captureOk = !capture.isNull();
-    const QString coords = QStringLiteral("x=%1 y=%2 w=%3 h=%4")
-                               .arg(area.x())
-                               .arg(area.y())
-                               .arg(area.width())
-                               .arg(area.height());
-
-    Logger::instance().info(
-        QStringLiteral("Capture finished. success=%1 area=[%2]").arg(captureOk ? "true" : "false", coords));
-
-    restoreMainWindow();
-
-    if (!captureOk) {
-        m_mainWindow->setStatusText(QStringLiteral("Capture failed | %1").arg(coords));
-        m_mainWindow->setResultText(QStringLiteral("Falha ao capturar a área selecionada."));
-        return;
-    }
-
-    const QString extractedText = m_ocrManager->processImage(capture);
-    m_mainWindow->setResultText(extractedText);
-    m_mainWindow->setStatusText(QStringLiteral("Capture complete | %1").arg(coords));
-}
