@@ -404,7 +404,7 @@
     </message>
     <message>
         <source>Sets which logical particles will be affected. When empty, all particles in the system are affected.</source>
-        <translation>Define quais partículas logiques serão affectées. quando esta propriedade é vazio, todas os partículas do sistema serão affectées.</translation>
+        <translation>Define quais partículas lógicas serão afetadas. Quando esta propriedade estiver vazia, todas as partículas do sistema serão afetadas.</translation>
     </message>
     <message>
         <source>Enabled</source>
@@ -412,7 +412,7 @@
     </message>
     <message>
         <source>If set to false, this affector will not alter any particles. Usually this is used to conditionally turn an affector on or off.</source>
-        <translation>quando falso, este affecteur n&apos;altère pas os partículas. esta propriedade permet dativar ou de desativar o affecteur conditionnellement.</translation>
+        <translation>Quando falso, este afetador não altera nenhuma partícula. Esta propriedade permite ativar ou desativar o afetador condicionalmente.</translation>
     </message>
 </context>
 <context>
@@ -420,8 +420,8 @@
     <message>
         <source>Attach an image.
 The attached image will be analyzed and integrated into the response by the AI.</source>
-        <translation>Joindre uma imagem.
-L&apos;imagnanexada será analisada e integrada pelo IA na resposta.</translation>
+        <translation>Anexar uma imagem.
+A imagem anexada será analisada e integrada pela IA na resposta.</translation>
     </message>
 </context>
 <context>
@@ -536,7 +536,7 @@ L&apos;imagnanexada será analisada e integrada pelo IA na resposta.</translatio
     </message>
     <message>
         <source>- A component in the selection uses anchors.</source>
-        <translation>- Un componente da seleção usa dos ancres.</translation>
+        <translation>- Um componente da seleção usa âncoras.</translation>
     </message>
 </context>
 <context>
@@ -586,11 +586,11 @@ Utilisez AmbientSound.Infinite para boucler indéfiniment.</translation>
     <name>AnchorButtons</name>
     <message>
         <source>Anchors can only be applied to child items.</source>
-        <translation>Os ancres ne podem ser aplicadas que aos elementos filhos.</translation>
+        <translation>As âncoras só podem ser aplicadas aos elementos filhos.</translation>
     </message>
     <message>
         <source>Anchors can only be applied to the base state.</source>
-        <translation>Os ancres ne podem ser aplicadas que aos estados base.</translation>
+        <translation>As âncoras só podem ser aplicadas ao estado base.</translation>
     </message>
     <message>
         <source>Anchor component to the top.</source>
@@ -734,7 +734,7 @@ Utilisez AmbientSound.Infinite para boucler indéfiniment.</translation>
     </message>
     <message>
         <source>Running</source>
-        <translation>En cours de execução</translation>
+        <translation>Em execução</translation>
     </message>
     <message>
         <source>Indicates whether the application is running or not</source>
@@ -895,7 +895,7 @@ Utilisez AmbientSound.Infinite para boucler indéfiniment.</translation>
     </message>
     <message>
         <source>Running</source>
-        <translation>En cours de execução</translation>
+        <translation>Em execução</translation>
     </message>
     <message>
         <source>Whether the sprite is animating or not.</source>
@@ -926,7 +926,7 @@ Utilisez AmbientSound.Infinite para boucler indéfiniment.</translation>
     </message>
     <message>
         <source>Running</source>
-        <translation>En cours de execução</translation>
+        <translation>Em execução</translation>
     </message>
     <message>
         <source>Whether the animation is running and/or paused.</source>
@@ -1175,7 +1175,7 @@ Utilisez AmbientSound.Infinite para boucler indéfiniment.</translation>
     <name>AssetImage</name>
     <message>
         <source>Remove the attached image.</source>
-        <translation>remover o imagnanexada.</translation>
+        <translation>Remover a imagem anexada.</translation>
     </message>
 </context>
 <context>
@@ -1271,7 +1271,7 @@ Utilisez AmbientSound.Infinite para boucler indéfiniment.</translation>
     <name>Attractor3DSection</name>
     <message>
         <source>Particle Attractor</source>
-        <translation>Attracteur de partículas</translation>
+        <translation>Atrator de partículas</translation>
     </message>
     <message>
         <source>Position Variation</source>
@@ -1494,7 +1494,7 @@ Une valor positive augmente a reverberação para os hautes fréquences e étouf
     </message>
     <message>
         <source>Show colored axis indicator lines.</source>
-        <translation>exibe dos linhas colorées para indiquer os eixos.</translation>
+        <translation>Exibir linhas coloridas para indicar os eixos.</translation>
     </message>
     <message>
         <source>Enabled</source>
@@ -1809,11 +1809,11 @@ o caminho deve ser relatif.</translation>
     <name>BindingsDialog</name>
     <message>
         <source>Owner</source>
-        <translation>Propriétaire</translation>
+        <translation>Proprietário</translation>
     </message>
     <message>
         <source>The owner of the property</source>
-        <translation>o propriétaire da propriedade</translation>
+        <translation>O proprietário da propriedade</translation>
     </message>
 </context>
 <context>
@@ -1824,7 +1824,7 @@ o caminho deve ser relatif.</translation>
     </message>
     <message>
         <source>Sets the component and its property from which the value is copied.</source>
-        <translation>Define a propriedade do componente à partir de lao qualle a valor é copiée.</translation>
+        <translation>Define o componente e a propriedade de origem da qual o valor é copiado.</translation>
     </message>
     <message>
         <source>To</source>
@@ -1832,14 +1832,14 @@ o caminho deve ser relatif.</translation>
     </message>
     <message>
         <source>Sets the property of the selected component to which the copied value is assigned.</source>
-        <translation>Define a propriedade do componente selecionado em lao qualle a valor copiée é assignée.</translation>
+        <translation>Define a propriedade do componente selecionado à qual o valor copiado é atribuído.</translation>
     </message>
 </context>
 <context>
     <name>BindingsListView</name>
     <message>
         <source>Removes the binding.</source>
-        <translation>Supprime a liaison.</translation>
+        <translation>Remove a ligação.</translation>
     </message>
 </context>
 <context>
@@ -1855,34 +1855,34 @@ o caminho deve ser relatif.</translation>
     </message>
     <message>
         <source>The mode which is used when foreground source is blended over source.</source>
-        <translation>o modo de mélange utilizado quando o elemento ao premier plan é apposé na fonte.</translation>
+        <translation>O modo de mistura usado quando a origem de primeiro plano é mesclada sobre a origem.</translation>
     </message>
     <message>
         <source>Foreground source</source>
-        <translation>elemento de premier plan</translation>
+        <translation>Origem de primeiro plano</translation>
     </message>
     <message>
         <source>The component that is going to be blended over the source.</source>
-        <translation>o componente que vai ser apposé na fonte.</translation>
+        <translation>O componente que será mesclado sobre a origem.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
     <name>BlurSection</name>
     <message>
         <source>Blur</source>
-        <translation>Flou</translation>
+        <translation>Desfoque</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -2013,7 +2013,7 @@ o caminho deve ser relatif.</translation>
     <name>BorderItemSpecifics</name>
     <message>
         <source>Border Item</source>
-        <translation>Bordure</translation>
+        <translation>Borda</translation>
     </message>
     <message>
         <source>Stroke color</source>
@@ -2122,15 +2122,15 @@ o caminho deve ser relatif.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -2174,7 +2174,7 @@ o caminho deve ser relatif.</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Angle</translation>
+        <translation>Ângulo</translation>
     </message>
     <message>
         <source>Angle of the brush</source>
@@ -2257,18 +2257,18 @@ o caminho deve ser relatif.</translation>
     </message>
     <message>
         <source>Sets the size multiplier for the buffer.</source>
-        <translation>Define o multiplicateur de tamanho para este tampon.</translation>
+        <translation>Define o multiplicador de tamanho para este buffer.</translation>
     </message>
 </context>
 <context>
     <name>BusyIndicatorSpecifics</name>
     <message>
         <source>Busy Indicator</source>
-        <translation>Indicateur doccupation</translation>
+        <translation>Indicador de atividade</translation>
     </message>
     <message>
         <source>Running</source>
-        <translation>En cours de execução</translation>
+        <translation>Em execução</translation>
     </message>
     <message>
         <source>Toggles if the busy indicator indicates activity.</source>
@@ -2283,7 +2283,7 @@ o caminho deve ser relatif.</translation>
     <name>ButtonSection</name>
     <message>
         <source>Button</source>
-        <translation>Bouton</translation>
+        <translation>Botão</translation>
     </message>
     <message>
         <source>Appearance</source>
@@ -2306,7 +2306,7 @@ o caminho deve ser relatif.</translation>
     <name>ButtonSpecifics</name>
     <message>
         <source>Button</source>
-        <translation>Bouton</translation>
+        <translation>Botão</translation>
     </message>
     <message>
         <source>Text</source>
@@ -2973,15 +2973,15 @@ o caminho deve ser relatif.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -3027,15 +3027,15 @@ o caminho deve ser relatif.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -3043,7 +3043,7 @@ o caminho deve ser relatif.</translation>
     <message>
         <source>Colorized Image</source>
         <translatorcomment>colorée?</translatorcomment>
-        <translation>Imagem teintée</translation>
+        <translation>Imagem colorizada</translation>
     </message>
     <message>
         <source>Image color</source>
@@ -3592,7 +3592,7 @@ isso ne pode ser cancelado.</translation>
     </message>
     <message>
         <source>No materials available. Make sure you have an internet connection.</source>
-        <translation>nenhum material disponível. Assurez-vous davoir uma conexão Internet.</translation>
+        <translation>Nenhum material disponível. Verifique se você tem uma conexão com a Internet.</translation>
     </message>
     <message>
         <source>No match found.</source>
@@ -3672,7 +3672,7 @@ isso ne pode ser cancelado.</translation>
     <name>ContentLibraryTexturesView</name>
     <message>
         <source>No textures available. Make sure you have an internet connection.</source>
-        <translation>nenhuma texture disponível. Assurez-vous davoir uma conexão Internet.</translation>
+        <translation>Nenhuma textura disponível. Verifique se você tem uma conexão com a Internet.</translation>
     </message>
     <message>
         <source>No match found.</source>
@@ -4026,7 +4026,7 @@ calcule a luz diffuse e especular para cada pixel desenhado.</translation>
     </message>
     <message>
         <source>Sets how the colors of the model blend with colors behind it.</source>
-        <translation>Define como os cores do modelo se mélangent com os cores atrás.</translation>
+        <translation>Define como as cores do modelo se misturam com as cores ao fundo.</translation>
     </message>
     <message>
         <source>Enable Vertex Colors</source>
@@ -4316,7 +4316,7 @@ Une valor de 0 n&apos;enveloppe pas a luz, tandis que uma valor de 1 vai envelop
     <name>DepthOfFieldHQBlurSection</name>
     <message>
         <source>Blur</source>
-        <translation>Flou</translation>
+        <translation>Desfoque</translation>
     </message>
     <message>
         <source>Blur Amount</source>
@@ -4336,18 +4336,18 @@ Une valor de 0 n&apos;enveloppe pas a luz, tandis que uma valor de 1 vai envelop
     </message>
     <message>
         <source>Focus Range</source>
-        <translation>Plage de focus</translation>
+        <translation>Faixa de foco</translation>
     </message>
     <message>
         <source>Focus range of the blur.</source>
-        <translation>Plage de focus do desfoque.</translation>
+        <translation>Faixa de foco do desfoque.</translation>
     </message>
 </context>
 <context>
     <name>DesaturateSection</name>
     <message>
         <source>Desaturate</source>
-        <translation>Désaturation</translation>
+        <translation>Dessaturação</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -4355,30 +4355,30 @@ Une valor de 0 n&apos;enveloppe pas a luz, tandis que uma valor de 1 vai envelop
     </message>
     <message>
         <source>Strength of the desaturate.</source>
-        <translation>Force de désaturation.</translation>
+        <translation>Intensidade da dessaturação.</translation>
     </message>
 </context>
 <context>
     <name>DesaturationEffectSpecifics</name>
     <message>
         <source>Desaturation</source>
-        <translation>Désaturation</translation>
+        <translation>Dessaturação</translation>
     </message>
     <message>
         <source>How much the source colors are desaturated.</source>
-        <translation>valor indiquant o niveau de désaturation dos cores.</translation>
+        <translation>Valor que indica o nível de dessaturação das cores.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -4532,11 +4532,11 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     <name>DirectionalBlurEffectSpecifics</name>
     <message>
         <source>Directional Blur</source>
-        <translation>Flou directionnel</translation>
+        <translation>Desfoque direcional</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Angle</translation>
+        <translation>Ângulo</translation>
     </message>
     <message>
         <source>The direction for the blur. Blur is applied to both sides of each pixel. Therefore, setting the direction to 0 and 180 produces the same result.</source>
@@ -4564,11 +4564,11 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
     <message>
         <source>Transparent border</source>
@@ -4603,15 +4603,15 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -4626,7 +4626,7 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Radius of the effect.</source>
-        <translation>Rayon do effet.</translation>
+        <translation>Raio do efeito.</translation>
     </message>
     <message>
         <source>Width</source>
@@ -4658,14 +4658,14 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Center of the distortion.</source>
-        <translation>Centro da distortion.</translation>
+        <translation>Centro da distorção.</translation>
     </message>
 </context>
 <context>
     <name>DistortionSphereSection</name>
     <message>
         <source>Distortion</source>
-        <translation>Distortion</translation>
+        <translation>Distorção</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -4673,7 +4673,7 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Radius of the effect.</source>
-        <translation>Rayon do effet.</translation>
+        <translation>Raio do efeito.</translation>
     </message>
     <message>
         <source>Height</source>
@@ -4681,7 +4681,7 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Height of the distortion.</source>
-        <translation>altura da distortion.</translation>
+        <translation>Altura da distorção.</translation>
     </message>
     <message>
         <source>Center</source>
@@ -4689,14 +4689,14 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Center of the distortion.</source>
-        <translation>Centro da distortion.</translation>
+        <translation>Centro da distorção.</translation>
     </message>
 </context>
 <context>
     <name>DistortionSpiralSection</name>
     <message>
         <source>Distortion</source>
-        <translation>Distortion</translation>
+        <translation>Distorção</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -4704,7 +4704,7 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Radius of the effect.</source>
-        <translation>Rayon do effet.</translation>
+        <translation>Raio do efeito.</translation>
     </message>
     <message>
         <source>Strength</source>
@@ -4720,7 +4720,7 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Center of the distortion.</source>
-        <translation>Centro da distortion.</translation>
+        <translation>Centro da distorção.</translation>
     </message>
 </context>
 <context>
@@ -4776,15 +4776,15 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     <name>DrawerSpecifics</name>
     <message>
         <source>Drawer</source>
-        <translation>Tiroir</translation>
+        <translation>Gaveta</translation>
     </message>
     <message>
         <source>Edge</source>
-        <translation>Bordure</translation>
+        <translation>Borda</translation>
     </message>
     <message>
         <source>Defines the edge of the window the drawer will open from.</source>
-        <translation>Define a bordure da janela à partir de lao qualle o tiroir se ouvre.</translation>
+        <translation>Define a borda da janela a partir da qual a gaveta será aberta.</translation>
     </message>
     <message>
         <source>Drag margin</source>
@@ -4867,11 +4867,11 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
     <message>
         <source>Transparent border</source>
@@ -4886,7 +4886,7 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     <name>DynamicBurst3DSection</name>
     <message>
         <source>Particle Dynamic Burst</source>
-        <translation>Rafale dynamique de partículas</translation>
+        <translation>Rajada dinâmica de partículas</translation>
     </message>
     <message>
         <source>Trigger Mode</source>
@@ -4967,7 +4967,7 @@ define por a&lt;b&gt;tamanho do pas&lt;/b&gt;.</translation>
     <name>EdgeDetectSection</name>
     <message>
         <source>Edge</source>
-        <translation>Bordure</translation>
+        <translation>Borda</translation>
     </message>
     <message>
         <source>Strength</source>
@@ -5249,7 +5249,7 @@ Voulez-vous vraiment remover este nó&#xa0;:
     </message>
     <message>
         <source>Passes</source>
-        <translation>Passes</translation>
+        <translation>Passagens</translation>
     </message>
     <message>
         <source>Sets the render passes of the effect.</source>
@@ -5297,7 +5297,7 @@ Voulez-vous vraiment remover este nó&#xa0;:
     </message>
     <message>
         <source>Blur</source>
-        <translation>Flou</translation>
+        <translation>Desfoque</translation>
     </message>
     <message>
         <source>Sets the intensity of the &lt;b&gt;Layer Blur&lt;/b&gt; on the component.</source>
@@ -5742,11 +5742,11 @@ Os componentes ao premier plan devem ser transparentes e o componente em plano d
     </message>
     <message>
         <source>Alpha Mix</source>
-        <translation>Mélange alpha</translation>
+        <translation>Mistura alfa</translation>
     </message>
     <message>
         <source>Sets the amount of color grading to mix with the scene.</source>
-        <translation>Define a quantidade de étalonnage à mélanger com a cena.</translation>
+        <translation>Define a quantidade de gradação de cor a ser misturada com a cena.</translation>
     </message>
     <message>
         <source>Ambient Occlusion (SSAO)</source>
@@ -5822,7 +5822,7 @@ Os componentes ao premier plan devem ser transparentes e o componente em plano d
     </message>
     <message>
         <source>Focus Range</source>
-        <translation>Plage de focus</translation>
+        <translation>Faixa de foco</translation>
     </message>
     <message>
         <source>Sets the range of distances from the focus distance that are in focus.</source>
@@ -5876,7 +5876,7 @@ Os componentes ao premier plan devem ser transparentes e o componente em plano d
     </message>
     <message>
         <source>Bloom</source>
-        <translation>Flou lumineux</translation>
+        <translation>Brilho difuso</translation>
     </message>
     <message>
         <source>Sets the amount of bloom applied to the glow effect.</source>
@@ -6044,7 +6044,7 @@ Os componentes ao premier plan devem ser transparentes e o componente em plano d
     </message>
     <message>
         <source>Blur</source>
-        <translation>Flou</translation>
+        <translation>Desfoque</translation>
     </message>
     <message>
         <source>Set amount of blur to apply to the lens flare.</source>
@@ -6199,11 +6199,11 @@ Os componentes ao premier plan devem ser transparentes e o componente em plano d
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
     <message>
         <source>Transparent border</source>
@@ -6884,15 +6884,15 @@ Fleurs, coup de gueule ou suggestions, tout retour é bienvenu&#xa0;!</translati
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -6931,11 +6931,11 @@ Fleurs, coup de gueule ou suggestions, tout retour é bienvenu&#xa0;!</translati
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
     <message>
         <source>Transparent border</source>
@@ -6950,7 +6950,7 @@ Fleurs, coup de gueule ou suggestions, tout retour é bienvenu&#xa0;!</translati
     <name>GaussianBlurSection</name>
     <message>
         <source>Blur</source>
-        <translation>Flou</translation>
+        <translation>Desfoque</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -7105,11 +7105,11 @@ Fleurs, coup de gueule ou suggestions, tout retour é bienvenu&#xa0;!</translati
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
     <message>
         <source>Transparent border</source>
@@ -7822,15 +7822,15 @@ adicionar um componente em surbrillance.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -8134,15 +8134,15 @@ adicionar um componente em surbrillance.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -8737,15 +8737,15 @@ dessinée na texture.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -9671,15 +9671,15 @@ adicionar um componente em surbrillance.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -10138,7 +10138,7 @@ Celle-ci remplacera a sonde de luz da cena.</translation>
     <name>MotionBlurSection</name>
     <message>
         <source>Blur</source>
-        <translation>Flou</translation>
+        <translation>Desfoque</translation>
     </message>
     <message>
         <source>Fade Amount</source>
@@ -10510,15 +10510,15 @@ Celle-ci remplacera a sonde de luz da cena.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -10959,7 +10959,7 @@ a tamanho totale implicite.</translation>
     </message>
     <message>
         <source>Emit Bursts</source>
-        <translation>Rafales de emissão</translation>
+        <translation>Rajadas de emissão</translation>
     </message>
     <message>
         <source>Sets a list of EmitBurst3D elements to declaratively define bursts.</source>
@@ -11485,7 +11485,7 @@ adicionar um componente em surbrillance.</translation>
     </message>
     <message>
         <source>Running</source>
-        <translation>En cours de execução</translation>
+        <translation>Em execução</translation>
     </message>
     <message>
         <source>Whether the physics world is running.</source>
@@ -11855,7 +11855,7 @@ adicionar um componente em surbrillance.</translation>
     </message>
     <message>
         <source>Blend Mode</source>
-        <translation>Modo de mélange</translation>
+        <translation>Modo de mistura</translation>
     </message>
     <message>
         <source>Sets how the colors of the model rendered blend with those behind it.</source>
@@ -12405,11 +12405,11 @@ Une barre de progressão em este modo exibe que uma operação
     <name>PropertiesDialog</name>
     <message>
         <source>Owner</source>
-        <translation>Propriétaire</translation>
+        <translation>Proprietário</translation>
     </message>
     <message>
         <source>The owner of the property</source>
-        <translation>o propriétaire da propriedade</translation>
+        <translation>O proprietário da propriedade</translation>
     </message>
 </context>
 <context>
@@ -15237,7 +15237,7 @@ Os componentes verrouillés ne podem ser ni modificados ni selecionados.</transl
     </message>
     <message>
         <source>Reset anchors for selected component.</source>
-        <translation>Redefinir os ancres para o componente selecionado.</translation>
+        <translation>Redefinir as âncoras para o componente selecionado.</translation>
     </message>
     <message>
         <source>Layout selected components in column layout.</source>
@@ -18728,7 +18728,7 @@ aviso&#xa0;: fonctionnalité expérimentale pouvant entraîner um falha durante 
     </message>
     <message>
         <source>Mixing test frameworks and test tools can lead to duplicating run information when using &quot;Run All Tests&quot;, for example.</source>
-        <translation>o mélange dos cadriciels de test e dos ferramentas de test pode mener à dos informations de execução dupliquées, especialmente durante o uso da fonctionnalité «&#xa0;executar todos os tests&#xa0;».</translation>
+        <translation>A mistura de frameworks e ferramentas de teste pode levar a informações de execução duplicadas, especialmente ao usar o recurso «&#xa0;executar todos os testes&#xa0;».</translation>
     </message>
     <message>
         <source>%1 (none)</source>
@@ -18793,7 +18793,7 @@ aviso&#xa0;: fonctionnalité expérimentale pouvant entraîner um falha durante 
     <name>QtC::Axivion</name>
     <message>
         <source>Owner</source>
-        <translation>Propriétaire</translation>
+        <translation>Proprietário</translation>
     </message>
     <message>
         <source>Path globbing</source>
@@ -21111,7 +21111,7 @@ Par exemple, «&#xa0;Revision&#xa0;: 15&#xa0;» laissera a branch à revisão 15
     </message>
     <message>
         <source>Enter one CMake &lt;a href=&quot;variable&quot;&gt;variable&lt;/a&gt; per line.&lt;br/&gt;To set or change a variable, use -D&amp;lt;variable&amp;gt;:&amp;lt;type&amp;gt;=&amp;lt;value&amp;gt;.&lt;br/&gt;&amp;lt;type&amp;gt; can have one of the following values: FILEPATH, PATH, BOOL, INTERNAL, or STRING.&lt;br/&gt;To unset a variable, use -U&amp;lt;variable&amp;gt;.&lt;br/&gt;</source>
-        <translation>Saisir uma &lt;a href=&quot;variável&quot;&gt;variável&lt;/a&gt; CMake por linha.&lt;br/&gt;para definir ou editar uma variável, usar -D&amp;lt;variável&amp;gt;:&amp;lt;tipo&amp;gt;=&amp;lt;valor&amp;gt;.&lt;br/&gt;o &amp;lt;tipo&amp;gt; podavoir o une dos valores suivantes : FILEPATH, PATH, BOOL, INTERNAL, ou STRING.&lt;br/&gt;para remettre à zéro uma variável, usar -U&amp;lt;variável&amp;gt;.&lt;br/&gt;</translation>
+        <translation>Informe uma &lt;a href=&quot;variável&quot;&gt;variável&lt;/a&gt; do CMake por linha.&lt;br/&gt;Para definir ou editar uma variável, use -D&amp;lt;variável&amp;gt;:&amp;lt;tipo&amp;gt;=&amp;lt;valor&amp;gt;.&lt;br/&gt;O &amp;lt;tipo&amp;gt; pode ser um dos seguintes valores: FILEPATH, PATH, BOOL, INTERNAL ou STRING.&lt;br/&gt;Para redefinir uma variável, use -U&amp;lt;variável&amp;gt;.&lt;br/&gt;</translation>
     </message>
     <message>
         <source>Re-configure with Initial Parameters</source>
@@ -21428,7 +21428,7 @@ Par exemple, «&#xa0;Revision&#xa0;: 15&#xa0;» laissera a branch à revisão 15
     </message>
     <message>
         <source>Enter one CMake &lt;a href=&quot;variable&quot;&gt;variable&lt;/a&gt; per line.&lt;br/&gt;To set a variable, use -D&amp;lt;variable&amp;gt;:&amp;lt;type&amp;gt;=&amp;lt;value&amp;gt;.&lt;br/&gt;&amp;lt;type&amp;gt; can have one of the following values: FILEPATH, PATH, BOOL, INTERNAL, or STRING.</source>
-        <translation>Saisir uma &lt;a href=&quot;variável&quot;&gt;variável&lt;/a&gt; CMake por linha.&lt;br/&gt;para definir uma variável, usar -D&amp;lt;variável&amp;gt;:&amp;lt;tipo&amp;gt;=&amp;lt;valor&amp;gt;.&lt;br/&gt;o &amp;lt;tipo&amp;gt; podavoir o une dos valores suivantes : FILEPATH, PATH, BOOL, INTERNAL, ou STRING.</translation>
+        <translation>Informe uma &lt;a href=&quot;variável&quot;&gt;variável&lt;/a&gt; do CMake por linha.&lt;br/&gt;Para definir uma variável, use -D&amp;lt;variável&amp;gt;:&amp;lt;tipo&amp;gt;=&amp;lt;valor&amp;gt;.&lt;br/&gt;O &amp;lt;tipo&amp;gt; pode ser um dos seguintes valores: FILEPATH, PATH, BOOL, INTERNAL ou STRING.</translation>
     </message>
     <message>
         <source>CMake Configuration</source>
@@ -24662,7 +24662,7 @@ o coda foi copié em votre presse-papiers.</translation>
     </message>
     <message>
         <source>Enabling %1 is subject to your agreement and abidance with your applicable %1 terms. It is your responsibility to know and accept the requirements and parameters of using tools like %1. This may include, but is not limited to, ensuring you have the rights to allow %1 access to your code, as well as understanding any implications of your use of %1 and suggestions produced (like copyright, accuracy, etc.).</source>
-        <translation>L&apos;activation de %1 é sujette à votre accord e votre conformité em os termes applicables %1. Ele é de votre responsabilité de connaître e daccepter os prérequis e os conditions de uso de um ferramenta como %1. isso pode inclure, mas não é limité à, se assurer davoir os droits de permettre à %1 dacessar à votre code, assim que de comprendre os implications de votre uso de %1 e os suggestions produites (tels que os droits dauteur, a précision, etc.).</translation>
+        <translation>A ativação de %1 está sujeita ao seu acordo e à sua conformidade com os termos aplicáveis de %1. É sua responsabilidade conhecer e aceitar os pré-requisitos e as condições de uso de uma ferramenta como %1. Isso pode incluir, entre outros pontos, garantir que você tenha os direitos para permitir que %1 acesse seu código, bem como compreender as implicações do seu uso de %1 e das sugestões geradas (como direitos autorais, precisão etc.).</translation>
     </message>
     <message>
         <source>The Copilot plugin requires node.js and the Copilot neovim plugin. If you install the neovim plugin as described in %1, the plugin will find the %3 file automatically.
@@ -26406,7 +26406,7 @@ provided they were unmodified before the refactoring.</source>
     </message>
     <message>
         <source>Owner:</source>
-        <translation>Propriétaire :</translation>
+        <translation>Proprietário:</translation>
     </message>
     <message>
         <source>Group:</source>
@@ -30183,7 +30183,7 @@ estes préfixes são utilizados em complément ao diretório atual para basculer
     </message>
     <message>
         <source>&lt;b&gt;Warning&lt;/b&gt;: This file is not part of any project. The code model might have issues parsing this file properly.</source>
-        <translation>&lt;b&gt;aviso&lt;/b&gt; : este arquivo ne feito partie de nenhum projeto. o modelo de code podavoir dos difficultés ànalyser correctement este arquivo.</translation>
+        <translation>&lt;b&gt;Aviso&lt;/b&gt;: este arquivo não faz parte de nenhum projeto. O modelo de código pode ter dificuldades para analisar este arquivo corretamente.</translation>
     </message>
     <message>
         <source>Add File to Project</source>
@@ -31940,7 +31940,7 @@ reçoit um signal como SIGSEGV pendant o depuração.</translation>
     </message>
     <message>
         <source>Displays the objectName property of QObject based items. Note that this can negatively impact debugger performance even if no QObjects are present.</source>
-        <translation>exibe a propriedade nomObjet dos elementos basés em QObject. Notez que isso podavoir um impact négatif em os performances do depurador, mesmo se nenhum QObject n’é présent.</translation>
+        <translation>Exibe a propriedade objectName dos elementos baseados em QObject. Observe que isso pode ter um impacto negativo no desempenho do depurador, mesmo que nenhum QObject esteja presente.</translation>
     </message>
     <message>
         <source>Sort members of classes and structs alphabetically</source>
@@ -31994,7 +31994,7 @@ por padrão do usuário ao inicialização do depurador.</translation>
     </message>
     <message>
         <source>The options below give access to advanced&lt;br&gt;or experimental functions of GDB.&lt;p&gt;Enabling them may negatively impact&lt;br&gt;your debugging experience.</source>
-        <translation>Os options ci-dessous permettent dacessar&lt;br&gt;à dos fonctions avancées ou expérimentales de GDB.&lt;p&gt;Seu activation podavoir um impact négatif&lt;br&gt;em votre expérience de depuração.</translation>
+        <translation>As opções abaixo permitem acessar&lt;br&gt;funções avançadas ou experimentais do GDB.&lt;p&gt;A ativação delas pode ter um impacto negativo&lt;br&gt;na sua experiência de depuração.</translation>
     </message>
     <message>
         <source>Additional Attach Commands</source>
@@ -32403,7 +32403,7 @@ por padrão do usuário ao inicialização do depurador.</translation>
     </message>
     <message>
         <source>An error occurred when attempting to write to the DAP process. For example, the process may not be running, or it may have closed its input channel.</source>
-        <translation>Une erro se é produite durante de uma tentative de gravação ao processo DAP. Par exemple, o processo pode ne pas ser em execução ou, ele podavoir fermé son canal de entrada.</translation>
+        <translation>Ocorreu um erro durante uma tentativa de gravação no processo DAP. Por exemplo, o processo pode não estar em execução ou pode ter fechado seu canal de entrada.</translation>
     </message>
     <message>
         <source>An error occurred when attempting to read from the DAP process. For example, the process may not be running.</source>
@@ -32427,7 +32427,7 @@ por padrão do usuário ao inicialização do depurador.</translation>
     </message>
     <message>
         <source>An error occurred when attempting to write to the Pdb process. For example, the process may not be running, or it may have closed its input channel.</source>
-        <translation>Une erro se é produite durante de une tentative de gravação em o processo Pdb. o processo pode ne pas ser iniciado ou ele podavoir fermé son entrada standard.</translation>
+        <translation>Ocorreu um erro durante uma tentativa de gravação no processo Pdb. O processo pode não estar iniciado ou pode ter fechado sua entrada padrão.</translation>
     </message>
     <message>
         <source>An error occurred when attempting to read from the Pdb process. For example, the process may not be running.</source>
@@ -36610,7 +36610,7 @@ a recompilation do projeto podaider.</translation>
     </message>
     <message>
         <source>Running</source>
-        <translation>En cours de execução</translation>
+        <translation>Em execução</translation>
     </message>
     <message>
         <source>Set this property to animate the effect.</source>
@@ -37299,7 +37299,7 @@ désactivera également os greffons suivants :
     </message>
     <message>
         <source>Running</source>
-        <translation>En cours de execução</translation>
+        <translation>Em execução</translation>
     </message>
     <message>
         <source>Stopped</source>
@@ -40438,7 +40438,7 @@ Souhaitez-vous y colocar fim&#xa0;?</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation>Propriétaire</translation>
+        <translation>Proprietário</translation>
     </message>
     <message>
         <source>Updated</source>
@@ -41372,7 +41372,7 @@ Remarque : isso pode vous exposer à uma attaque de tipo «&#xa0;homme do meio&#
     </message>
     <message>
         <source>Owner</source>
-        <translation>Propriétaire</translation>
+        <translation>Proprietário</translation>
     </message>
     <message>
         <source>Link with GitLab</source>
@@ -42495,7 +42495,7 @@ Souhaitez-vous os sobrescrever&#xa0;?</translation>
     </message>
     <message>
         <source>devicectl returned unexpected output ... deployment might have failed.</source>
-        <translation>devicectl a renvoyé uma saída inattendue… o implantação podavoir falhou.</translation>
+        <translation>O devicectl retornou uma saída inesperada… a implantação pode ter falhado.</translation>
     </message>
     <message>
         <source>The provisioning profile &quot;%1&quot; (%2) used to sign the application does not cover the device %3 (%4). Deployment to it will fail.</source>
@@ -48721,9 +48721,9 @@ Display name of the clean build step list. Used as part of the labels in the pro
         <source>You must tell Qt Creator which test framework is used inside the project.
 
 You should not mix multiple test frameworks in a project.</source>
-        <translation>Vous deve indiquer à Qt Creator quel cadriciel de test usar em o projeto.
+        <translation>Você deve informar ao Qt Creator qual framework de teste é usado no projeto.
 
-Vous ne deve pas mélanger vários cadriciels de tests em um mesmo projeto.</translation>
+Você não deve misturar vários frameworks de teste em um mesmo projeto.</translation>
     </message>
     <message>
         <source>Test Information</source>
@@ -48827,7 +48827,7 @@ para développer uma application complête, criar um projeto Qt Quick Applicatio
     </message>
     <message>
         <source>Proprietary</source>
-        <translation>Propriétaire</translation>
+        <translation>Proprietário</translation>
     </message>
     <message>
         <source>Other</source>
@@ -55583,7 +55583,7 @@ Souhaitez-vous editar este effet&#xa0;?</translation>
     </message>
     <message>
         <source>Snap with Anchors</source>
-        <translation>Aimantation com os ancres</translation>
+        <translation>Ajustar com âncoras</translation>
     </message>
     <message>
         <source>Snap Without Anchors</source>
@@ -56260,7 +56260,7 @@ erro&#xa0;:
     </message>
     <message>
         <source>Border</source>
-        <translation>Bordure</translation>
+        <translation>Borda</translation>
     </message>
     <message>
         <source>Easing</source>
@@ -56772,7 +56772,7 @@ para mas de informations, allez à documentation «&#xa0;Checking Code Syntax&#x
     </message>
     <message>
         <source>Do not mix translation functions in a UI file (.ui.qml).</source>
-        <translation>Ne mélangez pas os fonctions de traductions em um arquivo UI (.ui.qml).</translation>
+        <translation>Não misture funções de tradução em um arquivo de UI (.ui.qml).</translation>
     </message>
     <message>
         <source>A State cannot have a child item (%1).</source>
@@ -58169,7 +58169,7 @@ Enregistrement falhou.</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation>Bouton</translation>
+        <translation>Botão</translation>
     </message>
     <message>
         <source>Result</source>
@@ -63921,7 +63921,7 @@ Une valor inférieure à 100 % pode entraîner um chevauchement e um mauvais ali
     </message>
     <message>
         <source>Join Lines</source>
-        <translation>Joindre os linhas</translation>
+        <translation>Unir as linhas</translation>
     </message>
     <message>
         <source>Delete Line from Cursor On</source>
@@ -70590,18 +70590,18 @@ Membres&#xa0;:</translation>
     </message>
     <message>
         <source>Number of matching elements:</source>
-        <translation>Número de elementos correspondants&#xa0;:</translation>
+        <translation>Número de elementos correspondentes&#xa0;:</translation>
     </message>
 </context>
 <context>
     <name>RadialBlurEffectSpecifics</name>
     <message>
         <source>Radial Blur</source>
-        <translation>Flou radial</translation>
+        <translation>Desfoque radial</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Angle</translation>
+        <translation>Ângulo</translation>
     </message>
     <message>
         <source>The direction for the blur and at the same time the level of blurring. The larger the angle, the more the result becomes blurred. The quality of the blur depends on samples property.</source>
@@ -70649,11 +70649,11 @@ Membres&#xa0;:</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
     <message>
         <source>Transparent border</source>
@@ -70887,11 +70887,11 @@ define na tamanho de pas.</translation>
     <name>RecursiveBlurEffectSpecifics</name>
     <message>
         <source>Recursive Blur</source>
-        <translation>Flou recursivo</translation>
+        <translation>Desfoque recursivo</translation>
     </message>
     <message>
         <source>Loops</source>
-        <translation>Passes</translation>
+        <translation>Passagens</translation>
     </message>
     <message>
         <source>The amount of blur iterations that are going to be performed for the source.</source>
@@ -70911,11 +70911,11 @@ define na tamanho de pas.</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels  to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
     <message>
         <source>Transparent border</source>
@@ -71093,7 +71093,7 @@ En définissant esta propriedade à verdadeiro, a texture cubique será corrigé
     <name>Repeater3DSection</name>
     <message>
         <source>Repeater</source>
-        <translation>Répéteur</translation>
+        <translation>Repetidor</translation>
     </message>
     <message>
         <source>Model</source>
@@ -71116,7 +71116,7 @@ En définissant esta propriedade à verdadeiro, a texture cubique será corrigé
     <name>RepeaterSpecifics</name>
     <message>
         <source>Repeater</source>
-        <translation>Répéteur</translation>
+        <translation>Repetidor</translation>
     </message>
     <message>
         <source>Model</source>
@@ -71772,11 +71772,11 @@ En définissant esta propriedade à verdadeiro, a texture cubique será corrigé
     </message>
     <message>
         <source>Skybox Blur</source>
-        <translation>Flou do céu</translation>
+        <translation>Desfoque do céu</translation>
     </message>
     <message>
         <source>Sets how much to blur the skybox when using SceneEnvironment.SkyBox for the backgroundMode property.</source>
-        <translation>Define a quantidade de flou àplicar ao céu durante do uso do modo de plano de fundo SceneEnvironment.SkyBox.</translation>
+        <translation>Define a quantidade de desfoque a aplicar ao céu ao usar SceneEnvironment.SkyBox como modo de plano de fundo.</translation>
     </message>
     <message>
         <source>Effects</source>
@@ -72031,7 +72031,7 @@ En définissant esta propriedade à verdadeiro, a texture cubique será corrigé
     </message>
     <message>
         <source>Sets the component and its property from which the value is copied.</source>
-        <translation>Define a propriedade do componente à partir de lao qualle a valor é copiée.</translation>
+        <translation>Define o componente e a propriedade de origem da qual o valor é copiado.</translation>
     </message>
     <message>
         <source>Sets the component and its property to which the copied value is assigned.</source>
@@ -74711,15 +74711,15 @@ Ela é utilizada para calculer a tamanho totale implicite.</translation>
     </message>
     <message>
         <source>Caching</source>
-        <translation>Mise em cache</translation>
+        <translation>Cache</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
 </context>
 <context>
@@ -74848,7 +74848,7 @@ Ela é utilizada para calculer a tamanho totale implicite.</translation>
     </message>
     <message>
         <source>Running</source>
-        <translation>En cours de execução</translation>
+        <translation>Em execução</translation>
     </message>
     <message>
         <source>Sets whether the timer is running or not.</source>
@@ -75751,11 +75751,11 @@ Voulez-vous vraiment o remover&#xa0;?</translation>
     </message>
     <message>
         <source>Cached</source>
-        <translation>En cache</translation>
+        <translation>Em cache</translation>
     </message>
     <message>
         <source>Caches the effect output pixels to improve the rendering performance.</source>
-        <translation>Met em cache os pixels resultante do effet afin de melhorar os performances de renderização.</translation>
+        <translation>Armazena em cache os pixels resultantes do efeito para melhorar o desempenho de renderização.</translation>
     </message>
     <message>
         <source>Transparent border</source>
@@ -75885,15 +75885,15 @@ Voulez-vous vraiment o remover&#xa0;?</translation>
     </message>
     <message>
         <source>Repeater</source>
-        <translation>Répéteur</translation>
+        <translation>Repetidor</translation>
     </message>
     <message>
         <source>Busy Indicator</source>
-        <translation>Indicateur doccupation</translation>
+        <translation>Indicador de atividade</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation>Bouton</translation>
+        <translation>Botão</translation>
     </message>
     <message>
         <source>Check Box</source>
