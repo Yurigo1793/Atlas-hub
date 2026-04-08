@@ -76,6 +76,13 @@ target_link_libraries(AtlasHub PRIVATE
     Qt6::Widgets
 )
 
+if(WIN32)
+    find_library(ATLASHUB_WINDOWSAPP_LIB windowsapp)
+    if(ATLASHUB_WINDOWSAPP_LIB)
+        target_link_libraries(AtlasHub PRIVATE ${ATLASHUB_WINDOWSAPP_LIB})
+    endif()
+endif()
+
 if(MINGW)
     target_link_options(AtlasHub PRIVATE -mwindows)
 endif()

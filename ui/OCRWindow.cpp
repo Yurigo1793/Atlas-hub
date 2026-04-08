@@ -1,11 +1,21 @@
 #include "OCRWindow.h"
 #include "ui_OCRWindow.h"
 
+#include <QApplication>
+
 OCRWindow::OCRWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::OCRWindow)
 {
     ui->setupUi(this);
+    setWindowIcon(QApplication::windowIcon());
+    ui->centralwidget->setStyleSheet(QStringLiteral(
+        "QWidget#centralwidget {"
+        "background-color: #10141a;"
+        "background-image: url(:/branding/logo.svg);"
+        "background-position: center;"
+        "background-repeat: no-repeat;"
+        "}"));
     setupUiConnections();
 }
 
