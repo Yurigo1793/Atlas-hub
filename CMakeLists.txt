@@ -59,11 +59,14 @@ set(ATLASHUB_RESOURCES
 
 find_package(Tesseract QUIET)
 
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
+
 qt_add_executable(AtlasHub WIN32
     ${ATLASHUB_SOURCES}
     ${ATLASHUB_HEADERS}
     ${ATLASHUB_UIS}
     ${ATLASHUB_RESOURCES}
+    ${APP_ICON_RESOURCE_WINDOWS}
 )
 
 target_include_directories(AtlasHub PRIVATE
