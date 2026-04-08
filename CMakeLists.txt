@@ -57,38 +57,50 @@ set(ATLASHUB_RESOURCES
     resources/branding.qrc
 )
 
-find_package(Tesseract QUIET)
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
 
 qt_add_executable(AtlasHub WIN32
     ${ATLASHUB_SOURCES}
     ${ATLASHUB_HEADERS}
     ${ATLASHUB_UIS}
     ${ATLASHUB_RESOURCES}
+    ${APP_ICON_RESOURCE_WINDOWS}
 )
 
 target_include_directories(AtlasHub PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-if(Tesseract_FOUND)
-    message(STATUS "Tesseract encontrado: ${Tesseract_VERSION}")
+set(TESSERACT_DIR ${CMAKE_SOURCE_DIR}/third_party/tesseract)
 
-    target_compile_definitions(AtlasHub PRIVATE ATLASHUB_HAS_TESSERACT=1)
-    target_include_directories(AtlasHub PRIVATE ${Tesseract_INCLUDE_DIRS})
-else()
-    message(WARNING
-        "Tesseract nao foi encontrado. O AtlasHub sera compilado sem OCR.\n"
-        "Para habilitar OCR, instale Tesseract + Leptonica e/ou informe CMAKE_PREFIX_PATH."
-    )
+if(NOT IS_DIRECTORY ${TESSERACT_DIR})
+    message(FATAL_ERROR "Tesseract not found in third_party/tesseract")
 endif()
+
+if(NOT IS_DIRECTORY ${TESSERACT_DIR}/include OR NOT IS_DIRECTORY ${TESSERACT_DIR}/lib OR NOT IS_DIRECTORY ${TESSERACT_DIR}/bin OR NOT IS_DIRECTORY ${TESSERACT_DIR}/tessdata)
+    message(FATAL_ERROR "Tesseract not found in third_party/tesseract")
+endif()
+
+target_include_directories(AtlasHub PRIVATE
+    ${TESSERACT_DIR}/include
+)
+
+link_directories(${TESSERACT_DIR}/lib)
+
+add_custom_command(TARGET AtlasHub POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${TESSERACT_DIR}/bin
+    $<TARGET_FILE_DIR:AtlasHub>
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${TESSERACT_DIR}/tessdata
+    $<TARGET_FILE_DIR:AtlasHub>/tessdata
+)
 
 target_link_libraries(AtlasHub PRIVATE
     Qt6::Widgets
+    tesseract
+    leptonica
 )
-
-if(Tesseract_FOUND)
-    target_link_libraries(AtlasHub PRIVATE ${Tesseract_LIBRARIES})
-endif()
 
 if(MINGW)
     target_link_options(AtlasHub PRIVATE -mwindows)
