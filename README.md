@@ -92,6 +92,18 @@ cmake --build build
 
 Alternativamente, você pode definir `Qt6_DIR` diretamente para a pasta que contém `Qt6Config.cmake`.
 
+### Erro: `fatal error: tesseract/baseapi.h: No such file or directory`
+Esse erro indica que o ambiente não encontrou os headers do Tesseract durante a compilação.
+
+Com a configuração atual do CMake, o AtlasHub **ainda compila sem OCR** quando Tesseract/Leptonica não estão disponíveis (o módulo retorna mensagem de OCR indisponível em runtime).
+
+Para habilitar OCR de fato, instale Tesseract + Leptonica e configure o CMake para encontrá-los:
+
+```bash
+cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH="C:/caminho/para/tesseract;C:/Qt/6.8.2/mingw_64"
+cmake --build build
+```
+
 ## Roadmap
 
 ### Fase 1 — Base arquitetural

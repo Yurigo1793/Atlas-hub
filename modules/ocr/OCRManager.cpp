@@ -2,8 +2,10 @@
 
 #include <QImage>
 
+#if defined(ATLASHUB_HAS_TESSERACT)
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
+#endif
 
 #include "utils/Logger.h"
 
@@ -21,6 +23,11 @@ QString OCRManager::processImage(const QImage &image)
 {
     Logger::instance().info(QStringLiteral("OCR started"));
 
+#if !defined(ATLASHUB_HAS_TESSERACT)
+    const QString noOcrEngineMessage = QStringLiteral("OCR engine not available (Tesseract not found at build time)");
+    Logger::instance().warning(noOcrEngineMessage);
+    return noOcrEngineMessage;
+#else
     if (image.isNull() || image.width() <= 0 || image.height() <= 0) {
         Logger::instance().warning(kInvalidImageMessage);
         return kInvalidImageMessage;
@@ -59,4 +66,5 @@ QString OCRManager::processImage(const QImage &image)
     }
 
     return result;
+#endif
 }
