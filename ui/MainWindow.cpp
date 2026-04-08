@@ -1,11 +1,21 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include <QApplication>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowIcon(QApplication::windowIcon());
+    ui->centralwidget->setStyleSheet(QStringLiteral(
+        "QWidget#centralwidget {"
+        "background-color: #10141a;"
+        "background-image: url(:/branding/logo.svg);"
+        "background-position: center;"
+        "background-repeat: no-repeat;"
+        "}"));
     setupUiConnections();
 }
 
