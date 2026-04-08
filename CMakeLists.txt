@@ -57,11 +57,25 @@ set(ATLASHUB_RESOURCES
     resources/branding.qrc
 )
 
-set(ATLASHUB_RESOURCES
-    resources/branding.qrc
+find_path(TESSERACT_INCLUDE_DIR tesseract/baseapi.h)
+find_path(LEPTONICA_INCLUDE_DIR leptonica/allheaders.h)
+find_library(TESSERACT_LIBRARY NAMES tesseract libtesseract)
+find_library(LEPTONICA_LIBRARY NAMES lept liblept)
+
+set(Tesseract_INCLUDE_DIRS
+    ${TESSERACT_INCLUDE_DIR}
+    ${LEPTONICA_INCLUDE_DIR}
+)
+set(Tesseract_LIBRARIES
+    ${TESSERACT_LIBRARY}
+    ${LEPTONICA_LIBRARY}
 )
 
-add_executable(AtlasHub WIN32
+if(NOT TESSERACT_INCLUDE_DIR OR NOT LEPTONICA_INCLUDE_DIR OR NOT TESSERACT_LIBRARY OR NOT LEPTONICA_LIBRARY)
+    message(FATAL_ERROR "Tesseract/Leptonica not found. Install development packages and retry.")
+endif()
+
+qt_add_executable(AtlasHub WIN32
     ${ATLASHUB_SOURCES}
     ${ATLASHUB_HEADERS}
     ${ATLASHUB_UIS}
@@ -70,18 +84,13 @@ add_executable(AtlasHub WIN32
 
 target_include_directories(AtlasHub PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${Tesseract_INCLUDE_DIRS}
 )
 
 target_link_libraries(AtlasHub PRIVATE
     Qt6::Widgets
+    ${Tesseract_LIBRARIES}
 )
-
-if(WIN32)
-    find_library(ATLASHUB_WINDOWSAPP_LIB windowsapp)
-    if(ATLASHUB_WINDOWSAPP_LIB)
-        target_link_libraries(AtlasHub PRIVATE ${ATLASHUB_WINDOWSAPP_LIB})
-    endif()
-endif()
 
 if(MINGW)
     target_link_options(AtlasHub PRIVATE -mwindows)

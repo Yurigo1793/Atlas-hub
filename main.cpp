@@ -1,7 +1,5 @@
 #include <QApplication>
 #include <QChar>
-#include <QDir>
-#include <QFileInfo>
 #include <QIcon>
 
 #ifdef _WIN32
@@ -24,36 +22,6 @@
 #include "core/AppController.h"
 #include "utils/Logger.h"
 
-namespace
-{
-QIcon resolveAppIcon()
-{
-    const QString bundledSvg = QStringLiteral(":/branding/logo.svg");
-    const QStringList searchRoots = {
-        QCoreApplication::applicationDirPath(),
-        QDir::current().filePath(QStringLiteral("assets")),
-        QDir::currentPath()
-    };
-
-    for (const QString &root : searchRoots) {
-        const QString expectedSvg = QDir(root).filePath(QStringLiteral("app.svg"));
-        if (QFileInfo::exists(expectedSvg)) {
-            Logger::instance().info(QStringLiteral("Using application icon: %1").arg(expectedSvg));
-            return QIcon(expectedSvg);
-        }
-
-        const QString expectedIco = QDir(root).filePath(QStringLiteral("app.ico"));
-        if (QFileInfo::exists(expectedIco)) {
-            Logger::instance().info(QStringLiteral("Using application icon: %1").arg(expectedIco));
-            return QIcon(expectedIco);
-        }
-    }
-
-    Logger::instance().warning(QStringLiteral("No app.svg/app.ico file found. Falling back to bundled SVG icon."));
-    return QIcon(bundledSvg);
-}
-}
-
 int main(int argc, char *argv[])
 {
 #if defined(_WIN32) && ATLASHUB_HAS_APP_USER_MODEL_ID
@@ -70,7 +38,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QApplication::setApplicationName("AtlasHub");
     QApplication::setOrganizationName("AtlasHub");
-    app.setWindowIcon(resolveAppIcon());
+    app.setWindowIcon(QIcon("app.ico"));
 
     Logger::instance().info("Application starting");
 
