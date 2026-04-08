@@ -1,17 +1,16 @@
 #include "OCRManager.h"
 
+#include <QCoreApplication>
+#include <QDir>
 #include <QImage>
 
-#if defined(ATLASHUB_HAS_TESSERACT)
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
-#endif
 
 #include "utils/Logger.h"
 
 namespace
 {
-constexpr auto kTessdataPath = "third_party/tesseract/tessdata";
 constexpr auto kDefaultLanguage = "eng";
 
 const QString kInvalidImageMessage = QStringLiteral("Invalid image");
@@ -23,11 +22,6 @@ QString OCRManager::processImage(const QImage &image)
 {
     Logger::instance().info(QStringLiteral("OCR started"));
 
-#if !defined(ATLASHUB_HAS_TESSERACT)
-    const QString noOcrEngineMessage = QStringLiteral("OCR engine not available (Tesseract not found at build time)");
-    Logger::instance().warning(noOcrEngineMessage);
-    return noOcrEngineMessage;
-#else
     if (image.isNull() || image.width() <= 0 || image.height() <= 0) {
         Logger::instance().warning(kInvalidImageMessage);
         return kInvalidImageMessage;
@@ -38,7 +32,9 @@ QString OCRManager::processImage(const QImage &image)
 
     tesseract::TessBaseAPI tess;
 
-    if (tess.Init(kTessdataPath, kDefaultLanguage) != 0) {
+    const QString tessdataPath = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("tessdata"));
+
+    if (tess.Init(tessdataPath.toUtf8().constData(), kDefaultLanguage) != 0) {
         const QString initError = QStringLiteral("Failed to initialize Tesseract (check tessdata path)");
         Logger::instance().error(initError);
         tess.End();
@@ -66,5 +62,4 @@ QString OCRManager::processImage(const QImage &image)
     }
 
     return result;
-#endif
 }
