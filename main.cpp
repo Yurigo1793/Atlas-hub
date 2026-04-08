@@ -36,6 +36,12 @@ QIcon resolveAppIcon()
     };
 
     for (const QString &root : searchRoots) {
+        const QString expectedSvg = QDir(root).filePath(QStringLiteral("app.svg"));
+        if (QFileInfo::exists(expectedSvg)) {
+            Logger::instance().info(QStringLiteral("Using application icon: %1").arg(expectedSvg));
+            return QIcon(expectedSvg);
+        }
+
         const QString expectedIco = QDir(root).filePath(QStringLiteral("app.ico"));
         if (QFileInfo::exists(expectedIco)) {
             Logger::instance().info(QStringLiteral("Using application icon: %1").arg(expectedIco));
@@ -43,7 +49,7 @@ QIcon resolveAppIcon()
         }
     }
 
-    Logger::instance().warning(QStringLiteral("No app.ico file found. Falling back to bundled SVG icon."));
+    Logger::instance().warning(QStringLiteral("No app.svg/app.ico file found. Falling back to bundled SVG icon."));
     return QIcon(bundledSvg);
 }
 }

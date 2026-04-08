@@ -3,6 +3,7 @@
 #include <QImage>
 
 #include <exception>
+#include <string>
 
 #include "utils/Logger.h"
 
@@ -77,28 +78,30 @@ SoftwareBitmap qImageToSoftwareBitmap(const QImage &image)
 QString runWindowsOcr(const QImage &image)
 {
     try {
-        init_apartment();
+        init_apartment(apartment_type::multi_threaded);
     } catch (const hresult_changed_mode &) {
         Logger::instance().info(QStringLiteral("WinRT apartment already initialized with different mode; continuing"));
     }
 
+    Logger::instance().info(QStringLiteral("Image size: %1x%2").arg(image.width()).arg(image.height()));
+
     const SoftwareBitmap bitmap = qImageToSoftwareBitmap(image);
 
-    Logger::instance().info(QStringLiteral("Creating OCR engine from user profile languages"));
     const OcrEngine engine = OcrEngine::TryCreateFromUserProfileLanguages();
     if (!engine) {
-        Logger::instance().error(QStringLiteral("OCR engine creation failed: TryCreateFromUserProfileLanguages returned null"));
-        return QStringLiteral("OCR failed");
+        Logger::instance().error(QStringLiteral("OCR engine not available"));
+        return QStringLiteral("OCR engine not available");
     }
+    Logger::instance().info(QStringLiteral("Engine created"));
 
     const OcrResult result = engine.RecognizeAsync(bitmap).get();
-    const hstring text = result.Text();
-    const QString extractedText = QString::fromWCharArray(text.c_str());
+    const QString extractedText = QString::fromStdWString(std::wstring(result.Text().c_str()));
 
-    Logger::instance().info(QStringLiteral("OCR result length: %1").arg(extractedText.size()));
+    Logger::instance().info(QStringLiteral("OCR text length: %1").arg(extractedText.size()));
 
     if (extractedText.isEmpty()) {
-        Logger::instance().warning(QStringLiteral("OCR produced empty text"));
+        Logger::instance().warning(QStringLiteral("No text detected"));
+        return QStringLiteral("No text detected");
     }
 
     return extractedText;
@@ -109,8 +112,8 @@ QString runWindowsOcr(const QImage &image)
 QString OCRManager::processImage(const QImage &image) const
 {
     if (image.isNull()) {
-        Logger::instance().warning(QStringLiteral("OCR failed: input image is null"));
-        return QStringLiteral("OCR failed");
+        Logger::instance().warning(QStringLiteral("Invalid image"));
+        return QStringLiteral("Invalid image");
     }
 
 #if defined(_WIN32) && ATLASHUB_HAS_WINRT_OCR
