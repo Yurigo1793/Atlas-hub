@@ -12,9 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->centralwidget->setStyleSheet(QStringLiteral(
         "QWidget#centralwidget {"
         "background-color: #10141a;"
-        "background-image: url(:/branding/logo.svg);"
-        "background-position: center;"
-        "background-repeat: no-repeat;"
         "}"));
     setupUiConnections();
 }
