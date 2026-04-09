@@ -74,13 +74,21 @@ target_include_directories(AtlasHub PRIVATE
 )
 
 set(TESSERACT_DIR ${CMAKE_SOURCE_DIR}/third_party/tesseract)
+if(NOT IS_DIRECTORY ${TESSERACT_DIR})
+    set(TESSERACT_DIR ${CMAKE_SOURCE_DIR}/tesseract-5.5.2)
+endif()
 
 if(NOT IS_DIRECTORY ${TESSERACT_DIR})
-    message(FATAL_ERROR "Tesseract not found in third_party/tesseract")
+    message(FATAL_ERROR
+        "Tesseract not found.\n"
+        "Expected one of:\n"
+        "  - third_party/tesseract\n"
+        "  - tesseract-5.5.2"
+    )
 endif()
 
 if(NOT IS_DIRECTORY ${TESSERACT_DIR}/include OR NOT IS_DIRECTORY ${TESSERACT_DIR}/lib OR NOT IS_DIRECTORY ${TESSERACT_DIR}/bin OR NOT IS_DIRECTORY ${TESSERACT_DIR}/tessdata)
-    message(FATAL_ERROR "Tesseract not found in third_party/tesseract")
+    message(FATAL_ERROR "Tesseract folder is incomplete: ${TESSERACT_DIR}")
 endif()
 
 target_include_directories(AtlasHub PRIVATE

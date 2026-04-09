@@ -16,4 +16,7 @@ public:
     OCRManager() = default;
 
     QString processImage(const QImage &image);
+
+private:
+    QString resolveTessdataPath() const;
 };

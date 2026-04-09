@@ -2,7 +2,9 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QFileInfo>
 #include <QImage>
+#include <QStringList>
 
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
@@ -16,6 +18,34 @@ constexpr auto kDefaultLanguage = "eng";
 const QString kInvalidImageMessage = QStringLiteral("Invalid image");
 const QString kOcrFailedMessage = QStringLiteral("OCR failed");
 const QString kNoTextDetectedMessage = QStringLiteral("No text detected");
+}
+
+QString OCRManager::resolveTessdataPath() const
+{
+    const QString appDir = QCoreApplication::applicationDirPath();
+    const QDir appDirHandle(appDir);
+    const QString envPrefix = qEnvironmentVariable("TESSDATA_PREFIX");
+
+    QStringList candidates;
+    if (!envPrefix.isEmpty()) {
+        candidates << QDir::cleanPath(envPrefix);
+        candidates << QDir(QDir::cleanPath(envPrefix)).filePath(QStringLiteral("tessdata"));
+    }
+
+    candidates << appDirHandle.filePath(QStringLiteral("tessdata"));
+    candidates << appDirHandle.filePath(QStringLiteral("../tessdata"));
+    candidates << appDirHandle.filePath(QStringLiteral("../tesseract-5.5.2/tessdata"));
+    candidates << appDirHandle.filePath(QStringLiteral("../../tesseract-5.5.2/tessdata"));
+    candidates << QDir::cleanPath(QStringLiteral("tesseract-5.5.2/tessdata"));
+
+    for (const QString &path : candidates) {
+        const QFileInfo trainedDataFile(QDir(path).filePath(QStringLiteral("eng.traineddata")));
+        if (trainedDataFile.exists() && trainedDataFile.isFile()) {
+            return QDir(path).absolutePath();
+        }
+    }
+
+    return appDirHandle.filePath(QStringLiteral("tessdata"));
 }
 
 QString OCRManager::processImage(const QImage &image)
@@ -32,7 +62,8 @@ QString OCRManager::processImage(const QImage &image)
 
     tesseract::TessBaseAPI tess;
 
-    const QString tessdataPath = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("tessdata"));
+    const QString tessdataPath = resolveTessdataPath();
+    Logger::instance().info(QStringLiteral("Using tessdata path: %1").arg(tessdataPath));
 
     if (tess.Init(tessdataPath.toUtf8().constData(), kDefaultLanguage) != 0) {
         const QString initError = QStringLiteral("Failed to initialize Tesseract (check tessdata path)");
