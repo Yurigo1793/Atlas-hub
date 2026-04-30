@@ -31,54 +31,9 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="titleLabel">
-      <property name="text">
-       <string>AtlasHub</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="subtitleLabel">
-      <property name="text">
-       <string>Command your workflow</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnSelectImage">
-      <property name="text">
-       <string>Selecionar imagem</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="lblImagePath">
-      <property name="text">
-       <string>Nenhuma imagem selecionada</string>
-      </property>
-      <property name="wordWrap">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnCaptureArea">
-      <property name="text">
-       <string>Capturar área</string>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QPushButton" name="btnRunOCR">
       <property name="text">
        <string>Executar OCR</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnCopy">
-      <property name="text">
-       <string>Copiar texto</string>
       </property>
      </widget>
     </item>
