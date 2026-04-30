@@ -6,174 +6,81 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>680</height>
+    <width>900</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>AtlasHub</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">QMainWindow {
-    background-color: #0b0f14;
-}
-
-QWidget {
-    color: #d4dde7;
-    background-color: transparent;
-    font-family: "Segoe UI", "Inter", sans-serif;
-    font-size: 10pt;
-}
-
-QFrame#topBar {
-    background-color: #101722;
-    border: 1px solid #1d2a3a;
-    border-radius: 8px;
-}
-
-QLabel#titleLabel {
-    color: #7bb0ff;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-QLabel#subtitleLabel {
-    color: #93a5bb;
-    font-size: 13px;
-}
-
-QPushButton {
-    background-color: #172231;
-    border: 1px solid #2a3c54;
-    border-radius: 10px;
-    color: #e6edf7;
-    font-size: 12pt;
-    font-weight: 600;
-    min-height: 80px;
-    padding: 10px;
-}
-
-QPushButton:hover {
-    background-color: #20324a;
-    border-color: #7bb0ff;
-}
-
-QPushButton:pressed {
-    background-color: #1a2a3f;
-}</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="mainLayout">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <property name="leftMargin">
-     <number>24</number>
+     <number>16</number>
     </property>
     <property name="topMargin">
-     <number>24</number>
+     <number>16</number>
     </property>
     <property name="rightMargin">
-     <number>24</number>
+     <number>16</number>
     </property>
     <property name="bottomMargin">
-     <number>24</number>
+     <number>16</number>
     </property>
     <property name="spacing">
-     <number>20</number>
+     <number>10</number>
     </property>
     <item>
-     <widget class="QFrame" name="topBar">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+     <widget class="QLabel" name="titleLabel">
+      <property name="text">
+       <string>AtlasHub</string>
       </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QHBoxLayout" name="topBarLayout">
-       <property name="leftMargin">
-        <number>16</number>
-       </property>
-       <property name="topMargin">
-        <number>12</number>
-       </property>
-       <property name="rightMargin">
-        <number>16</number>
-       </property>
-       <property name="bottomMargin">
-        <number>12</number>
-       </property>
-       <item>
-        <layout class="QVBoxLayout" name="titleLayout">
-         <property name="spacing">
-          <number>4</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="titleLabel">
-           <property name="text">
-            <string>AtlasHub</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="subtitleLabel">
-           <property name="text">
-            <string>Command your workflow</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="topBarSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
      </widget>
     </item>
     <item>
-     <layout class="QGridLayout" name="moduleGridLayout">
-      <property name="horizontalSpacing">
-       <number>16</number>
+     <widget class="QLabel" name="subtitleLabel">
+      <property name="text">
+       <string>Command your workflow</string>
       </property>
-      <property name="verticalSpacing">
-       <number>16</number>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnSelectImage">
+      <property name="text">
+       <string>Selecionar imagem</string>
       </property>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="captureButton">
-        <property name="text">
-         <string>Captura</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="documentsButton">
-        <property name="text">
-         <string>Documentos</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="automationButton">
-        <property name="text">
-         <string>Automação</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="toolsButton">
-        <property name="text">
-         <string>Ferramentas</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lblImagePath">
+      <property name="text">
+       <string>Nenhuma imagem selecionada</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnRunOCR">
+      <property name="text">
+       <string>Executar OCR</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnCopy">
+      <property name="text">
+       <string>Copiar texto</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="textOutput">
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

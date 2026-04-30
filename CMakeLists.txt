@@ -18,6 +18,8 @@ set(ATLASHUB_SOURCES
     main.cpp
     core/AppController.cpp
     core/AppController.h
+    core/OCRService.cpp
+    core/OCRService.h
     ui/MainWindow.cpp
     ui/MainWindow.h
     ui/MainWindow.ui

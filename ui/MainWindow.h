@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,4 +19,5 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QString selectedImagePath;
 };
