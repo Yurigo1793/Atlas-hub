@@ -27,7 +27,7 @@ set(ATLASHUB_SOURCES
     ui/ScreenCaptureOverlay.h
 )
 
-qt_add_executable(AtlasHub
+qt_add_executable(AtlasHub WIN32
     ${ATLASHUB_SOURCES}
 )
 
@@ -53,27 +53,14 @@ if(WIN32 AND TARGET Qt6::qmake)
     endif()
 endif()
 
-set(ATLASHUB_TESSERACT_DIR
-    "${CMAKE_SOURCE_DIR}/third_party/tesseract"
-    CACHE PATH "Directory containing tesseract.exe and tessdata"
-)
-
-if(NOT EXISTS "${ATLASHUB_TESSERACT_DIR}"
-    AND EXISTS "${CMAKE_BINARY_DIR}/third_party/tesseract"
-)
-    set(ATLASHUB_TESSERACT_DIR "${CMAKE_BINARY_DIR}/third_party/tesseract")
-endif()
-
-if(EXISTS "${ATLASHUB_TESSERACT_DIR}")
-    add_custom_command(TARGET AtlasHub POST_BUILD
-        COMMAND ${CMAKE_COMMAND}
-            -Dsrc="${ATLASHUB_TESSERACT_DIR}"
-            -Ddst="$<TARGET_FILE_DIR:AtlasHub>/third_party/tesseract"
-            -P "${CMAKE_SOURCE_DIR}/cmake/copy_tesseract_runtime.cmake"
-    )
-else()
-    message(WARNING
-        "Tesseract runtime not found at ${ATLASHUB_TESSERACT_DIR}; "
-        "OCR will be unavailable until this folder is added."
+if(NOT EXISTS "${CMAKE_SOURCE_DIR}/third_party/tesseract")
+    message(FATAL_ERROR
+        "Tesseract runtime not found at ${CMAKE_SOURCE_DIR}/third_party/tesseract"
     )
 endif()
+
+add_custom_command(TARGET AtlasHub POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_SOURCE_DIR}/third_party/tesseract"
+        "$<TARGET_FILE_DIR:AtlasHub>/third_party/tesseract"
+)

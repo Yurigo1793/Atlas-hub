@@ -18,7 +18,7 @@ QString OCRService::extractText(const QString& imagePath)
         base + "/third_party/tesseract/tessdata";
 
     if (!QFile::exists(tesseractPath)) {
-        return "Erro: tesseract.exe nao encontrado em: " + tesseractPath;
+        return "Erro: Tesseract empacotado nao encontrado em: " + tesseractPath;
     }
 
     if (!QDir(tessdataPath).exists()) {
