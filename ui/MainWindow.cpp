@@ -2,6 +2,7 @@
 #include "ui_MainWindow.h"
 
 #include "core/OCRService.h"
+#include "ui/ScreenCaptureOverlay.h"
 
 #include <QApplication>
 #include <QClipboard>
@@ -37,6 +38,25 @@ MainWindow::MainWindow(QWidget *parent)
         OCRService ocrService;
         QString result = ocrService.extractText(selectedImagePath);
         ui->textOutput->setPlainText(result);
+    });
+
+    connect(ui->btnCaptureArea, &QPushButton::clicked, this, [this]() {
+        auto *overlay = new ScreenCaptureOverlay(this);
+
+        connect(overlay, &ScreenCaptureOverlay::captureFinished, this, [this](const QString &path) {
+            ui->textOutput->clear();
+
+            if (path.isEmpty()) {
+                ui->textOutput->setPlainText("Falha ao capturar a área selecionada.");
+                return;
+            }
+
+            OCRService ocrService;
+            QString result = ocrService.extractText(path);
+            ui->textOutput->setPlainText(result);
+        });
+
+        overlay->showFullScreen();
     });
 
     connect(ui->btnCopy, &QPushButton::clicked, this, [this]() {

@@ -23,6 +23,8 @@ set(ATLASHUB_SOURCES
     ui/MainWindow.cpp
     ui/MainWindow.h
     ui/MainWindow.ui
+    ui/ScreenCaptureOverlay.cpp
+    ui/ScreenCaptureOverlay.h
 )
 
 qt_add_executable(AtlasHub
