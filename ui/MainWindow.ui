@@ -62,6 +62,13 @@
      </widget>
     </item>
     <item>
+     <widget class="QPushButton" name="btnCaptureArea">
+      <property name="text">
+       <string>Capturar área</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QPushButton" name="btnRunOCR">
       <property name="text">
        <string>Executar OCR</string>
