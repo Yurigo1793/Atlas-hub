@@ -7,8 +7,14 @@
 
 QString OCRService::extractText(const QString& imagePath)
 {
-    const QString tesseractRoot = QCoreApplication::applicationDirPath() + "/third_party/tesseract";
-    const QString tesseractExe = QDir::toNativeSeparators(tesseractRoot + "/tesseract.exe");
+    const QString base = QCoreApplication::applicationDirPath();
+    const QString tesseractPath = base + "/third_party/tesseract/tesseract.exe";
+
+    if (!QFile::exists(tesseractPath)) {
+        return QStringLiteral("Erro: tesseract.exe não encontrado");
+    }
+
+    qputenv("TESSDATA_PREFIX", (base + "/third_party/tesseract/tessdata").toUtf8());
 
     const QString outputBase = QDir::tempPath() + "/atlas_ocr_output";
     const QString outputTxt = outputBase + ".txt";
@@ -16,11 +22,7 @@ QString OCRService::extractText(const QString& imagePath)
     QFile::remove(outputTxt);
 
     QProcess process;
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    env.insert("TESSDATA_PREFIX", QDir::toNativeSeparators(tesseractRoot + "/tessdata"));
-    process.setProcessEnvironment(env);
-
-    process.start(tesseractExe, { imagePath, outputBase, "-l", "por+eng" });
+    process.start(tesseractPath, { imagePath, outputBase, "-l", "por+eng" });
 
     if (!process.waitForStarted()) {
         return process.errorString();
