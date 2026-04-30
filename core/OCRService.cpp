@@ -8,10 +8,14 @@
 QString OCRService::extractText(const QString& imagePath)
 {
     const QString base = QCoreApplication::applicationDirPath();
-    const QString tesseractPath = base + "/third_party/tesseract/tesseract.exe";
+    QString tesseractPath = base + "/third_party/tesseract/tesseract.exe";
 
     if (!QFile::exists(tesseractPath)) {
-        return QStringLiteral("Erro: tesseract.exe não encontrado");
+        tesseractPath = base + "/third_party/tesseract/tesseract";
+    }
+
+    if (!QFile::exists(tesseractPath)) {
+        return QStringLiteral("Erro: Tesseract não encontrado no pacote do app (third_party/tesseract).");
     }
 
     qputenv("TESSDATA_PREFIX", (base + "/third_party/tesseract/tessdata").toUtf8());
