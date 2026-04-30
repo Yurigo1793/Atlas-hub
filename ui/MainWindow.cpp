@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
         this->showMinimized();
 
         QTimer::singleShot(300, this, [this]() {
-            auto *overlay = new ScreenCaptureOverlay(this);
+            auto *overlay = new ScreenCaptureOverlay();
 
             connect(overlay, &ScreenCaptureOverlay::captureFinished, this, [this](const QString &path) {
                 this->showNormal();

@@ -50,7 +50,11 @@ void ScreenCaptureOverlay::mouseReleaseEvent(QMouseEvent *event)
         return;
     }
 
-    QScreen *screen = QGuiApplication::primaryScreen();
+    const QPoint selectionCenter = selectedGlobalRect.center();
+    QScreen *screen = QGuiApplication::screenAt(selectionCenter);
+    if (screen == nullptr) {
+        screen = QGuiApplication::primaryScreen();
+    }
     if (screen == nullptr) {
         emit captureFinished(QString());
         close();
