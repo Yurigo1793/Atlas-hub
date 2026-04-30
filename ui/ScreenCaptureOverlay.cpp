@@ -1,11 +1,13 @@
 #include "ScreenCaptureOverlay.h"
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QFile>
 #include <QGuiApplication>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QScreen>
+#include <QThread>
 
 ScreenCaptureOverlay::ScreenCaptureOverlay(QWidget *parent)
     : QWidget(parent)
@@ -61,9 +63,6 @@ void ScreenCaptureOverlay::mouseReleaseEvent(QMouseEvent *event)
         return;
     }
 
-    QPixmap full = screen->grabWindow(0);
-    full.setDevicePixelRatio(screen->devicePixelRatio());
-
     QRect screenRect = screen->geometry();
     QRect selectedOnScreen = selectedGlobalRect.translated(-screenRect.topLeft());
     QRect boundedSelection = selectedOnScreen.intersected(QRect(QPoint(0, 0), screenRect.size()));
@@ -74,15 +73,18 @@ void ScreenCaptureOverlay::mouseReleaseEvent(QMouseEvent *event)
         return;
     }
 
-    qreal dpr = screen->devicePixelRatio();
-    QRect sourceRect(
-        qRound(boundedSelection.x() * dpr),
-        qRound(boundedSelection.y() * dpr),
-        qRound(boundedSelection.width() * dpr),
-        qRound(boundedSelection.height() * dpr)
-    );
+    hide();
+    QCoreApplication::processEvents();
+    QThread::msleep(120);
+    QCoreApplication::processEvents();
 
-    QPixmap cropped = full.copy(sourceRect);
+    QPixmap cropped = screen->grabWindow(
+        0,
+        boundedSelection.x(),
+        boundedSelection.y(),
+        boundedSelection.width(),
+        boundedSelection.height()
+    );
     QString path = QDir::tempPath() + "/atlas_capture.png";
     QFile::remove(path);
 

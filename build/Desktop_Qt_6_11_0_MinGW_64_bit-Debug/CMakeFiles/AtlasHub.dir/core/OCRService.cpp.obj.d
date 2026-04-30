@@ -330,6 +330,31 @@ CMakeFiles/AtlasHub.dir/core/OCRService.cpp.obj: \
  C:/Qt/6.11.0/mingw_64/include/QtCore/qdeadlinetimer.h \
  C:/Qt/6.11.0/mingw_64/include/QtCore/qnativeinterface.h \
  C:/Qt/6.11.0/mingw_64/include/QtCore/qcoreapplication_platform.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/QDateTime \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qdatetime.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qcalendar.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qlocale.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qvariant.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qdebug.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qtextstream.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qcontiguouscache.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/climits \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qsharedpointer.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qshareddata.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qsharedpointer_impl.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/set \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_set.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multiset.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_set.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qmap.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qshareddata_impl.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qset.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qhash.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qvarlengtharray.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qalloc.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/q23utility.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/q20utility.h \
  C:/Qt/6.11.0/mingw_64/include/QtCore/QDir \
  C:/Qt/6.11.0/mingw_64/include/QtCore/qdir.h \
  C:/Qt/6.11.0/mingw_64/include/QtCore/qdirlisting.h \
@@ -368,33 +393,10 @@ CMakeFiles/AtlasHub.dir/core/OCRService.cpp.obj: \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/codecvt \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_dir.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_ops.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qdatetime.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qcalendar.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qlocale.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qvariant.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qdebug.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qtextstream.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qcontiguouscache.h \
- C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/climits \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qsharedpointer.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qshareddata.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qsharedpointer_impl.h \
- C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/set \
- C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_set.h \
- C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multiset.h \
- C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
- C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_set.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qmap.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qshareddata_impl.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qset.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qhash.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qvarlengtharray.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/qalloc.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/q23utility.h \
- C:/Qt/6.11.0/mingw_64/include/QtCore/q20utility.h \
  C:/Qt/6.11.0/mingw_64/include/QtCore/qfile.h \
  C:/Qt/6.11.0/mingw_64/include/QtCore/qfileinfo.h \
  C:/Qt/6.11.0/mingw_64/include/QtCore/qtimezone.h \
  C:/Qt/6.11.0/mingw_64/include/QtCore/QFile \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/QFileInfo \
  C:/Qt/6.11.0/mingw_64/include/QtCore/QProcess \
  C:/Qt/6.11.0/mingw_64/include/QtCore/qprocess.h

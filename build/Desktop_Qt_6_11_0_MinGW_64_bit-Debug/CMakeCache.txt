@@ -14,6 +14,9 @@
 # EXTERNAL cache entries
 ########################
 
+//Directory containing tesseract.exe and tessdata
+ATLASHUB_TESSERACT_DIR:PATH=C:/Atlas-hub/third_party/tesseract
+
 //Value Computed by CMake
 AtlasHub_BINARY_DIR:STATIC=C:/Atlas-hub/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug
 

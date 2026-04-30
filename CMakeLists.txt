@@ -39,8 +39,41 @@ target_link_libraries(AtlasHub PRIVATE
     Qt6::Widgets
 )
 
-add_custom_command(TARGET AtlasHub POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_SOURCE_DIR}/third_party/tesseract
-    $<TARGET_FILE_DIR:AtlasHub>/third_party/tesseract
+if(WIN32 AND TARGET Qt6::qmake)
+    get_target_property(QT_QMAKE_EXECUTABLE Qt6::qmake IMPORTED_LOCATION)
+    get_filename_component(QT_BIN_DIR "${QT_QMAKE_EXECUTABLE}" DIRECTORY)
+    find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${QT_BIN_DIR}")
+
+    if(WINDEPLOYQT_EXECUTABLE)
+        add_custom_command(TARGET AtlasHub POST_BUILD
+            COMMAND "${WINDEPLOYQT_EXECUTABLE}"
+                --no-translations
+                "$<TARGET_FILE:AtlasHub>"
+        )
+    endif()
+endif()
+
+set(ATLASHUB_TESSERACT_DIR
+    "${CMAKE_SOURCE_DIR}/third_party/tesseract"
+    CACHE PATH "Directory containing tesseract.exe and tessdata"
 )
+
+if(NOT EXISTS "${ATLASHUB_TESSERACT_DIR}"
+    AND EXISTS "${CMAKE_BINARY_DIR}/third_party/tesseract"
+)
+    set(ATLASHUB_TESSERACT_DIR "${CMAKE_BINARY_DIR}/third_party/tesseract")
+endif()
+
+if(EXISTS "${ATLASHUB_TESSERACT_DIR}")
+    add_custom_command(TARGET AtlasHub POST_BUILD
+        COMMAND ${CMAKE_COMMAND}
+            -Dsrc="${ATLASHUB_TESSERACT_DIR}"
+            -Ddst="$<TARGET_FILE_DIR:AtlasHub>/third_party/tesseract"
+            -P "${CMAKE_SOURCE_DIR}/cmake/copy_tesseract_runtime.cmake"
+    )
+else()
+    message(WARNING
+        "Tesseract runtime not found at ${ATLASHUB_TESSERACT_DIR}; "
+        "OCR will be unavailable until this folder is added."
+    )
+endif()
