@@ -13,6 +13,20 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     connect(ui->btnRunOCR, &QPushButton::clicked, this, [this]() {
+        ui->textOutput->setPlainText(
+            "Selecionar área\n"
+            "↓\n"
+            "Capturar imagem\n"
+            "↓\n"
+            "Salvar temporário\n"
+            "↓\n"
+            "Rodar Tesseract\n"
+            "↓\n"
+            "Ler output.txt\n"
+            "↓\n"
+            "Mostrar texto"
+        );
+
         this->showMinimized();
 
         QTimer::singleShot(300, this, [this]() {

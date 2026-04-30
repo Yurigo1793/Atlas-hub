@@ -38,3 +38,9 @@ target_include_directories(AtlasHub PRIVATE
 target_link_libraries(AtlasHub PRIVATE
     Qt6::Widgets
 )
+
+add_custom_command(TARGET AtlasHub POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/third_party
+        $<TARGET_FILE_DIR:AtlasHub>/third_party
+)
