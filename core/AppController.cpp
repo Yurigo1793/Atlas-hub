@@ -19,5 +19,7 @@ void AppController::initialize()
         m_mainWindow = new MainWindow();
     }
 
-    m_mainWindow->show();
+    if (!m_mainWindow->shouldStartMinimizedToTray()) {
+        m_mainWindow->show();
+    }
 }

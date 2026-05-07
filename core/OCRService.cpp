@@ -7,7 +7,7 @@
 #include <QFileInfo>
 #include <QProcess>
 
-QString OCRService::extractText(const QString& imagePath)
+QString OCRService::extractText(const QString &imagePath, const QString &language)
 {
     const QString base = QCoreApplication::applicationDirPath();
 
@@ -18,15 +18,26 @@ QString OCRService::extractText(const QString& imagePath)
         base + "/third_party/tesseract/tessdata";
 
     if (!QFile::exists(tesseractPath)) {
-        return "Erro: Tesseract empacotado nao encontrado em: " + tesseractPath;
+        return QCoreApplication::translate("OCRService",
+                                           "Erro: Tesseract empacotado não encontrado em: %1")
+            .arg(tesseractPath);
     }
 
     if (!QDir(tessdataPath).exists()) {
-        return "Erro: tessdata nao encontrado em: " + tessdataPath;
+        return QCoreApplication::translate("OCRService", "Erro: tessdata não encontrado em: %1")
+            .arg(tessdataPath);
+    }
+
+    const QString tessdataFile = tessdataPath + "/" + language + ".traineddata";
+    if (!QFile::exists(tessdataFile)) {
+        return QCoreApplication::translate("OCRService",
+                                           "Erro: dados de OCR não encontrados para o idioma selecionado: %1")
+            .arg(tessdataFile);
     }
 
     if (!QFile::exists(imagePath)) {
-        return QStringLiteral("Falha: imagem temporaria para OCR nao foi encontrada.");
+        return QCoreApplication::translate("OCRService",
+                                           "Falha: imagem temporária para OCR não foi encontrada.");
     }
 
     QProcess process;
@@ -40,29 +51,32 @@ QString OCRService::extractText(const QString& imagePath)
     QStringList args;
     args << imagePath
          << outputBase
-         << "-l" << "por+eng"
+         << "-l" << language
          << "--tessdata-dir" << tessdataPath;
 
     process.setArguments(args);
     process.start();
 
     if (!process.waitForStarted()) {
-        return "Erro ao iniciar OCR: " + process.errorString();
+        return QCoreApplication::translate("OCRService", "Erro ao iniciar OCR: %1")
+            .arg(process.errorString());
     }
 
     if (!process.waitForFinished(30000)) {
         process.kill();
         process.waitForFinished();
-        return "Erro ao executar OCR: " + process.errorString();
+        return QCoreApplication::translate("OCRService", "Erro ao executar OCR: %1")
+            .arg(process.errorString());
     }
 
     if (process.exitStatus() != QProcess::NormalExit || process.exitCode() != 0) {
-        return QStringLiteral("Erro no OCR: ") + QString::fromUtf8(process.readAll());
+        return QCoreApplication::translate("OCRService", "Erro no OCR: %1")
+            .arg(QString::fromUtf8(process.readAll()));
     }
 
     QFile outputFile(outputBase + ".txt");
     if (!outputFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return QStringLiteral("Falha ao abrir arquivo de saida do OCR.");
+        return QCoreApplication::translate("OCRService", "Falha ao abrir arquivo de saída do OCR.");
     }
 
     const QString extractedText = QString::fromUtf8(outputFile.readAll());

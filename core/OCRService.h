@@ -5,5 +5,5 @@
 class OCRService
 {
 public:
-    QString extractText(const QString& imagePath);
+    QString extractText(const QString &imagePath, const QString &language);
 };

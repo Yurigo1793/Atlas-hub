@@ -6,46 +6,274 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>650</height>
+    <width>980</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>AtlasHub</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="mainLayout">
     <property name="leftMargin">
-     <number>16</number>
+     <number>14</number>
     </property>
     <property name="topMargin">
-     <number>16</number>
+     <number>14</number>
     </property>
     <property name="rightMargin">
-     <number>16</number>
+     <number>14</number>
     </property>
     <property name="bottomMargin">
-     <number>16</number>
+     <number>14</number>
     </property>
     <property name="spacing">
-     <number>10</number>
+     <number>12</number>
     </property>
     <item>
-     <widget class="QPushButton" name="btnRunOCR">
-      <property name="text">
-       <string>Executar OCR</string>
+     <layout class="QHBoxLayout" name="headerLayout">
+      <property name="spacing">
+       <number>10</number>
       </property>
-     </widget>
+      <item>
+       <widget class="QLabel" name="appIconLabel">
+        <property name="minimumSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="errorLog">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>72</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>86</height>
+         </size>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="placeholderText">
+         <string>Erros e avisos aparecem aqui.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
-     <widget class="QTextEdit" name="textOutput">
-      <property name="readOnly">
-       <bool>false</bool>
+     <layout class="QHBoxLayout" name="contentLayout">
+      <property name="spacing">
+       <number>12</number>
       </property>
-     </widget>
+      <item>
+       <layout class="QVBoxLayout" name="ocrPanelLayout">
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="ocrTextLabel">
+         <property name="text">
+           <string>Texto OCR</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textOutput">
+          <property name="readOnly">
+           <bool>false</bool>
+          </property>
+          <property name="placeholderText">
+           <string>O texto capturado pelo OCR aparece aqui.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QWidget" name="translationControls">
+        <property name="minimumSize">
+         <size>
+          <width>158</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>190</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="controlsLayout">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="btnRunOCR">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>44</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(0, 133, 204);
+color: white;
+border: 2px solid rgb(0, 100, 168);
+border-radius: 6px;
+padding: 6px;
+font-weight: bold;</string>
+           </property>
+           <property name="text">
+            <string>OCR</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="sourceLanguageLabel">
+           <property name="text">
+            <string>De</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="sourceLanguageCombo"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="targetLanguageLabel">
+           <property name="text">
+            <string>Para</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="targetLanguageCombo"/>
+         </item>
+         <item>
+          <spacer name="upperControlsSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>24</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnTranslate">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>42</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Traduzir</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="lowerControlsSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="translationPanelLayout">
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="translationTextLabel">
+          <property name="text">
+           <string>Tradução</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="translationOutput">
+          <property name="readOnly">
+           <bool>false</bool>
+          </property>
+          <property name="placeholderText">
+           <string>A tradução aparece aqui.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>980</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuconf">
+   <property name="title">
+     <string>Configurações</string>
+   </property>
+  </widget>
+   <widget class="QMenu" name="menuAjuda">
+    <property name="title">
+     <string>Ajuda</string>
+    </property>
+    <addaction name="actionHelp"/>
+   </widget>
+   <addaction name="menuconf"/>
+   <addaction name="menuAjuda"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Ajuda</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

@@ -8,7 +8,11 @@ Nesta fase inicial, o app possui um modulo de OCR: ele permite selecionar uma ar
 
 - Captura de uma area da tela.
 - OCR local com Tesseract empacotado no projeto.
-- Suporte aos idiomas `por` e `eng` via `tessdata`.
+- Suporte aos idiomas `por`, `eng`, `spa` e `fra` via `tessdata`.
+- Traducao automatica do texto capturado por OCR usando mirrors gratuitos compativeis com LibreTranslate.
+- Traducao manual do texto atual usando os idiomas portugues, ingles, espanhol e frances.
+- Deteccao automatica do idioma do texto antes da traducao.
+- Ultima configuracao de idioma salva entre execucoes do app.
 - Build portatil com as DLLs do Qt e do Tesseract copiadas para a pasta do executavel.
 - Execucao no Windows sem abrir janela de console.
 
@@ -27,6 +31,8 @@ Essa pasta deve conter:
 - `tessdata/`
 - `tessdata/por.traineddata`
 - `tessdata/eng.traineddata`
+- `tessdata/spa.traineddata`
+- `tessdata/fra.traineddata`
 
 Durante o build, o CMake copia automaticamente essa pasta para o diretorio do executavel:
 
@@ -43,6 +49,22 @@ O codigo sempre carrega o Tesseract a partir da pasta do executavel, usando `QCo
 - Compilador configurado no Qt Creator, como MinGW ou MSVC
 - CMake funcionando pelo kit do Qt Creator
 - Pasta `third_party/tesseract/` presente no repositorio
+- Acesso a pelo menos um mirror gratuito compativel com LibreTranslate. O app tenta automaticamente:
+  `https://translate.argosopentech.com/translate`, `https://translate.libregalaxy.org/translate`,
+  `https://translate.fedilab.app/translate` e `https://translate.cutie.dating/translate`.
+
+Opcionalmente, aponte o app para outra instancia compativel:
+
+```powershell
+$env:LIBRETRANSLATE_URL = "http://localhost:5000/translate"
+.\build\Desktop_Qt_6_11_0_MinGW_64_bit-Debug\AtlasHub.exe
+```
+
+Se a instancia escolhida exigir chave, configure tambem:
+
+```powershell
+$env:LIBRETRANSLATE_API_KEY = "sua-chave-aqui"
+```
 
 ## Build pelo Qt Creator
 

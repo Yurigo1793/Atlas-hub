@@ -102,12 +102,22 @@ void ScreenCaptureOverlay::paintEvent(QPaintEvent *event)
     Q_UNUSED(event);
 
     QPainter painter(this);
-    painter.fillRect(rect(), QColor(0, 0, 0, 120));
 
-    QRect selectedRect = QRect(mapFromGlobal(selectionStartGlobal), mapFromGlobal(selectionEndGlobal)).normalized();
+    painter.fillRect(rect(), QColor(0, 0, 0, 60));
+
+    QRect selectedRect = QRect(
+        mapFromGlobal(selectionStartGlobal),
+        mapFromGlobal(selectionEndGlobal)
+    ).normalized();
+
     if (!selectedRect.isEmpty()) {
+
+        painter.setCompositionMode(QPainter::CompositionMode_Clear);
+        painter.fillRect(selectedRect, Qt::transparent);
+        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+
         painter.setPen(QPen(QColor(255, 255, 255), 2));
-        painter.setBrush(QColor(255, 255, 255, 30));
+        painter.setBrush(Qt::NoBrush);
         painter.drawRect(selectedRect);
     }
 }
