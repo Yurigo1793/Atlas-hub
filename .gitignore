@@ -1,18 +1,66 @@
-# Build
-build/
-cmake-build-*/
+# Build output
+/build/
+/cmake-build-*/
+/out/
+/dist/
+/install/
 
-# Executáveis
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+DartConfiguration.tcl
+Testing/
+Makefile
+*.ninja
+.ninja_*
+
+# Qt generated files
+*_autogen/
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qm
+
+# Qt Creator / IDE local state
+/.qtcreator/
+*.user
+*.user.*
+*.autosave
+*.creator
+*.creator.user
+*.cflags
+*.cxxflags
+*.files
+*.includes
+
+# Local build binaries and intermediates
 *.exe
-
-# DLLs
 *.dll
-
-# Arquivos temporários
-*.log
 *.obj
 *.o
+*.a
+*.lib
+*.pdb
+*.ilk
+*.idb
+*.exp
+*.res
 
-# Qt Creator
-*.user
-*.autosave
+# Keep the vendored Tesseract runtime versioned.
+!/third_party/
+!/third_party/tesseract/
+!/third_party/tesseract/**
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+Thumbs.db
+desktop.ini

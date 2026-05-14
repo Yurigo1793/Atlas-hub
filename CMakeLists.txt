@@ -83,7 +83,8 @@ if(NOT EXISTS "${CMAKE_SOURCE_DIR}/third_party/tesseract")
 endif()
 
 add_custom_command(TARGET AtlasHub POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_SOURCE_DIR}/third_party/tesseract"
-        "$<TARGET_FILE_DIR:AtlasHub>/third_party/tesseract"
+    COMMAND ${CMAKE_COMMAND}
+        -Dsrc="${CMAKE_SOURCE_DIR}/third_party/tesseract"
+        -Ddst="$<TARGET_FILE_DIR:AtlasHub>/third_party/tesseract"
+        -P "${CMAKE_SOURCE_DIR}/cmake/copy_tesseract_runtime.cmake"
 )
