@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "AtlasHub"
-#define MyAppVersion "0.3.0"
+#define MyAppVersion "0.3.1"
 #define MyAppPublisher "Yurigo1793"
 #define MyAppURL "https://github.com/Yurigo1793/Atlas-hub"
 #define MyAppExeName "AtlasHub.exe"
@@ -11,7 +11,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{9C021155-FF57-4051-B54B-06E05706E921}
+AppId={{81054962-F821-4E01-85D9-1105ABA65282}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -32,25 +32,21 @@ ArchitecturesInstallIn64BitMode=x64compatible
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
-OutputDir=output
+OutputDir=C:\Users\LICITAÇÃO\Desktop\ATLAS-HUB
 OutputBaseFilename=AtlasHubSetup
 SetupIconFile=C:\Atlas-hub\resources\app.ico
 SolidCompression=yes
-WizardStyle=modern windows11
+WizardStyle=classic dynamic windows11
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
-Name: "french"; MessagesFile: "compiler:Languages\French.isl"
-Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
-Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\LICITAÇÃO\Desktop\ATLAS-HUB\AtlasHub\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\LICITAÇÃO\Desktop\ATLAS-HUB\AtlasHub\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\LICITAÇÃO\Desktop\ATLAS-HUB\Atlas-Hub\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\LICITAÇÃO\Desktop\ATLAS-HUB\Atlas-Hub\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
