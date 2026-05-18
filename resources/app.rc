@@ -19,11 +19,11 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Yurigo1793\0"
             VALUE "FileDescription", "AtlasHub\0"
-            VALUE "FileVersion", "0.3.0\0"
+            VALUE "FileVersion", "0.3.2\0"
             VALUE "InternalName", "AtlasHub\0"
             VALUE "OriginalFilename", "AtlasHub.exe\0"
             VALUE "ProductName", "AtlasHub\0"
-            VALUE "ProductVersion", "0.3.0\0"
+            VALUE "ProductVersion", "0.3.2\0"
         END
     END
 
