@@ -1,18 +1,52 @@
 # Atlas Hub
 
-Atlas Hub e um aplicativo desktop em Qt/C++ pensado para reunir ferramentas locais em uma unica interface.
+Atlas Hub e um aplicativo desktop em Qt/C++ para produtividade de escritorio, reunindo OCR, traducao, historico e ferramentas rapidas de texto em uma interface simples, portatil e integrada ao Windows.
 
-Nesta fase inicial, o app possui um modulo de OCR: ele permite selecionar uma area da tela, captura a imagem selecionada e extrai o texto usando uma copia empacotada do Tesseract. O objetivo e que o Atlas Hub cresca com muitos outros modulos no futuro, mantendo a mesma ideia central: utilitarios rapidos, locais e integrados em uma experiencia simples.
+O app permite capturar uma area da tela, extrair texto localmente com Tesseract, traduzir automaticamente ou manualmente, restaurar capturas antigas pelo historico e trabalhar com o texto reconhecido sem depender de uma instalacao global do OCR.
 
-## Funcionalidades atuais
+## Funcionalidades
 
-- Captura de uma area da tela.
-- OCR local com Tesseract empacotado no projeto.
+### OCR e captura
+
+- Captura de uma area da tela por selecao visual.
+- OCR local com Tesseract empacotado no projeto, sem depender do `PATH` do sistema.
 - Suporte aos idiomas `por`, `eng`, `spa` e `fra` via `tessdata`.
+- Atalho global configuravel para executar OCR rapidamente.
+- Execucao a partir da bandeja do sistema.
+
+### Traducao
+
 - Traducao automatica do texto capturado por OCR usando mirrors gratuitos compativeis com LibreTranslate.
-- Traducao manual do texto atual usando os idiomas portugues, ingles, espanhol e frances.
+- Traducao manual do texto atual.
+- Suporte de traducao para portugues, ingles, espanhol e frances.
 - Deteccao automatica do idioma do texto antes da traducao.
-- Ultima configuracao de idioma salva entre execucoes do app.
+- Modo de idiomas inteligentes para alternar automaticamente entre idioma principal e secundario.
+- Configuracao de idiomas salva entre execucoes do app.
+- Suporte a instancia propria do LibreTranslate via variaveis de ambiente.
+
+### Historico
+
+- Historico das capturas de OCR e suas traducoes.
+- Restauracao de capturas antigas com duplo clique.
+- Busca no historico por texto OCR ou texto traduzido.
+- Filtro por data: todas as datas, hoje, ultimos 7 dias e ultimos 30 dias.
+- Favoritos no historico.
+- Filtro para mostrar apenas favoritos.
+- Persistencia dos favoritos junto dos itens do historico.
+
+### Edicao e produtividade
+
+- Campos editaveis para ajustar o texto OCR e a traducao.
+- Botoes rapidos para copiar texto OCR e traducao.
+- Barra de formatacao com fonte, tamanho, negrito, italico, sublinhado e cor do texto.
+- Menu de ajuda com link para suporte pelo repositorio.
+
+### Interface e sistema
+
+- Interface em portugues, ingles e frances.
+- Tema claro e tema escuro.
+- Opcao para iniciar com o Windows.
+- Opcao para iniciar minimizado na bandeja do sistema.
 - Build portatil com as DLLs do Qt e do Tesseract copiadas para a pasta do executavel.
 - Execucao no Windows sem abrir janela de console.
 

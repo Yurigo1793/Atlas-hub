@@ -8,8 +8,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("AtlasHub");
-    QCoreApplication::setApplicationName("Atlas-Hub");
-    QCoreApplication::setApplicationVersion("AtlasHub v0.2.0-beta");
+    QCoreApplication::setApplicationName("AtlasHub");
+    QCoreApplication::setApplicationVersion("0.3.8");
     QApplication::setQuitOnLastWindowClosed(false);
     app.setWindowIcon(QIcon(":/icons/app.ico"));
 
