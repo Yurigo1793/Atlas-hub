@@ -91,12 +91,88 @@ struct TranslationResult
     QString targetLanguage;
     QString translatedText;
 };
+
+QString darkThemeStyleSheet()
+{
+    return QStringLiteral(
+        "* { font-family: System; font-size: 12pt; }"
+        "QMainWindow { background-color: #101214; color: #d7dde3; }"
+        "QWidget#centralwidget { background-color: #101214; }"
+        "QMenuBar { background: #15191d; color: #d7dde3; border: 1px solid #2b333a; font-weight: bold; }"
+        "QMenuBar::item { background: transparent; padding: 2px 10px; }"
+        "QMenuBar::item:selected { background: #1f7a4d; color: #f5fff8; }"
+        "QMenu { background: #15191d; color: #d7dde3; border: 1px solid #2f3a42; font-weight: bold; }"
+        "QMenu::item { padding: 4px 26px 4px 16px; }"
+        "QMenu::item:selected { background: #1f7a4d; color: #f5fff8; }"
+        "QMenu::separator { height: 1px; background: #33404a; margin: 4px 8px; }"
+        "QLabel, QLineEdit, QComboBox, QTextEdit, QPlainTextEdit, QListWidget {"
+        " background: #171b1f; color: #d7dde3; border: 1px solid #34404a; font-weight: bold;"
+        " selection-background-color: #238456; selection-color: #f5fff8; }"
+        "QTextEdit, QPlainTextEdit, QListWidget { padding: 4px; background: #12161a; }"
+        "QListWidget { alternate-background-color: #1a1f24; }"
+        "QListWidget::item { background: #12161a; color: #d7dde3; }"
+        "QListWidget::item:alternate { background: #1a1f24; color: #c7d0d8; }"
+        "QListWidget::item:selected { background: #238456; color: #f5fff8; }"
+        "QTextEdit:focus, QPlainTextEdit:focus, QLineEdit:focus, QComboBox:focus, QListWidget:focus {"
+        " border: 1px solid #2aa866; }"
+        "QScrollBar:vertical, QScrollBar:horizontal { background: #111519; border: 1px solid #303a43; width: 14px; height: 14px; }"
+        "QScrollBar::handle:vertical, QScrollBar::handle:horizontal { background: #4b5a64; min-height: 20px; min-width: 20px; }"
+        "QScrollBar::handle:hover { background: #238456; }"
+        "QScrollBar::add-line, QScrollBar::sub-line { background: #171b1f; border: 1px solid #303a43; }"
+        "QScrollBar::add-page, QScrollBar::sub-page { background: #111519; }"
+        "QPushButton, QToolButton {"
+        " background: #1c2227; color: #e3e8ed; border-top: 2px solid #51616d;"
+        " border-left: 2px solid #51616d; border-right: 4px solid #07090b;"
+        " border-bottom: 4px solid #07090b; padding: 4px 8px; font-weight: bold; }"
+        "QPushButton:hover, QToolButton:hover { background: #243039; color: #ffffff; }"
+        "QPushButton:pressed, QToolButton:pressed {"
+        " background: #238456; color: #f5fff8; border-top: 4px solid #07090b;"
+        " border-left: 4px solid #07090b; border-right: 2px solid #51616d;"
+        " border-bottom: 2px solid #51616d; padding-top: 6px; padding-left: 10px;"
+        " padding-right: 6px; padding-bottom: 2px; }"
+        "QPushButton#btnRunOCR, QPushButton#btnTranslate { background-color: #238456; color: #f5fff8; }"
+        "QComboBox::drop-down { border-left: 1px solid #34404a; background: #1f262c; }"
+        "QCheckBox { color: #d7dde3; background: transparent; border: none; font-weight: bold; }"
+        "QDockWidget { background-color: #101214; color: #d7dde3; font-weight: bold; }"
+        "QDockWidget::title { background: #15191d; border: 1px solid #2f3a42; padding: 2px; }"
+        "QStatusBar { background: #15191d; color: #9fb0bc; border-top: 1px solid #2f3a42; font-weight: bold; }"
+        "QStatusBar QLabel { background: transparent; border: none; color: #9fb0bc; padding: 0 10px; }"
+        "QLabel#systemStatusLabel { color: #3fd07f; }"
+        "QLabel#engineStatusLabel { color: #7f8f9c; }"
+        "QLabel#ocrStatusLabel, QLabel#translationStatusLabel { color: #c7d0d8; }");
+}
+
+QString trayMenuStyleSheet(bool darkTheme)
+{
+    if (darkTheme) {
+        return QStringLiteral(
+            "QMenu { background: #15191d; color: #d7dde3; border: 1px solid #2f3a42; min-width: 210px; font-family: System; font-size: 12pt; }"
+            "QMenu::item { padding: 5px 24px 5px 16px; }"
+            "QMenu::item:selected { background: #238456; color: #f5fff8; }"
+            "QMenu::separator { height: 1px; background: #33404a; margin: 4px 8px; }");
+    }
+
+    return QStringLiteral(
+        "QMenu { background: #f4f1e8; color: #111111; border: 1px solid #111111; min-width: 210px; font-family: System; font-size: 12pt; }"
+        "QMenu::item { padding: 5px 24px 5px 16px; }"
+        "QMenu::item:selected { background: #00FF66; color: #111111; }"
+        "QMenu::separator { height: 1px; background: #aaa69b; margin: 4px 8px; }");
+}
+
+QPixmap atlasHubWindowIconPixmap(bool darkTheme, int size)
+{
+    const QString path = darkTheme
+                             ? QStringLiteral(":/icons/atlas_globe_dark.svg")
+                             : QStringLiteral(":/icons/atlas_globe_light.svg");
+    return QIcon(path).pixmap(size, size);
+}
 }
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , m_uiLanguage(QStringLiteral("pt_BR"))
+    , m_lightStyleSheet()
     , m_formatToolbar(nullptr)
     , m_formatMenu(nullptr)
     , m_uiLanguageMenu(nullptr)
@@ -129,6 +205,10 @@ MainWindow::MainWindow(QWidget *parent)
     , m_historyFavoritesOnlyCheck(nullptr)
     , m_historyFavoriteButton(nullptr)
     , m_historyList(nullptr)
+    , m_systemStatusLabel(nullptr)
+    , m_engineStatusLabel(nullptr)
+    , m_ocrStatusLabel(nullptr)
+    , m_translationStatusLabel(nullptr)
     , m_ocrHotkey(nullptr)
     , m_secondaryLanguage(QStringLiteral("en"))
     , m_quitRequested(false)
@@ -138,19 +218,11 @@ MainWindow::MainWindow(QWidget *parent)
     , m_updatingLanguageCombos(false)
 {
     ui->setupUi(this);
+    m_lightStyleSheet = styleSheet();
     setWindowIcon(QIcon(":/icons/app.ico"));
-    ui->appIconLabel->setPixmap(QIcon(":/icons/app.ico").pixmap(40, 40));
-    ui->btnRunOCR->setStyleSheet(QString());
+    ui->appIconLabel->setPixmap(atlasHubWindowIconPixmap(false, 54));
     ui->btnRunOCR->setIcon(style()->standardIcon(QStyle::SP_ComputerIcon));
     ui->btnTranslate->setIcon(style()->standardIcon(QStyle::SP_BrowserReload));
-    ui->errorLog->setMaximumHeight(58);
-    ui->errorLog->setMinimumHeight(44);
-    ui->mainLayout->setContentsMargins(10, 10, 10, 8);
-    ui->mainLayout->setSpacing(8);
-    ui->contentLayout->setSpacing(10);
-    ui->controlsLayout->setSpacing(6);
-    statusBar()->setMaximumHeight(20);
-    statusBar()->setSizeGripEnabled(false);
 
     setupTrayIcon();
     setupCopyButtons();
@@ -160,6 +232,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupUiLanguageMenu();
     setupSettingsActions();
     setupHistory();
+    setupTechnicalStatusBar();
     loadUiLanguageSettings();
     loadSmartLanguageSettings();
     resetAutomaticTranslationMode();
@@ -229,32 +302,25 @@ void MainWindow::applyTheme()
     QSettings settings;
     m_darkTheme = settings.value(QStringLiteral("ui/darkTheme"), false).toBool();
 
-    if (!m_darkTheme) {
-        qApp->setStyleSheet(QStringLiteral(
-            "QMainWindow, QWidget { background: #f6f7f9; color: #20242a; }"
-            "QTextEdit, QPlainTextEdit, QLineEdit, QComboBox, QListWidget { background: #ffffff; border: 1px solid #d7dce2; border-radius: 6px; padding: 5px; selection-background-color: #2f80ed; }"
-            "QPushButton, QToolButton { background: #ffffff; border: 1px solid #ccd3db; border-radius: 6px; padding: 5px 8px; }"
-            "QPushButton:hover, QToolButton:hover { background: #eef4fb; border-color: #9eb6d4; }"
-            "QPushButton:pressed, QToolButton:pressed { background: #dceafb; }"
-            "QPushButton#btnRunOCR { background: #1976d2; color: white; border-color: #155fa8; font-weight: 600; }"
-            "QPushButton#btnTranslate { background: #22313f; color: white; border-color: #1a2631; font-weight: 600; }"
-            "QLabel { background: transparent; }"
-            "QMenuBar, QMenu, QStatusBar, QToolBar { background: #eef1f4; color: #20242a; }"
-            "QDockWidget::title { padding: 4px; background: #e4e8ed; }"));
-        return;
+    setStyleSheet(m_darkTheme ? darkThemeStyleSheet() : m_lightStyleSheet);
+    ui->appIconLabel->setPixmap(atlasHubWindowIconPixmap(m_darkTheme, 54));
+
+    const QList<QLabel *> technicalLabels{
+        m_systemStatusLabel,
+        m_engineStatusLabel,
+        m_ocrStatusLabel,
+        m_translationStatusLabel,
+    };
+
+    for (QLabel *label : technicalLabels) {
+        if (label) {
+            label->setVisible(m_darkTheme);
+        }
     }
 
-    qApp->setStyleSheet(QStringLiteral(
-        "QMainWindow, QWidget { background: #20252b; color: #edf1f5; }"
-        "QTextEdit, QPlainTextEdit, QLineEdit, QComboBox, QListWidget { background: #15191e; color: #edf1f5; border: 1px solid #3b4652; border-radius: 6px; padding: 5px; selection-background-color: #3d7fc9; }"
-        "QPushButton, QToolButton { background: #2a3139; color: #edf1f5; border: 1px solid #465260; border-radius: 6px; padding: 5px 8px; }"
-        "QPushButton:hover, QToolButton:hover { background: #35404a; border-color: #5d6d7d; }"
-        "QPushButton:pressed, QToolButton:pressed { background: #1c2228; }"
-        "QPushButton#btnRunOCR { background: #2f80ed; color: white; border-color: #2567bf; font-weight: 600; }"
-        "QPushButton#btnTranslate { background: #3c4956; color: white; border-color: #536273; font-weight: 600; }"
-        "QLabel { background: transparent; }"
-        "QMenuBar, QMenu, QStatusBar, QToolBar { background: #181d22; color: #edf1f5; }"
-        "QDockWidget::title { padding: 4px; background: #252c33; }"));
+    if (m_trayMenu) {
+        m_trayMenu->setStyleSheet(trayMenuStyleSheet(m_darkTheme));
+    }
 }
 
 void MainWindow::applyUiLanguage(const QString &localeName)
@@ -412,6 +478,7 @@ void MainWindow::handleOcrFinished(const QString &path, bool restoreWindowWhenFi
 {
     if (path.isEmpty() || !QFile::exists(path)) {
         appendError(tr("Falha ao capturar a área selecionada."));
+        setTechnicalStatus(QStringLiteral("ERROR"), QString());
         m_ocrInProgress = false;
         if (restoreWindowWhenFinished) {
             restoreFromTray();
@@ -420,6 +487,7 @@ void MainWindow::handleOcrFinished(const QString &path, bool restoreWindowWhenFi
     }
 
     appendError(tr("Imagem capturada. Executando OCR..."));
+    setTechnicalStatus(QStringLiteral("READ"), QString());
     QCoreApplication::processEvents();
 
     OCRService ocrService;
@@ -428,6 +496,7 @@ void MainWindow::handleOcrFinished(const QString &path, bool restoreWindowWhenFi
 
     if (visibleResult.isEmpty()) {
         appendError(tr("OCR concluído, mas nenhum texto foi reconhecido."));
+        setTechnicalStatus(QStringLiteral("IDLE"), QString());
         m_ocrInProgress = false;
         if (restoreWindowWhenFinished) {
             restoreFromTray();
@@ -437,6 +506,7 @@ void MainWindow::handleOcrFinished(const QString &path, bool restoreWindowWhenFi
 
     if (isErrorMessage(visibleResult)) {
         appendError(visibleResult);
+        setTechnicalStatus(QStringLiteral("ERROR"), QString());
         m_ocrInProgress = false;
         if (restoreWindowWhenFinished) {
             restoreFromTray();
@@ -445,6 +515,7 @@ void MainWindow::handleOcrFinished(const QString &path, bool restoreWindowWhenFi
     }
 
     appendError(tr("OCR concluído."));
+    setTechnicalStatus(QStringLiteral("IDLE"), QString());
     ui->textOutput->setPlainText(result);
     m_ocrInProgress = false;
     if (restoreWindowWhenFinished) {
@@ -491,11 +562,13 @@ void MainWindow::runTranslation(bool useSmartTarget)
     const QString text = ui->textOutput->toPlainText();
     if (text.trimmed().isEmpty()) {
         appendError(tr("Falha: não há texto de OCR para traduzir."));
+        setTechnicalStatus(QString(), QStringLiteral("ERROR"));
         return;
     }
 
     ui->btnTranslate->setEnabled(false);
     ui->translationOutput->setPlainText(tr("Traduzindo..."));
+    setTechnicalStatus(QString(), QStringLiteral("RUN"));
 
     const QString fallbackSourceLanguage = ui->sourceLanguageCombo->currentData(Qt::UserRole + 1).toString();
     const QString selectedTargetLanguage = ui->targetLanguageCombo->currentData(Qt::UserRole + 1).toString();
@@ -540,10 +613,11 @@ void MainWindow::runTranslation(bool useSmartTarget)
                                           return;
                                       }
 
-                                      if (window->ui->textOutput->toPlainText() != result.sourceText) {
-                                          window->ui->btnTranslate->setEnabled(true);
-                                          return;
-                                      }
+                                       if (window->ui->textOutput->toPlainText() != result.sourceText) {
+                                           window->ui->btnTranslate->setEnabled(true);
+                                           window->setTechnicalStatus(QString(), QStringLiteral("IDLE"));
+                                           return;
+                                       }
 
                                       const int detectedLanguageIndex =
                                           window->sourceLanguageIndexForTranslateCode(result.sourceLanguage);
@@ -568,15 +642,17 @@ void MainWindow::runTranslation(bool useSmartTarget)
 
                                       window->ui->btnTranslate->setEnabled(true);
 
-                                      if (isErrorMessage(result.translatedText.trimmed())) {
-                                          window->ui->translationOutput->clear();
-                                          window->appendError(result.translatedText.trimmed());
-                                          return;
-                                      }
+                                       if (isErrorMessage(result.translatedText.trimmed())) {
+                                           window->ui->translationOutput->clear();
+                                           window->appendError(result.translatedText.trimmed());
+                                           window->setTechnicalStatus(QString(), QStringLiteral("ERROR"));
+                                           return;
+                                       }
 
-                                      window->ui->translationOutput->setPlainText(result.translatedText);
-                                      window->appendError(window->tr("Tradução concluída."));
-                                      window->addHistoryEntry(result.sourceText, result.translatedText);
+                                       window->ui->translationOutput->setPlainText(result.translatedText);
+                                       window->appendError(window->tr("Tradução concluída."));
+                                       window->setTechnicalStatus(QString(), QStringLiteral("IDLE"));
+                                       window->addHistoryEntry(result.sourceText, result.translatedText);
                                   },
                                   Qt::QueuedConnection);
     });
@@ -983,33 +1059,13 @@ void MainWindow::retranslateDynamicUi()
 
 void MainWindow::setupCopyButtons()
 {
-    m_copyOcrButton = new QToolButton(this);
+    m_copyOcrButton = ui->copyOcrButton;
     m_copyOcrButton->setIcon(style()->standardIcon(QStyle::SP_DialogSaveButton));
     m_copyOcrButton->setToolTip(tr("Copiar texto OCR"));
-    m_copyOcrButton->setAutoRaise(true);
 
-    m_copyTranslationButton = new QToolButton(this);
+    m_copyTranslationButton = ui->copyTranslationButton;
     m_copyTranslationButton->setIcon(style()->standardIcon(QStyle::SP_DialogSaveButton));
     m_copyTranslationButton->setToolTip(tr("Copiar tradução"));
-    m_copyTranslationButton->setAutoRaise(true);
-
-    auto *ocrHeaderLayout = new QHBoxLayout();
-    ocrHeaderLayout->setContentsMargins(0, 0, 0, 0);
-    ocrHeaderLayout->setSpacing(6);
-    ui->ocrPanelLayout->removeWidget(ui->ocrTextLabel);
-    ocrHeaderLayout->addWidget(ui->ocrTextLabel);
-    ocrHeaderLayout->addStretch();
-    ocrHeaderLayout->addWidget(m_copyOcrButton);
-    ui->ocrPanelLayout->insertLayout(0, ocrHeaderLayout);
-
-    auto *translationHeaderLayout = new QHBoxLayout();
-    translationHeaderLayout->setContentsMargins(0, 0, 0, 0);
-    translationHeaderLayout->setSpacing(6);
-    ui->translationPanelLayout->removeWidget(ui->translationTextLabel);
-    translationHeaderLayout->addWidget(ui->translationTextLabel);
-    translationHeaderLayout->addStretch();
-    translationHeaderLayout->addWidget(m_copyTranslationButton);
-    ui->translationPanelLayout->insertLayout(0, translationHeaderLayout);
 
     connect(m_copyOcrButton, &QToolButton::clicked, this, [this]() {
         copyTextToClipboard(ui->textOutput->toPlainText(),
@@ -1033,50 +1089,25 @@ void MainWindow::setupHelp()
 
 void MainWindow::setupHistory()
 {
-    m_historyDock = new QDockWidget(tr("Histórico"), this);
-    m_historyDock->setObjectName(QStringLiteral("historyDock"));
-    m_historyDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);
+    m_historyDock = ui->historyDock;
+    m_historyDock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+    m_historyDock->setAllowedAreas(Qt::BottomDockWidgetArea);
+    m_historyDock->setFloating(false);
 
-    auto *historyPanel = new QWidget(m_historyDock);
-    auto *historyLayout = new QVBoxLayout(historyPanel);
-    historyLayout->setContentsMargins(6, 6, 6, 6);
-    historyLayout->setSpacing(6);
+    m_historySearchEdit = ui->historySearchEdit;
+    m_historyDateFilterCombo = ui->historyDateFilterCombo;
+    m_historyFavoritesOnlyCheck = ui->historyFavoritesOnlyCheck;
+    m_historyFavoriteButton = ui->historyFavoriteButton;
+    m_historyList = ui->historyList;
 
-    auto *filterLayout = new QHBoxLayout();
-    filterLayout->setContentsMargins(0, 0, 0, 0);
-    filterLayout->setSpacing(6);
-
-    m_historySearchEdit = new QLineEdit(historyPanel);
-    m_historySearchEdit->setClearButtonEnabled(true);
-    m_historySearchEdit->setPlaceholderText(tr("Buscar no histórico"));
-
-    m_historyDateFilterCombo = new QComboBox(historyPanel);
+    m_historyDateFilterCombo->clear();
     m_historyDateFilterCombo->addItem(tr("Todas as datas"), 0);
     m_historyDateFilterCombo->addItem(tr("Hoje"), 1);
     m_historyDateFilterCombo->addItem(tr("Últimos 7 dias"), 7);
     m_historyDateFilterCombo->addItem(tr("Últimos 30 dias"), 30);
 
-    m_historyFavoritesOnlyCheck = new QCheckBox(tr("Favoritos"), historyPanel);
-
-    m_historyFavoriteButton = new QToolButton(historyPanel);
-    m_historyFavoriteButton->setText(QStringLiteral("*"));
     m_historyFavoriteButton->setToolTip(tr("Favoritar captura selecionada"));
     m_historyFavoriteButton->setEnabled(false);
-
-    filterLayout->addWidget(m_historySearchEdit, 1);
-    filterLayout->addWidget(m_historyDateFilterCombo);
-    filterLayout->addWidget(m_historyFavoritesOnlyCheck);
-    filterLayout->addWidget(m_historyFavoriteButton);
-    historyLayout->addLayout(filterLayout);
-
-    m_historyList = new QListWidget(historyPanel);
-    m_historyList->setAlternatingRowColors(true);
-    m_historyList->setUniformItemSizes(true);
-    historyLayout->addWidget(m_historyList);
-
-    m_historyDock->setWidget(historyPanel);
-    addDockWidget(Qt::BottomDockWidgetArea, m_historyDock);
-    m_historyDock->setMaximumHeight(220);
 
     connect(m_historySearchEdit, &QLineEdit::textChanged, this, &MainWindow::refreshHistoryView);
     connect(m_historyDateFilterCombo, &QComboBox::currentIndexChanged, this, [this]() {
@@ -1147,9 +1178,43 @@ void MainWindow::setupLanguages()
     });
 }
 
+void MainWindow::setupTechnicalStatusBar()
+{
+    statusBar()->setSizeGripEnabled(false);
+
+    m_systemStatusLabel = new QLabel(QStringLiteral("●  SYSTEM READY"), this);
+    m_systemStatusLabel->setObjectName(QStringLiteral("systemStatusLabel"));
+
+    m_engineStatusLabel = new QLabel(QStringLiteral("TESSERACT v5.3"), this);
+    m_engineStatusLabel->setObjectName(QStringLiteral("engineStatusLabel"));
+
+    m_ocrStatusLabel = new QLabel(QStringLiteral("OCR: IDLE"), this);
+    m_ocrStatusLabel->setObjectName(QStringLiteral("ocrStatusLabel"));
+
+    m_translationStatusLabel = new QLabel(QStringLiteral("TRANS: IDLE"), this);
+    m_translationStatusLabel->setObjectName(QStringLiteral("translationStatusLabel"));
+
+    statusBar()->addPermanentWidget(m_systemStatusLabel);
+    statusBar()->addPermanentWidget(m_engineStatusLabel);
+    statusBar()->addPermanentWidget(m_ocrStatusLabel);
+    statusBar()->addPermanentWidget(m_translationStatusLabel);
+}
+
+void MainWindow::setTechnicalStatus(const QString &ocrStatus, const QString &translationStatus)
+{
+    if (m_ocrStatusLabel && !ocrStatus.isEmpty()) {
+        m_ocrStatusLabel->setText(QStringLiteral("OCR: ") + ocrStatus);
+    }
+
+    if (m_translationStatusLabel && !translationStatus.isEmpty()) {
+        m_translationStatusLabel->setText(QStringLiteral("TRANS: ") + translationStatus);
+    }
+}
+
 void MainWindow::setupTrayIcon()
 {
     m_trayMenu = new QMenu(this);
+    m_trayMenu->setStyleSheet(trayMenuStyleSheet(m_darkTheme));
 
     m_openAtlasHubAction = m_trayMenu->addAction(tr("Abrir AtlasHub"));
     m_runOcrAction = m_trayMenu->addAction(tr("Executar OCR"));
@@ -1187,21 +1252,17 @@ void MainWindow::setupSettingsActions()
 {
     QSettings settings;
 
-    m_startWithWindowsAction = ui->menuconf->addAction(tr("Inicializar com Windows"));
-    m_startWithWindowsAction->setCheckable(true);
+    m_startWithWindowsAction = ui->actionStartWithWindows;
     m_startWithWindowsAction->setChecked(isWindowsStartupEnabled());
 
-    m_startMinimizedAction = ui->menuconf->addAction(tr("Iniciar minimizado na tray"));
-    m_startMinimizedAction->setCheckable(true);
+    m_startMinimizedAction = ui->actionStartMinimized;
     m_startMinimizedAction->setChecked(settings.value(QStringLiteral("startup/startMinimizedToTray"), false).toBool());
 
-    m_darkThemeAction = ui->menuconf->addAction(tr("Tema escuro"));
-    m_darkThemeAction->setCheckable(true);
+    m_darkThemeAction = ui->actionDarkTheme;
     m_darkThemeAction->setChecked(settings.value(QStringLiteral("ui/darkTheme"), false).toBool());
 
-    m_smartLanguagesAction = ui->menuconf->addAction(tr("Idiomas inteligentes do OCR..."));
-
-    m_clearHistoryAction = ui->menuconf->addAction(tr("Limpar histórico"));
+    m_smartLanguagesAction = ui->actionSmartLanguages;
+    m_clearHistoryAction = ui->actionClearHistory;
 
     connect(m_startWithWindowsAction, &QAction::toggled, this, [this](bool enabled) {
         setWindowsStartupEnabled(enabled);
@@ -1235,67 +1296,18 @@ void MainWindow::setupSettingsActions()
 
 void MainWindow::setupTextToolbar()
 {
-    m_formatMenu = new QMenu(tr("Formatação"), this);
-    menuBar()->insertMenu(ui->menuAjuda->menuAction(), m_formatMenu);
-
-    m_formatToolbar = addToolBar(tr("Formatação"));
-    m_formatToolbar->setMovable(false);
-    m_formatToolbar->setIconSize(QSize(16, 16));
-
-    m_fontBox = new QFontComboBox(m_formatToolbar);
-    m_fontBox->setToolTip(tr("Fonte"));
-    m_formatToolbar->addWidget(m_fontBox);
-
-    m_sizeBox = new QSpinBox(m_formatToolbar);
-    m_sizeBox->setToolTip(tr("Tamanho"));
-    m_sizeBox->setRange(8, 48);
-    m_sizeBox->setValue(12);
-    m_sizeBox->setSuffix(tr(" pt"));
-    m_formatToolbar->addWidget(m_sizeBox);
-
-    m_formatToolbar->addSeparator();
-
-    m_boldAction = new QAction(tr("Negrito"), this);
-    m_boldAction->setIconText(tr("B"));
-    m_boldAction->setCheckable(true);
+    m_formatMenu = ui->menuFormatacao;
+    m_boldAction = ui->actionBold;
     m_boldAction->setToolTip(tr("Negrito"));
 
-    m_italicAction = new QAction(tr("Itálico"), this);
-    m_italicAction->setIconText(tr("I"));
-    m_italicAction->setCheckable(true);
+    m_italicAction = ui->actionItalic;
     m_italicAction->setToolTip(tr("Itálico"));
 
-    m_underlineAction = new QAction(tr("Sublinhado"), this);
-    m_underlineAction->setIconText(tr("U"));
-    m_underlineAction->setCheckable(true);
+    m_underlineAction = ui->actionUnderline;
     m_underlineAction->setToolTip(tr("Sublinhado"));
 
-    m_colorAction = new QAction(tr("Cor do texto"), this);
-    m_colorAction->setIconText(tr("Cor"));
+    m_colorAction = ui->actionTextColor;
     m_colorAction->setToolTip(tr("Cor do texto"));
-
-    m_formatToolbar->addAction(m_boldAction);
-    m_formatToolbar->addAction(m_italicAction);
-    m_formatToolbar->addAction(m_underlineAction);
-    m_formatToolbar->addAction(m_colorAction);
-
-    m_formatMenu->addAction(m_boldAction);
-    m_formatMenu->addAction(m_italicAction);
-    m_formatMenu->addAction(m_underlineAction);
-    m_formatMenu->addSeparator();
-    m_formatMenu->addAction(m_colorAction);
-
-    connect(m_fontBox, &QFontComboBox::currentFontChanged, this, [this](const QFont &font) {
-        QTextCharFormat format;
-        format.setFontFamilies(QStringList{font.family()});
-        mergeOutputFormat(format);
-    });
-
-    connect(m_sizeBox, &QSpinBox::valueChanged, this, [this](int size) {
-        QTextCharFormat format;
-        format.setFontPointSize(size);
-        mergeOutputFormat(format);
-    });
 
     connect(m_boldAction, &QAction::toggled, this, [this](bool checked) {
         QTextCharFormat format;
@@ -1327,22 +1339,19 @@ void MainWindow::setupTextToolbar()
 
 void MainWindow::setupUiLanguageMenu()
 {
-    m_uiLanguageMenu = ui->menuconf->addMenu(tr("Idioma da interface"));
+    m_uiLanguageMenu = ui->menuUiLanguage;
     m_uiLanguageGroup = new QActionGroup(this);
     m_uiLanguageGroup->setExclusive(true);
 
-    m_portugueseAction = m_uiLanguageMenu->addAction(tr("Português", "UI language option"));
-    m_portugueseAction->setCheckable(true);
+    m_portugueseAction = ui->actionPortuguese;
     m_portugueseAction->setData(QStringLiteral("pt_BR"));
     m_uiLanguageGroup->addAction(m_portugueseAction);
 
-    m_englishAction = m_uiLanguageMenu->addAction(tr("English", "UI language option"));
-    m_englishAction->setCheckable(true);
+    m_englishAction = ui->actionEnglish;
     m_englishAction->setData(QStringLiteral("en_US"));
     m_uiLanguageGroup->addAction(m_englishAction);
 
-    m_frenchAction = m_uiLanguageMenu->addAction(tr("Français", "UI language option"));
-    m_frenchAction->setCheckable(true);
+    m_frenchAction = ui->actionFrench;
     m_frenchAction->setData(QStringLiteral("fr_FR"));
     m_uiLanguageGroup->addAction(m_frenchAction);
 
@@ -1350,8 +1359,7 @@ void MainWindow::setupUiLanguageMenu()
         applyUiLanguage(action->data().toString());
     });
 
-    ui->menuconf->addSeparator();
-    m_configureHotkeyAction = ui->menuconf->addAction(tr("Atalho OCR..."));
+    m_configureHotkeyAction = ui->actionConfigureHotkey;
     connect(m_configureHotkeyAction, &QAction::triggered, this, &MainWindow::showHotkeySettingsDialog);
 }
 
@@ -1531,6 +1539,7 @@ void MainWindow::startOcrCapture(bool restoreWindowWhenFinished)
     }
 
     m_ocrInProgress = true;
+    setTechnicalStatus(QStringLiteral("ARMED"), QStringLiteral("IDLE"));
     ui->errorLog->setPlainText(tr("Selecione a área da tela para capturar..."));
     ui->textOutput->clear();
     ui->translationOutput->clear();

@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/icons">
         <file>app.ico</file>
+        <file>atlas_globe_light.svg</file>
+        <file>atlas_globe_dark.svg</file>
     </qresource>
 </RCC>

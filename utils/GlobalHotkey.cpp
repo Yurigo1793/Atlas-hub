@@ -49,14 +49,34 @@ QString windowsErrorText(DWORD errorCode)
 
     return message;
 }
+
+GlobalHotkey *keyboardHookOwner = nullptr;
+
+LRESULT CALLBACK keyboardHookProc(int code, WPARAM wParam, LPARAM lParam)
+{
+    if (code == HC_ACTION && keyboardHookOwner != nullptr) {
+        const auto *event = reinterpret_cast<KBDLLHOOKSTRUCT *>(lParam);
+        const bool keyEvent = wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN
+                              || wParam == WM_KEYUP || wParam == WM_SYSKEYUP;
+        if (event != nullptr && keyEvent
+            && keyboardHookOwner->handleNativeKeyboardHook(event->vkCode, event->flags)) {
+            return 1;
+        }
+    }
+
+    return CallNextHookEx(nullptr, code, wParam, lParam);
+}
 #endif
 }
 
 GlobalHotkey::GlobalHotkey(QObject *parent)
     : QObject(parent)
     , m_hotkeyBaseId(nextHotkeyBaseId())
+    , m_keyboardHook(nullptr)
     , m_nativeWindowId(0)
     , m_hasConflict(false)
+    , m_useKeyboardHook(false)
+    , m_hookActive(false)
 {
     if (QCoreApplication::instance()) {
         QCoreApplication::instance()->installNativeEventFilter(this);
@@ -91,6 +111,30 @@ bool GlobalHotkey::registerShortcut(const QKeySequence &shortcut)
     if (keys.isEmpty()) {
         m_lastError = tr("Tecla não suportada.");
         return false;
+    }
+
+    const Qt::KeyboardModifiers qtModifiers = keyCombination.keyboardModifiers();
+    const bool ctrlAltOnly = qtModifiers.testFlag(Qt::ControlModifier)
+                             && qtModifiers.testFlag(Qt::AltModifier)
+                             && !qtModifiers.testFlag(Qt::ShiftModifier)
+                             && !qtModifiers.testFlag(Qt::MetaModifier);
+    if (ctrlAltOnly) {
+        keyboardHookOwner = this;
+        m_hookKeys = keys;
+        m_keyboardHook = SetWindowsHookExW(WH_KEYBOARD_LL,
+                                           keyboardHookProc,
+                                           GetModuleHandleW(nullptr),
+                                           0);
+        if (m_keyboardHook == nullptr) {
+            m_hookKeys.clear();
+            keyboardHookOwner = nullptr;
+            m_lastError = windowsErrorText(GetLastError());
+            return false;
+        }
+
+        m_useKeyboardHook = true;
+        m_hookActive = false;
+        return true;
     }
 
     HWND targetWindow = reinterpret_cast<HWND>(m_nativeWindowId);
@@ -149,11 +193,64 @@ void GlobalHotkey::setNativeWindowId(quintptr windowId)
 void GlobalHotkey::unregisterShortcut()
 {
 #ifdef Q_OS_WIN
+    if (m_keyboardHook != nullptr) {
+        UnhookWindowsHookEx(static_cast<HHOOK>(m_keyboardHook));
+        m_keyboardHook = nullptr;
+    }
+
+    if (keyboardHookOwner == this) {
+        keyboardHookOwner = nullptr;
+    }
+
+    m_hookKeys.clear();
+    m_useKeyboardHook = false;
+    m_hookActive = false;
+
     HWND targetWindow = reinterpret_cast<HWND>(m_nativeWindowId);
     for (int hotkeyId : std::as_const(m_registeredHotkeyIds)) {
         UnregisterHotKey(targetWindow, hotkeyId);
     }
     m_registeredHotkeyIds.clear();
+#endif
+}
+
+bool GlobalHotkey::handleNativeKeyboardHook(quint32 vkCode, quint32 flags)
+{
+#ifdef Q_OS_WIN
+    if (!m_useKeyboardHook || m_hookKeys.isEmpty()) {
+        return false;
+    }
+
+    const bool keyReleased = (flags & LLKHF_UP) != 0;
+    if (keyReleased) {
+        if (m_hookKeys.contains(vkCode)) {
+            m_hookActive = false;
+        }
+        return false;
+    }
+
+    if (!m_hookKeys.contains(vkCode)) {
+        return false;
+    }
+
+    const bool rightAltDown = (GetAsyncKeyState(VK_RMENU) & 0x8000) != 0;
+    if (rightAltDown) {
+        return false;
+    }
+
+    const bool controlDown = (GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0;
+    const bool altDown = (GetAsyncKeyState(VK_MENU) & 0x8000) != 0;
+    if (!controlDown || !altDown || m_hookActive) {
+        return false;
+    }
+
+    m_hookActive = true;
+    QMetaObject::invokeMethod(this, &GlobalHotkey::activated, Qt::QueuedConnection);
+    return true;
+#else
+    Q_UNUSED(vkCode)
+    Q_UNUSED(flags)
+    return false;
 #endif
 }
 

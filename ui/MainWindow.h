@@ -19,6 +19,7 @@ class QComboBox;
 class QDockWidget;
 class QFontComboBox;
 class QKeySequence;
+class QLabel;
 class QLineEdit;
 class QListWidget;
 class QListWidgetItem;
@@ -86,9 +87,11 @@ private:
     void setupHotkey();
     void setupLanguages();
     void setupSettingsActions();
+    void setupTechnicalStatusBar();
     void setupTrayIcon();
     void setupTextToolbar();
     void setupUiLanguageMenu();
+    void setTechnicalStatus(const QString &ocrStatus, const QString &translationStatus);
     void showHotkeySettingsDialog();
     void showHelpWindow();
     void showSmartLanguageSettingsDialog();
@@ -101,6 +104,7 @@ private:
     Ui::MainWindow *ui;
     QTranslator m_translator;
     QString m_uiLanguage;
+    QString m_lightStyleSheet;
     QString selectedImagePath;
 
     QToolBar *m_formatToolbar;
@@ -135,6 +139,10 @@ private:
     QCheckBox *m_historyFavoritesOnlyCheck;
     QToolButton *m_historyFavoriteButton;
     QListWidget *m_historyList;
+    QLabel *m_systemStatusLabel;
+    QLabel *m_engineStatusLabel;
+    QLabel *m_ocrStatusLabel;
+    QLabel *m_translationStatusLabel;
     GlobalHotkey *m_ocrHotkey;
     QString m_ocrHotkeyText;
     struct HistoryEntry

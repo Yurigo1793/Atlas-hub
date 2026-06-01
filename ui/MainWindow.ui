@@ -6,15 +6,131 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>980</width>
-    <height>560</height>
+    <width>960</width>
+    <height>640</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>900</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
-   <string>AtlasHub</string>
+   <string notr="true">AtlasHub</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">* {
+    font-family: System;
+    font-size: 12pt;
+}
+
+QMainWindow {
+    background-color: #F0EEE6;
+}
+
+QMenuBar {
+    background-color: #F0EEE6;
+    border: 2px solid #111111;
+    font-weight: bold;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 2px 10px;
+}
+
+QMenuBar::item:selected {
+    background: #111111;
+    color: #FFFFFF;
+}
+
+QMenu {
+    background: #F0EEE6;
+    color: #111111;
+    border: 2px solid #111111;
+    font-weight: bold;
+}
+
+QMenu::item {
+    padding: 4px 26px 4px 16px;
+}
+
+QMenu::item:selected {
+    background: #00FF66;
+    color: #111111;
+}
+
+QToolBar {
+    background: #FFFFFF;
+    border-top: 2px solid #adadad;
+    border-left: 2px solid #adadad;
+    border-right: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+    padding: 6px;
+    spacing: 6px;
+}
+
+QLabel, QLineEdit, QComboBox, QTextEdit, QPlainTextEdit, QListWidget {
+    background: #FFFFFF;
+    color: #111111;
+    border: 2px solid #111111;
+    font-weight: bold;
+}
+
+QTextEdit, QPlainTextEdit, QListWidget {
+    padding: 4px;
+}
+
+QPushButton, QToolButton {
+    background: #FFFFFF;
+    color: #111111;
+    border-top: 2px solid #adadad;
+    border-left: 2px solid #adadad;
+    border-right: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+    padding: 4px 8px;
+    font-weight: bold;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+    border-top: 4px solid #000000;
+    border-left: 4px solid #000000;
+    border-right: 2px solid #adadad;
+    border-bottom: 2px solid #adadad;
+    padding-top: 6px;
+    padding-left: 10px;
+    padding-right: 6px;
+    padding-bottom: 2px;
+}
+
+QPushButton#btnRunOCR, QPushButton#btnTranslate {
+    background-color: #00FF66;
+}
+
+QDockWidget {
+    background-color: #F0EEE6;
+    color: #111111;
+    font-weight: bold;
+}
+
+QDockWidget::title {
+    background: #F0EEE6;
+    border: 2px solid #111111;
+    padding: 2px;
+}</string>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="mainLayout">
+    <property name="spacing">
+     <number>12</number>
+    </property>
     <property name="leftMargin">
      <number>14</number>
     </property>
@@ -27,9 +143,6 @@
     <property name="bottomMargin">
      <number>14</number>
     </property>
-    <property name="spacing">
-     <number>12</number>
-    </property>
     <item>
      <layout class="QHBoxLayout" name="headerLayout">
       <property name="spacing">
@@ -39,15 +152,18 @@
        <widget class="QLabel" name="appIconLabel">
         <property name="minimumSize">
          <size>
-          <width>48</width>
-          <height>48</height>
+          <width>54</width>
+          <height>54</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>48</width>
-          <height>48</height>
+          <width>54</width>
+          <height>54</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #FFFFFF;</string>
         </property>
         <property name="text">
          <string/>
@@ -62,13 +178,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>72</height>
+          <height>84</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>86</height>
+          <height>104</height>
          </size>
         </property>
         <property name="readOnly">
@@ -92,11 +208,41 @@
          <number>8</number>
         </property>
         <item>
-         <widget class="QLabel" name="ocrTextLabel">
-         <property name="text">
-           <string>Texto OCR</string>
+         <layout class="QHBoxLayout" name="ocrHeaderLayout">
+          <property name="spacing">
+           <number>6</number>
           </property>
-         </widget>
+          <item>
+           <widget class="QLabel" name="ocrTextLabel">
+            <property name="text">
+             <string>Texto OCR</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="ocrHeaderSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QToolButton" name="copyOcrButton">
+            <property name="toolTip">
+             <string>Copiar texto OCR</string>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QTextEdit" name="textOutput">
@@ -111,111 +257,83 @@
        </layout>
       </item>
       <item>
-       <widget class="QWidget" name="translationControls">
-        <property name="minimumSize">
-         <size>
-          <width>158</width>
-          <height>0</height>
-         </size>
+       <layout class="QVBoxLayout" name="controlsLayout">
+        <property name="spacing">
+         <number>8</number>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>190</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <layout class="QVBoxLayout" name="controlsLayout">
-         <property name="spacing">
-          <number>8</number>
-         </property>
-         <item>
-          <widget class="QPushButton" name="btnRunOCR">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>44</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(0, 133, 204);
-color: white;
-border: 2px solid rgb(0, 100, 168);
-border-radius: 6px;
-padding: 6px;
-font-weight: bold;</string>
-           </property>
-           <property name="text">
-            <string>OCR</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="sourceLanguageLabel">
-           <property name="text">
-            <string>De</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="sourceLanguageCombo"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="targetLanguageLabel">
-           <property name="text">
-            <string>Para</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="targetLanguageCombo"/>
-         </item>
-         <item>
-          <spacer name="upperControlsSpacer">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>24</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnTranslate">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>42</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Traduzir</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="lowerControlsSpacer">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </widget>
+        <item>
+         <widget class="QPushButton" name="btnRunOCR">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>52</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>OCR</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="sourceLanguageLabel">
+          <property name="text">
+           <string>De</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="sourceLanguageCombo"/>
+        </item>
+        <item>
+         <widget class="QLabel" name="targetLanguageLabel">
+          <property name="text">
+           <string>Para</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="targetLanguageCombo"/>
+        </item>
+        <item>
+         <spacer name="upperControlsSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>24</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnTranslate">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Traduzir</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="lowerControlsSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QVBoxLayout" name="translationPanelLayout">
@@ -223,11 +341,41 @@ font-weight: bold;</string>
          <number>8</number>
         </property>
         <item>
-         <widget class="QLabel" name="translationTextLabel">
-          <property name="text">
-           <string>Tradução</string>
+         <layout class="QHBoxLayout" name="translationHeaderLayout">
+          <property name="spacing">
+           <number>6</number>
           </property>
-         </widget>
+          <item>
+           <widget class="QLabel" name="translationTextLabel">
+            <property name="text">
+             <string>Tradução</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="translationHeaderSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QToolButton" name="copyTranslationButton">
+            <property name="toolTip">
+             <string>Copiar tradução</string>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QTextEdit" name="translationOutput">
@@ -245,20 +393,147 @@ font-weight: bold;</string>
     </item>
    </layout>
   </widget>
+  <widget class="QDockWidget" name="historyDock">
+   <property name="maximumSize">
+    <size>
+     <width>524287</width>
+     <height>252</height>
+    </size>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetFeature::NoDockWidgetFeatures</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::DockWidgetArea::BottomDockWidgetArea|Qt::DockWidgetArea::LeftDockWidgetArea|Qt::DockWidgetArea::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Histórico</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="historyPanel">
+    <layout class="QVBoxLayout" name="historyLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="leftMargin">
+      <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>6</number>
+     </property>
+     <property name="rightMargin">
+      <number>6</number>
+     </property>
+     <property name="bottomMargin">
+      <number>6</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="historyFilterLayout">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QLineEdit" name="historySearchEdit">
+         <property name="placeholderText">
+          <string>Buscar no histórico</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="historyDateFilterCombo"/>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="historyFavoritesOnlyCheck">
+         <property name="text">
+          <string>Favoritos</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="historyFavoriteButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Favoritar captura selecionada</string>
+         </property>
+         <property name="text">
+          <string>*</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QListWidget" name="historyList">
+       <property name="baseSize">
+        <size>
+         <width>1</width>
+         <height>1</height>
+        </size>
+       </property>
+       <property name="mouseTracking">
+        <bool>true</bool>
+       </property>
+       <property name="tabletTracking">
+        <bool>true</bool>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="uniformItemSizes">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>980</width>
-     <height>22</height>
+     <width>960</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuconf">
-   <property name="title">
+    <property name="title">
      <string>Configurações</string>
-   </property>
-  </widget>
+    </property>
+    <widget class="QMenu" name="menuUiLanguage">
+     <property name="title">
+      <string>Idioma da interface</string>
+     </property>
+     <addaction name="actionPortuguese"/>
+     <addaction name="actionEnglish"/>
+     <addaction name="actionFrench"/>
+    </widget>
+    <addaction name="menuUiLanguage"/>
+    <addaction name="separator"/>
+    <addaction name="actionConfigureHotkey"/>
+    <addaction name="actionStartWithWindows"/>
+    <addaction name="actionStartMinimized"/>
+    <addaction name="actionDarkTheme"/>
+    <addaction name="actionSmartLanguages"/>
+    <addaction name="actionClearHistory"/>
+   </widget>
+   <widget class="QMenu" name="menuFormatacao">
+    <property name="title">
+     <string>Formatação</string>
+    </property>
+    <addaction name="actionBold"/>
+    <addaction name="actionItalic"/>
+    <addaction name="actionUnderline"/>
+    <addaction name="separator"/>
+    <addaction name="actionTextColor"/>
+   </widget>
    <widget class="QMenu" name="menuAjuda">
     <property name="title">
      <string>Ajuda</string>
@@ -266,12 +541,129 @@ font-weight: bold;</string>
     <addaction name="actionHelp"/>
    </widget>
    <addaction name="menuconf"/>
+   <addaction name="menuFormatacao"/>
    <addaction name="menuAjuda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionHelp">
    <property name="text">
     <string>Ajuda</string>
+   </property>
+  </action>
+  <action name="actionStartWithWindows">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Inicializar com Windows</string>
+   </property>
+  </action>
+  <action name="actionStartMinimized">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Iniciar minimizado na tray</string>
+   </property>
+  </action>
+  <action name="actionDarkTheme">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tema escuro</string>
+   </property>
+  </action>
+  <action name="actionSmartLanguages">
+   <property name="text">
+    <string>Idiomas inteligentes do OCR...</string>
+   </property>
+  </action>
+  <action name="actionClearHistory">
+   <property name="text">
+    <string>Limpar histórico</string>
+   </property>
+  </action>
+  <action name="actionConfigureHotkey">
+   <property name="text">
+    <string>Atalho OCR...</string>
+   </property>
+  </action>
+  <action name="actionPortuguese">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Português</string>
+   </property>
+  </action>
+  <action name="actionEnglish">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>English</string>
+   </property>
+  </action>
+  <action name="actionFrench">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Français</string>
+   </property>
+  </action>
+  <action name="actionBold">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Negrito</string>
+   </property>
+   <property name="iconText">
+    <string>B</string>
+   </property>
+   <property name="toolTip">
+    <string>Negrito</string>
+   </property>
+  </action>
+  <action name="actionItalic">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Itálico</string>
+   </property>
+   <property name="iconText">
+    <string>I</string>
+   </property>
+   <property name="toolTip">
+    <string>Itálico</string>
+   </property>
+  </action>
+  <action name="actionUnderline">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Sublinhado</string>
+   </property>
+   <property name="iconText">
+    <string>U</string>
+   </property>
+   <property name="toolTip">
+    <string>Sublinhado</string>
+   </property>
+  </action>
+  <action name="actionTextColor">
+   <property name="text">
+    <string>Cor do texto</string>
+   </property>
+   <property name="iconText">
+    <string>Cor</string>
+   </property>
+   <property name="toolTip">
+    <string>Cor do texto</string>
    </property>
   </action>
  </widget>
