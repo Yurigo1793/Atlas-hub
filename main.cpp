@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("AtlasHub");
     QCoreApplication::setApplicationName("AtlasHub");
-    QCoreApplication::setApplicationVersion("0.3.8");
+    QCoreApplication::setApplicationVersion("0.4.3");
     QApplication::setQuitOnLastWindowClosed(false);
     app.setWindowIcon(QIcon(":/icons/app.ico"));
 
