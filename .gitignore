@@ -50,10 +50,12 @@ ui_*.h
 *.exp
 *.res
 
-# Keep the vendored Tesseract runtime versioned.
-!/third_party/
-!/third_party/tesseract/
-!/third_party/tesseract/**
+# Keep the Atlas OCR vendored Tesseract runtime versioned.
+!/modules/
+!/modules/atlas-ocr/
+!/modules/atlas-ocr/third_party/
+!/modules/atlas-ocr/third_party/tesseract/
+!/modules/atlas-ocr/third_party/tesseract/**
 
 # Logs and temporary files
 *.log

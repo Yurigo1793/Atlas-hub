@@ -1,6 +1,6 @@
 # Atlas Hub
 
-Atlas Hub e um aplicativo desktop em Qt/C++ para produtividade de escritorio, reunindo OCR, traducao, historico e ferramentas rapidas de texto em uma interface simples, portatil e integrada ao Windows.
+Atlas Hub e um aplicativo desktop em Qt/C++ para produtividade de escritorio, reunindo OCR, traducao, historico, PDF e ferramentas rapidas de texto em uma interface simples, portatil e integrada ao Windows.
 
 O app permite capturar uma area da tela, extrair texto localmente com Tesseract, traduzir automaticamente ou manualmente, restaurar capturas antigas pelo historico e trabalhar com o texto reconhecido sem depender de uma instalacao global do OCR.
 
@@ -13,6 +13,12 @@ O app permite capturar uma area da tela, extrair texto localmente com Tesseract,
 - Suporte aos idiomas `por`, `eng`, `spa` e `fra` via `tessdata`.
 - Atalho global configuravel para executar OCR rapidamente.
 - Execucao a partir da bandeja do sistema.
+
+### Atlas PDF
+
+- Modulo inicial `modules/atlas-pdf` para concentrar leitura e edicao de PDF.
+- Validacao de arquivos PDF por extensao, permissao de leitura e assinatura `%PDF-`.
+- Servico inicial para abrir documentos e salvar copias, preparando a integracao com a interface.
 
 ### Traducao
 
@@ -52,10 +58,32 @@ O app permite capturar uma area da tela, extrair texto localmente com Tesseract,
 
 ## Estrutura importante
 
+Os recursos do app estao separados por camadas:
+
+```text
+core/
+modules/
+  atlas-ocr/
+    ui/
+      MainWindow.ui
+      MainWindow.*
+      ScreenCaptureOverlay.*
+      OCRService.*
+  atlas-pdf/
+    ui/
+      AtlasPdfEditor.ui
+      AtlasPdfDocument.*
+      AtlasPdfService.*
+ui/
+utils/
+```
+
+`modules/atlas-ocr` concentra o OCR com Tesseract e o formulario `.ui` editavel usado pela janela principal. `modules/atlas-pdf` concentra a UI editavel e a base da engine de leitura/edicao de PDF.
+
 O Tesseract usado pelo app deve ficar versionado dentro do projeto:
 
 ```text
-third_party/tesseract/
+modules/atlas-ocr/third_party/tesseract/
 ```
 
 Essa pasta deve conter:
@@ -71,10 +99,10 @@ Essa pasta deve conter:
 Durante o build, o CMake copia automaticamente essa pasta para o diretorio do executavel:
 
 ```text
-<build>/third_party/tesseract/
+<build>/modules/atlas-ocr/third_party/tesseract/
 ```
 
-O codigo sempre carrega o Tesseract a partir da pasta do executavel, usando `QCoreApplication::applicationDirPath()`. O app nao usa o `PATH` do sistema e nao tenta usar uma instalacao global do Tesseract.
+O codigo sempre carrega o Tesseract a partir da pasta do executavel, usando `QCoreApplication::applicationDirPath()` e o caminho do modulo OCR. O app nao usa o `PATH` do sistema e nao tenta usar uma instalacao global do Tesseract.
 
 ## Requisitos
 
@@ -82,7 +110,7 @@ O codigo sempre carrega o Tesseract a partir da pasta do executavel, usando `QCo
 - Qt instalado, na mesma versao do projeto ou em versao compativel
 - Compilador configurado no Qt Creator, como MinGW ou MSVC
 - CMake funcionando pelo kit do Qt Creator
-- Pasta `third_party/tesseract/` presente no repositorio
+- Pasta `modules/atlas-ocr/third_party/tesseract/` presente no repositorio
 - Acesso a pelo menos um mirror gratuito compativel com LibreTranslate. O app tenta automaticamente:
   `https://translate.argosopentech.com/translate`, `https://translate.libregalaxy.org/translate`,
   `https://translate.fedilab.app/translate` e `https://translate.cutie.dating/translate`.
@@ -114,9 +142,9 @@ Depois do build, confira se a estrutura abaixo existe ao lado do executavel:
 
 ```text
 AtlasHub.exe
-third_party/tesseract/tesseract.exe
-third_party/tesseract/tessdata/por.traineddata
-third_party/tesseract/tessdata/eng.traineddata
+modules/atlas-ocr/third_party/tesseract/tesseract.exe
+modules/atlas-ocr/third_party/tesseract/tessdata/por.traineddata
+modules/atlas-ocr/third_party/tesseract/tessdata/eng.traineddata
 ```
 
 ## Build pela linha de comando
@@ -147,11 +175,11 @@ Para testar como se fosse a primeira vez:
 1. Apague a pasta `build/`.
 2. Abra o projeto novamente no Qt Creator ou rode os comandos de build.
 3. Compile o projeto.
-4. Verifique se `third_party/tesseract` foi copiado para a pasta do executavel.
+4. Verifique se `modules/atlas-ocr/third_party/tesseract` foi copiado para a pasta do executavel.
 5. Execute o app e teste o OCR.
 
 ## Observacoes para distribuicao portatil
 
-Para distribuir o app, use a pasta onde esta o `AtlasHub.exe` depois do build. Ela deve incluir as DLLs do Qt, plugins do Qt e a pasta `third_party/tesseract`.
+Para distribuir o app, use a pasta onde esta o `AtlasHub.exe` depois do build. Ela deve incluir as DLLs do Qt, plugins do Qt e a pasta `modules/atlas-ocr/third_party/tesseract`.
 
-Nao remova `third_party/tesseract` da pasta do executavel, pois o OCR depende somente da versao empacotada.
+Nao remova `modules/atlas-ocr/third_party/tesseract` da pasta do executavel, pois o OCR depende somente da versao empacotada.

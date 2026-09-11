@@ -1,9 +1,9 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
-#include "core/OCRService.h"
 #include "core/TranslationService.h"
-#include "ui/ScreenCaptureOverlay.h"
+#include "modules/atlas-ocr/ui/OCRService.h"
+#include "modules/atlas-ocr/ui/ScreenCaptureOverlay.h"
 #include "utils/GlobalHotkey.h"
 
 #include <QAction>
@@ -626,8 +626,10 @@ void MainWindow::runTranslation(bool useSmartTarget)
                                           window->m_updatingLanguageCombos = true;
                                           window->ui->sourceLanguageCombo->setCurrentIndex(detectedLanguageIndex);
                                           window->m_updatingLanguageCombos = false;
-                                          window->appendError(window->tr("Idioma detectado automaticamente: %1.")
-                                                                  .arg(window->ui->sourceLanguageCombo->currentText()));
+                                          window->appendError(
+                                              QCoreApplication::translate("MainWindow",
+                                                                          "Idioma detectado automaticamente: %1.")
+                                                  .arg(window->ui->sourceLanguageCombo->currentText()));
                                       }
 
                                       const int targetLanguageIndex =
@@ -650,7 +652,8 @@ void MainWindow::runTranslation(bool useSmartTarget)
                                        }
 
                                        window->ui->translationOutput->setPlainText(result.translatedText);
-                                       window->appendError(window->tr("Tradução concluída."));
+                                       window->appendError(QCoreApplication::translate("MainWindow",
+                                                                                       "Tradução concluída."));
                                        window->setTechnicalStatus(QString(), QStringLiteral("IDLE"));
                                        window->addHistoryEntry(result.sourceText, result.translatedText);
                                   },

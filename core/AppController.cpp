@@ -1,6 +1,6 @@
 #include "AppController.h"
 
-#include "ui/MainWindow.h"
+#include "modules/atlas-ocr/ui/MainWindow.h"
 
 AppController::AppController(QObject *parent)
     : QObject(parent)
