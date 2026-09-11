@@ -398,42 +398,42 @@
 <context>
     <name>AtlasPdfService</name>
     <message>
-        <location filename="../modules/atlas-pdf/ui/AtlasPdfService.cpp" line="19"/>
+        <location filename="../modules/atlas-pdf/core/AtlasPdfService.cpp" line="19"/>
         <source>PDF não encontrado: %1</source>
         <translation>PDF introuvable : %1</translation>
     </message>
     <message>
-        <location filename="../modules/atlas-pdf/ui/AtlasPdfService.cpp" line="26"/>
+        <location filename="../modules/atlas-pdf/core/AtlasPdfService.cpp" line="26"/>
         <source>PDF sem permissão de leitura: %1</source>
         <translation>PDF sans autorisation de lecture : %1</translation>
     </message>
     <message>
-        <location filename="../modules/atlas-pdf/ui/AtlasPdfService.cpp" line="34"/>
+        <location filename="../modules/atlas-pdf/core/AtlasPdfService.cpp" line="34"/>
         <source>Arquivo inválido ou não reconhecido como PDF: %1</source>
         <translation>Fichier invalide ou non reconnu comme PDF : %1</translation>
     </message>
     <message>
-        <location filename="../modules/atlas-pdf/ui/AtlasPdfService.cpp" line="99"/>
+        <location filename="../modules/atlas-pdf/core/AtlasPdfService.cpp" line="99"/>
         <source>Documento PDF inválido.</source>
         <translation>Document PDF invalide.</translation>
     </message>
     <message>
-        <location filename="../modules/atlas-pdf/ui/AtlasPdfService.cpp" line="107"/>
+        <location filename="../modules/atlas-pdf/core/AtlasPdfService.cpp" line="107"/>
         <source>Não foi possível substituir o PDF de destino: %1</source>
         <translation>Impossible de remplacer le PDF de destination : %1</translation>
     </message>
     <message>
-        <location filename="../modules/atlas-pdf/ui/AtlasPdfService.cpp" line="116"/>
+        <location filename="../modules/atlas-pdf/core/AtlasPdfService.cpp" line="116"/>
         <source>Não foi possível salvar a cópia do PDF em: %1</source>
         <translation>Impossible d&apos;enregistrer la copie du PDF dans : %1</translation>
     </message>
     <message>
-        <location filename="../modules/atlas-pdf/ui/AtlasPdfService.cpp" line="138"/>
+        <location filename="../modules/atlas-pdf/core/AtlasPdfService.cpp" line="138"/>
         <source>Não foi possível carregar o PDF para aplicar as edições.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../modules/atlas-pdf/ui/AtlasPdfService.cpp" line="152"/>
+        <location filename="../modules/atlas-pdf/core/AtlasPdfService.cpp" line="152"/>
         <source>Não foi possível iniciar a gravação do PDF: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1118,59 +1118,6 @@
         <location filename="../modules/atlas-ocr/ui/OCRService.cpp" line="109"/>
         <source>Falha ao abrir arquivo de saída do OCR.</source>
         <translation>Échec de l&apos;ouverture du fichier de sortie OCR.</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="90"/>
-        <source>Nao foi possivel criar a pasta de checkpoints.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="98"/>
-        <source>Nao foi possivel gravar o checkpoint de pre-qualificacao.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="134"/>
-        <source>Nao foi possivel remover o checkpoint de pre-qualificacao.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="168"/>
-        <source>Pre-qualificacao iniciada.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="318"/>
-        <source>Nenhum checkpoint de pre-qualificacao encontrado.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="322"/>
-        <source>Pre-qualificacao ja concluida.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="331"/>
-        <source>Continuar em %1, documento %2: %3.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="338"/>
-        <source>Nao ha documentos pendentes neste checkpoint.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="506"/>
-        <source>Checkpoint de pre-qualificacao nao encontrado.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../modules/atlas-prequalification/core/PrequalificationCheckpointService.cpp" line="513"/>
-        <source>Checkpoint de pre-qualificacao invalido.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

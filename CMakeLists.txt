@@ -31,17 +31,17 @@ set(ATLASHUB_SOURCES
     modules/atlas-ocr/ui/OCRService.h
     modules/atlas-ocr/ui/ScreenCaptureOverlay.cpp
     modules/atlas-ocr/ui/ScreenCaptureOverlay.h
-    modules/atlas-pdf/ui/AtlasPdfDocument.cpp
-    modules/atlas-pdf/ui/AtlasPdfDocument.h
+    modules/atlas-pdf/core/AtlasPdfDocument.cpp
+    modules/atlas-pdf/core/AtlasPdfDocument.h
+    modules/atlas-pdf/core/AtlasPdfService.cpp
+    modules/atlas-pdf/core/AtlasPdfService.h
+    modules/atlas-pdf/engine/AtlasPdfImageExtractor.cpp
+    modules/atlas-pdf/engine/AtlasPdfImageExtractor.h
+    modules/atlas-pdf/engine/AtlasPdfTextEngine.cpp
+    modules/atlas-pdf/engine/AtlasPdfTextEngine.h
     modules/atlas-pdf/ui/AtlasPdfEditor.ui
-    modules/atlas-pdf/ui/AtlasPdfImageExtractor.cpp
-    modules/atlas-pdf/ui/AtlasPdfImageExtractor.h
-    modules/atlas-pdf/ui/AtlasPdfService.cpp
-    modules/atlas-pdf/ui/AtlasPdfService.h
     modules/atlas-pdf/ui/AtlasPdfSelectableView.cpp
     modules/atlas-pdf/ui/AtlasPdfSelectableView.h
-    modules/atlas-pdf/ui/AtlasPdfTextEngine.cpp
-    modules/atlas-pdf/ui/AtlasPdfTextEngine.h
     utils/GlobalHotkey.cpp
     utils/GlobalHotkey.h
     resources/app.rc
@@ -61,19 +61,19 @@ qt_add_executable(AtlasHub WIN32
 set(ATLASPDF_SOURCES
     modules/atlas-ocr/ui/OCRService.cpp
     modules/atlas-ocr/ui/OCRService.h
-    modules/atlas-pdf/ui/AtlasPdfDocument.cpp
-    modules/atlas-pdf/ui/AtlasPdfDocument.h
+    modules/atlas-pdf/core/AtlasPdfDocument.cpp
+    modules/atlas-pdf/core/AtlasPdfDocument.h
+    modules/atlas-pdf/core/AtlasPdfService.cpp
+    modules/atlas-pdf/core/AtlasPdfService.h
+    modules/atlas-pdf/engine/AtlasPdfImageExtractor.cpp
+    modules/atlas-pdf/engine/AtlasPdfImageExtractor.h
+    modules/atlas-pdf/engine/AtlasPdfTextEngine.cpp
+    modules/atlas-pdf/engine/AtlasPdfTextEngine.h
     modules/atlas-pdf/ui/AtlasPdfEditorWindow.cpp
     modules/atlas-pdf/ui/AtlasPdfEditorWindow.h
     modules/atlas-pdf/ui/AtlasPdfEditor.ui
-    modules/atlas-pdf/ui/AtlasPdfImageExtractor.cpp
-    modules/atlas-pdf/ui/AtlasPdfImageExtractor.h
-    modules/atlas-pdf/ui/AtlasPdfService.cpp
-    modules/atlas-pdf/ui/AtlasPdfService.h
     modules/atlas-pdf/ui/AtlasPdfSelectableView.cpp
     modules/atlas-pdf/ui/AtlasPdfSelectableView.h
-    modules/atlas-pdf/ui/AtlasPdfTextEngine.cpp
-    modules/atlas-pdf/ui/AtlasPdfTextEngine.h
     modules/atlas-pdf/ui/main.cpp
     resources/app.rc
     resources/resources.qrc

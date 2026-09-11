@@ -1,8 +1,8 @@
 #include "AtlasPdfEditorWindow.h"
 #include "ui_AtlasPdfEditor.h"
 
-#include "AtlasPdfImageExtractor.h"
 #include "AtlasPdfSelectableView.h"
+#include "../engine/AtlasPdfImageExtractor.h"
 #include "modules/atlas-ocr/ui/OCRService.h"
 
 #include <QDateTime>

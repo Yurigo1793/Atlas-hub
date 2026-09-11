@@ -1,9 +1,9 @@
 #pragma once
 
-#include "AtlasPdfDocument.h"
+#include "../core/AtlasPdfDocument.h"
+#include "../core/AtlasPdfService.h"
+#include "../engine/AtlasPdfTextEngine.h"
 #include "AtlasPdfSelectableView.h"
-#include "AtlasPdfService.h"
-#include "AtlasPdfTextEngine.h"
 
 #include <QHash>
 #include <QImage>

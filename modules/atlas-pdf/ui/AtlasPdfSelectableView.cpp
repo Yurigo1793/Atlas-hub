@@ -1,7 +1,7 @@
 #include "AtlasPdfSelectableView.h"
 
-#include "AtlasPdfImageExtractor.h"
-#include "AtlasPdfTextEngine.h"
+#include "../engine/AtlasPdfImageExtractor.h"
+#include "../engine/AtlasPdfTextEngine.h"
 
 #include <QApplication>
 #include <QClipboard>

@@ -1,5 +1,5 @@
 #include "AtlasPdfEditorWindow.h"
-#include "AtlasPdfTextEngine.h"
+#include "../engine/AtlasPdfTextEngine.h"
 
 #include <QApplication>
 #include <QCoreApplication>
